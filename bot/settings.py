@@ -21,6 +21,7 @@ SECRET_KEYS = (
     "TELEGRAM_CHAT_ID",
     "IG_ACCESS_TOKEN",
     "IG_USER_ID",
+    "IG_APP_SECRET",
 )
 DEFAULT_MODE = "dry-run"
 MODES = ("dry-run", "approve", "auto")

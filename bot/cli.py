@@ -229,6 +229,115 @@ def cmd_render(args: argparse.Namespace) -> int:
     return 0
 
 
+def _slides(day_dir: Path) -> list[Path]:
+    return sorted((day_dir / "slides").glob("*.jpg"))
+
+
+def cmd_test_url(args: argparse.Namespace) -> int:
+    """Yayınlamadan Instagram'ın repo'daki görseli çekebildiğini doğrular."""
+    from . import hosting, instagram
+
+    day_dir = config.OUTPUT_DIR / args.date if args.date else today_dir()
+    slides = _slides(day_dir)
+    if not slides:
+        console.print("[red]❌ Slayt yok. Önce: python -m bot render[/]")
+        return 1
+    if hosting.push_paths(slides, f"Slaytlar: {day_dir.name}"):
+        console.print("[dim]Slaytlar GitHub'a gönderildi.[/]")
+    url = hosting.raw_url(slides[0])
+    ok, info = hosting.check_url(url)
+    console.print(f"{'✅' if ok else '❌'} Herkese açık URL: {info} · {url}")
+    if not ok:
+        return 1
+    try:
+        with console.status("Instagram görseli çekmeyi deniyor (yayın YOK)…"):
+            instagram.test_fetch(url)
+    except instagram.InstagramError as exc:
+        console.print(f"[red]❌ Instagram görseli çekemedi: {exc}[/]")
+        return 1
+    console.print("✅ Instagram görseli GitHub raw adresinden çekebildi (kap oluşturuldu, yayınlanmadı; 24 saatte silinir).")
+    return 0
+
+
+def cmd_publish(args: argparse.Namespace) -> int:
+    from . import hosting, instagram, telegram
+
+    day_dir = config.OUTPUT_DIR / args.date if args.date else today_dir()
+    content = day_dir / "content.json"
+    slides = _slides(day_dir)
+    if not content.exists() or not slides:
+        console.print("[red]❌ İçerik ya da slayt yok. Önce: python -m bot write && python -m bot render[/]")
+        return 1
+    post = json.loads(content.read_text(encoding="utf-8"))
+    pub_file = config.STATE_DIR / "published.json"
+    published = json.loads(pub_file.read_text(encoding="utf-8")) if pub_file.exists() else {}
+    if day_dir.name in published and not args.force:
+        console.print(f"[yellow]⚠️  {day_dir.name} zaten yayınlandı: {published[day_dir.name].get('permalink')}[/]")
+        return 1
+    if len(slides) != len(post["items"]) + 2:
+        console.print("[red]❌ Slayt sayısı içerikle uyuşmuyor; önce yeniden render edin.[/]")
+        return 1
+
+    if hosting.push_paths(slides, f"Slaytlar: {day_dir.name}"):
+        console.print("[dim]Slaytlar GitHub'a gönderildi.[/]")
+    urls = [hosting.raw_url(s) for s in slides]
+    for u in urls:
+        ok, info = hosting.check_url(u)
+        if not ok:
+            console.print(f"[red]❌ Görsel herkese açık değil ({info}): {u}[/]")
+            return 1
+
+    alts = [f"Kapak: Günün teknoloji ve oyun haberleri. "
+            + " ".join(f"{n}. {it['slide_title']}." for n, it in enumerate(post["items"], 1))]
+    alts += [it.get("alt_text", "") for it in post["items"]]
+    alts += ["Kapanış: Takip et @singleplayer_tr — her gün güncel teknoloji ve oyun haberleri."]
+
+    if not args.yes:
+        console.print(f"{len(urls)} slayt, caption {len(post['caption'])} karakter. Yayınlansın mı? [e/H] ", end="")
+        if input().strip().lower() not in ("e", "evet", "y", "yes"):
+            console.print("İptal edildi.")
+            return 1
+    try:
+        with console.status("Instagram'a yükleniyor…"):
+            res = instagram.publish_carousel(urls, alts, post["caption"])
+    except instagram.InstagramError as exc:
+        console.print(f"[red]❌ Yayın başarısız: {exc}[/]")
+        telegram.notify(f"❌ ig-tech-bot: Instagram yayını başarısız ({day_dir.name}).\n{exc}")
+        return 1
+
+    published[day_dir.name] = {"media_id": res.media_id, "permalink": res.permalink,
+                               "slides": res.children, "published_at": datetime.now(timezone.utc).isoformat(timespec="seconds")}
+    pub_file.write_text(json.dumps(published, indent=1, sort_keys=True) + "\n", encoding="utf-8")
+    seen = SeenStore()
+    for it in post["items"]:
+        for s in it["all_sources"]:
+            seen.add(s["url"])
+    seen.prune()
+    seen.save()
+    console.print(f"✅ Yayınlandı: {res.permalink}")
+    telegram.notify(f"✅ Instagram'da yayınlandı ({res.children} slayt):\n{res.permalink}")
+    return 0
+
+
+def cmd_refresh_token(args: argparse.Namespace) -> int:
+    from . import telegram, token_refresh
+
+    try:
+        if args.exchange:
+            st = token_refresh.upgrade_if_short_lived()
+            if st is None:
+                console.print("[yellow]Token zaten uzun ömürlü görünüyor ya da IG_APP_SECRET boş; değişiklik yok.[/]")
+                return 0
+        else:
+            st = token_refresh.refresh_and_store()
+    except token_refresh.TokenRefreshError as exc:
+        console.print(f"[red]❌ Token yenilenemedi: {exc}[/]")
+        telegram.notify(f"⚠️ ig-tech-bot: Instagram token yenilenemedi.\n{exc}")
+        return 1
+    console.print(f"✅ Token yenilendi ve .env'ye yazıldı (değer gösterilmez). Geçerlilik: {st['expires_at']}")
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(prog="python -m bot", description="ig-tech-bot komutları")
     sub = p.add_subparsers(dest="command", required=True)
@@ -250,12 +359,26 @@ def build_parser() -> argparse.ArgumentParser:
     w.add_argument("--images-only", action="store_true", help="bugünkü içerikte yalnızca görsel tariflerini yenile")
     w.set_defaults(func=cmd_write)
 
-    r = sub.add_parser("render", help="Arka planları üret ve 7 slaytlık carousel'i oluştur")
+    r = sub.add_parser("render", help="Arka planları üret ve carousel slaytlarını oluştur")
     r.add_argument("--date", help="output/ altındaki gün (YYYY-AA-GG), varsayılan bugün")
     r.add_argument("--design", nargs="*", help="designs/*.yaml varyasyon(lar)ı; verilmezse design.yaml")
     r.add_argument("--no-telegram", action="store_true", help="Telegram'a önizleme gönderme")
     r.add_argument("--no-open", action="store_true", help="Klasörü Finder'da açma")
     r.set_defaults(func=cmd_render)
+
+    u = sub.add_parser("test-url", help="Instagram'ın slaytları GitHub'dan çekebildiğini YAYINLAMADAN doğrula")
+    u.add_argument("--date", help="output/ altındaki gün (YYYY-AA-GG)")
+    u.set_defaults(func=cmd_test_url)
+
+    pb = sub.add_parser("publish", help="Günün carousel'ini Instagram'da yayınla")
+    pb.add_argument("--date", help="output/ altındaki gün (YYYY-AA-GG)")
+    pb.add_argument("--yes", action="store_true", help="onay sormadan yayınla")
+    pb.add_argument("--force", action="store_true", help="o gün zaten yayınlandıysa yine de yayınla")
+    pb.set_defaults(func=cmd_publish)
+
+    tk = sub.add_parser("refresh-token", help="Instagram token'ını yenile (60 gün) ve .env'ye yaz")
+    tk.add_argument("--exchange", action="store_true", help="kısa ömürlü token'ı uzun ömürlüye çevir (IG_APP_SECRET gerekir)")
+    tk.set_defaults(func=cmd_refresh_token)
     return p
 
 

@@ -132,10 +132,31 @@ def check_telegram(send_test: bool = True) -> Result:
     return Result("Telegram", True, detail)
 
 
+@_safe
 def check_instagram() -> Result:
-    if not settings.get("IG_ACCESS_TOKEN") or not settings.get("IG_USER_ID"):
-        return Result("Instagram", None, "Faz 4'te yapılandırılacak (IG_* boş)")
-    return Result("Instagram", None, "Instagram kontrolü Faz 4'te eklenecek")
+    from . import instagram, token_refresh
+
+    if not settings.get("IG_ACCESS_TOKEN"):
+        return Result("Instagram", None, "IG_ACCESS_TOKEN boş — Faz 4 rehberindeki adımlarla token al")
+    try:
+        info = instagram.me()
+        uid = str(info.get("user_id") or info.get("id"))
+        lim = instagram.publishing_limit(uid)
+    except instagram.TokenError as exc:
+        return Result("Instagram", False, f"token geçersiz ya da süresi dolmuş: {exc}")
+    except instagram.InstagramError as exc:
+        return Result("Instagram", False, str(exc))
+    left = token_refresh.days_left()
+    exp = f" · token ≈{left:.0f} gün geçerli" if left is not None else " · token süresi bilinmiyor (ilk yenilemede kaydedilecek)"
+    note = ""
+    raw = settings.get("IG_USER_ID")
+    if raw and not raw.isdigit():
+        note = " · IG_USER_ID sayısal değil, kimlik token'dan otomatik bulunuyor"
+    return Result(
+        "Instagram", True,
+        f"@{info.get('username')} ({info.get('account_type')}) · kimlik {settings.mask(uid)} · "
+        f"bugünkü paylaşım: {lim['used']}/{lim['total']}{exp}{note}",
+    )
 
 
 def run_all(send_test: bool = True) -> list[Result]:
