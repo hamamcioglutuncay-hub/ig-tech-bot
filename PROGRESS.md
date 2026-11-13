@@ -10,7 +10,7 @@ Son güncelleme: 2026-11-13
 | 2 | Anahtarlar ve metin üretimi | ✅ Tamamlandı (2026-11-13) |
 | 3 | Görsel ve tasarım | ✅ Tamamlandı (2026-11-13) |
 | 4 | Instagram bağlantısı | 🟡 Bağlantı ✅, test gönderisi hesap ısınması sonrasına ertelendi |
-| 5 | Otomasyon | ⏳ Sıradaki — dry-run modunda, plan onayı bekleniyor |
+| 5 | Otomasyon | ✅ dry-run modunda çalışıyor (2026-11-13); token yenileme için GH_PAT + IG_APP_ID/SECRET bekleniyor |
 | 6 | Canlıya alma ve bakım | ⬜ |
 
 ## Faz 0 sonuçları
@@ -74,8 +74,22 @@ Son güncelleme: 2026-11-13
 - Bundan sonra yalnızca yayın için gereken API çağrıları; işletme/reklam uç noktalarına çağrı yok. Meta panelinde token/hesap değişikliği birkaç gün yapılmayacak.
 - 62 test geçti.
 
+## Faz 5 sonuçları (2026-11-13)
+- `python -m bot run` (topla→yaz→görsel→slayt→Telegram + mod notu), `cleanup`, `publish` dry-run'da atlar (çıkış 0 + Telegram notu).
+- Workflow'lar: generate.yml (05:30 UTC), publish.yml (dispatch; auto'da 09:30 UTC), refresh-token.yml (Pzt 06:00 UTC, GH_PAT ile Secret'a yazar),
+  cleanup.yml (Paz 03:00 UTC). Hepsi `concurrency: ig-tech-bot`. Bot commit'leri "🤖 …".
+- gh `workflow` izni kullanıcı tarafından verildi. Secrets: GEMINI_API_KEY, CF_ACCOUNT_ID, CF_API_TOKEN, TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID, IG_USER_ID, IG_ACCESS_TOKEN.
+  Repo değişkeni MODE=dry-run. Eksik: IG_APP_ID, IG_APP_SECRET, GH_PAT (token yenileme için; ısınma sonrası).
+- İlk elle çalıştırma (run 43474171639): ✅ 760 tekil haber → 8 haber (gemini-3.5-flash), 10 slayt, bot commit'i 0f3a2e3. Telegram hatası yok.
+- publish.yml dry-run'da: ilk denemede kırmızı (çıkış 1) → düzeltildi, artık yeşil atlama (run 43475266059).
+- Türkçe README: günlük kullanım, modlar, telefondan yayın, düzenleme, anahtarlar, sorun giderme.
+- 71 test geçti.
+
 ## Sıradaki adım
-Faz 5 planı (MODE=dry-run: Instagram'a hiç istek yok, yalnızca Telegram önizleme).
+1. Kullanıcı 3–5 gün elle hesap ısınması (≈2026-11-16/18); her sabah dry-run önizlemesi Telegram'a gelir.
+2. Isınma sonrası: hesap durumu kontrolü → test gönderisi (`python -m bot publish --ignore-mode`, yalnızca kullanıcı "yayınla" derse) → Faz 4 kapanışı.
+3. IG_APP_ID/IG_APP_SECRET + GH_PAT → refresh-token.yml testi.
+4. `gh variable set MODE --body approve` → 7 günlük approve dönemi → Faz 6.
 Isınma sonrası (≈2026-11-16/18): `python -m bot publish` ile test gönderisi (kullanıcı "yayınla" derse) → Faz 4 kapanışı.
 
 ## Açık sorunlar
