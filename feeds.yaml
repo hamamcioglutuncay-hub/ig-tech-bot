@@ -1,8 +1,9 @@
-# Haber kaynakları. Her kaynak 2026-11-13'te test edildi.
+# Haber kaynakları. Her kaynak 2026-11-13'te test edildi (son 24 saatte haber verdiği doğrulandı).
 # category: teknoloji | oyun     lang: tr | en
 # Kaynak eklemek/çıkarmak için bu listeyi düzenlemen yeterli.
 # enabled: false yaparak bir kaynağı silmeden kapatabilirsin.
 # tz: tarihleri saat dilimsiz veren kaynak için yerel saat dilimi.
+# topic: ai → yapay zekâ odaklı kaynak (kategori yine 'teknoloji' sayılır).
 
 feeds:
   # --- Teknoloji (İngilizce) ---
@@ -27,7 +28,93 @@ feeds:
     category: teknoloji
     lang: en
 
-  # --- Teknoloji (Türkçe) ---
+  - name: Tom's Hardware
+    url: https://www.tomshardware.com/feeds/all
+    category: teknoloji
+    lang: en
+  - name: 9to5Mac
+    url: https://9to5mac.com/feed/
+    category: teknoloji
+    lang: en
+  - name: 9to5Google
+    url: https://9to5google.com/feed/
+    category: teknoloji
+    lang: en
+  - name: Android Authority
+    url: https://www.androidauthority.com/feed/
+    category: teknoloji
+    lang: en
+  - name: MacRumors
+    url: https://feeds.macrumors.com/MacRumors-All
+    category: teknoloji
+    lang: en
+  - name: Gizmodo
+    url: https://gizmodo.com/rss
+    category: teknoloji
+    lang: en
+  - name: The Next Web
+    url: https://thenextweb.com/feed
+    category: teknoloji
+    lang: en
+  - name: CNET
+    url: https://www.cnet.com/rss/news/
+    category: teknoloji
+    lang: en
+  - name: XDA
+    url: https://www.xda-developers.com/feed/
+    category: teknoloji
+    lang: en
+  - name: BleepingComputer
+    url: https://www.bleepingcomputer.com/feed/
+    category: teknoloji
+    lang: en
+  - name: The Register
+    url: https://www.theregister.com/headlines.atom
+    category: teknoloji
+    lang: en
+  - name: ZDNET
+    url: https://www.zdnet.com/news/rss.xml
+    category: teknoloji
+    lang: en
+
+  # --- Yapay zekâ (İngilizce) ---
+  - name: The Decoder
+    url: https://the-decoder.com/feed/
+    category: teknoloji
+    lang: en
+    topic: ai
+  - name: MarkTechPost
+    url: https://www.marktechpost.com/feed/
+    category: teknoloji
+    lang: en
+    topic: ai
+  - name: OpenAI News
+    url: https://openai.com/news/rss.xml
+    category: teknoloji
+    lang: en
+    topic: ai
+  - name: Google AI Blog
+    url: https://blog.google/technology/ai/rss/
+    category: teknoloji
+    lang: en
+    topic: ai
+  - name: Google DeepMind
+    url: https://deepmind.google/blog/rss.xml
+    category: teknoloji
+    lang: en
+    topic: ai
+  - name: Hugging Face Blog
+    url: https://huggingface.co/blog/feed.xml
+    category: teknoloji
+    lang: en
+    topic: ai
+  - name: MIT Technology Review AI
+    url: https://www.technologyreview.com/topic/artificial-intelligence/feed
+    category: teknoloji
+    lang: en
+    topic: ai
+
+  # --- Teknoloji (Türkçe) ---  (ayrı Türkçe YZ akışı bulunamadı; YZ haberleri bu kaynaklarda geçiyor)
   - name: Webtekno
     url: https://www.webtekno.com/rss.xml
     category: teknoloji
@@ -79,6 +166,63 @@ feeds:
     category: oyun
     lang: en
 
+  - name: Polygon
+    url: https://www.polygon.com/rss/index.xml
+    category: oyun
+    lang: en
+  - name: VGC
+    url: https://www.videogameschronicle.com/feed/
+    category: oyun
+    lang: en
+  - name: Gematsu
+    url: https://www.gematsu.com/feed
+    category: oyun
+    lang: en
+  - name: Destructoid
+    url: https://www.destructoid.com/feed/
+    category: oyun
+    lang: en
+  - name: Siliconera
+    url: https://www.siliconera.com/feed/
+    category: oyun
+    lang: en
+  - name: Nintendo Life
+    url: https://www.nintendolife.com/feeds/latest
+    category: oyun
+    lang: en
+  - name: Push Square
+    url: https://www.pushsquare.com/feeds/latest
+    category: oyun
+    lang: en
+  - name: Pure Xbox
+    url: https://www.purexbox.com/feeds/latest
+    category: oyun
+    lang: en
+  - name: Game Developer
+    url: https://www.gamedeveloper.com/rss.xml
+    category: oyun
+    lang: en
+  - name: PlayStation Blog
+    url: https://blog.playstation.com/feed/
+    category: oyun
+    lang: en
+  - name: Xbox Wire
+    url: https://news.xbox.com/en-us/feed/
+    category: oyun
+    lang: en
+  - name: Insider Gaming
+    url: https://insider-gaming.com/feed/
+    category: oyun
+    lang: en
+  - name: GamesRadar+
+    url: https://www.gamesradar.com/rss/
+    category: oyun
+    lang: en
+  - name: TheGamer
+    url: https://www.thegamer.com/feed/
+    category: oyun
+    lang: en
+
   # --- Oyun (Türkçe) ---
   - name: Oyungezer
     url: https://www.oyungezer.com.tr/rss
@@ -94,7 +238,20 @@ feeds:
     category: oyun
     lang: tr
 
+  - name: ShiftDelete.Net Oyun
+    url: https://shiftdelete.net/oyun/feed
+    category: oyun
+    lang: tr   # ana ShiftDelete akışıyla örtüşen haberler 'oyun' sayılır
+  - name: Kayıp Rıhtım
+    url: https://www.kayiprihtim.com/feed/
+    category: oyun
+    lang: tr   # oyun + fantastik/bilimkurgu popüler kültür
+
   # --- Denendi, çalışmıyor (2026-11-13) ---
   # Multiplayer:    https://www.multiplayer.com.tr/feed/  → akışta yalnızca 2024 tarihli "deneme" yazısı var
   # Disket Kutusu:  disketkutusu.com → alan adı yanıt vermiyor
   # LEVEL:          level.com.tr → bmag.com.tr dergi mağazasına yönleniyor, RSS yok
+  # IGN Türkiye:    tr.ign.com/feed.xml → son haber Ekim 2026, güncellenmiyor
+  # Technopat (403), Teknolojioku/PCHocası/Bölüm Sonu Canavarı (404), Megabayt/PlayStation Türkiye/GameTurk (boş akış)
+  # Gamer Arena, Gamekolik, Oyun Fanatik, HardwarePlus (yanıt yok/erişim engeli), VentureBeat (429), Anthropic (RSS yok)
+  # Alt akışlar (TechCrunch AI, The Verge AI, Ars AI, Webrazzi YZ) eklenmedi: ana akışla aynı haberleri veriyor

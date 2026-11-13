@@ -35,6 +35,8 @@ def cmd_collect(args: argparse.Namespace) -> int:
     for art in items[: args.limit]:
         when = art.published.astimezone(IST).strftime("%d.%m %H:%M")
         cat = "[magenta]oyun[/]" if art.category == "oyun" else "[green]teknoloji[/]"
+        if art.topic == "ai":
+            cat += " [yellow]YZ[/]"
         title = art.title + (f" [dim](+{', '.join(art.related)})[/]" if art.related else "")
         table.add_row(when, cat, art.source, title)
     console.print(table)
@@ -42,7 +44,8 @@ def cmd_collect(args: argparse.Namespace) -> int:
         console.print(f"[dim]… {len(items) - args.limit} haber daha (--limit 0 ile hepsi)[/]")
 
     by_cat = {c: sum(1 for a in items if a.category == c) for c in config.CATEGORIES}
-    console.print(f"Teknoloji: {by_cat['teknoloji']}  ·  Oyun: {by_cat['oyun']}")
+    ai = sum(1 for a in items if a.topic == "ai")
+    console.print(f"Teknoloji: {by_cat['teknoloji']} (YZ kaynaklı: {ai})  ·  Oyun: {by_cat['oyun']}")
     ok = [n for n in result.counts if n not in result.errors]
     console.print(f"[green]✅ {len(ok)} kaynak çalıştı[/]")
     for name, err in result.errors.items():

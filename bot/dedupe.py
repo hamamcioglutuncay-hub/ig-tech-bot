@@ -7,6 +7,7 @@ import re
 import unicodedata
 from datetime import datetime, timedelta, timezone
 from difflib import SequenceMatcher
+from functools import lru_cache
 from pathlib import Path
 from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
 
@@ -43,21 +44,26 @@ def _tr_lower(text: str) -> str:
     return text.replace("İ", "i").replace("I", "ı").lower()
 
 
-def title_tokens(title: str) -> set[str]:
+@lru_cache(maxsize=8192)
+def title_tokens(title: str) -> frozenset[str]:
     text = unicodedata.normalize("NFC", _tr_lower(title))
     words = re.findall(r"[0-9a-zçğıöşüâîû]+", text)
-    return {w for w in words if len(w) > 1 and w not in STOPWORDS}
+    return frozenset(w for w in words if len(w) > 1 and w not in STOPWORDS)
 
 
 def similar_titles(a: str, b: str) -> bool:
     ta, tb = title_tokens(a), title_tokens(b)
     if not ta or not tb:
         return False
-    jaccard = len(ta & tb) / len(ta | tb)
+    common = len(ta & tb)
+    jaccard = common / len(ta | tb)
     if jaccard >= 0.6 and min(len(ta), len(tb)) >= 3:
         return True
-    ratio = SequenceMatcher(None, _tr_lower(a), _tr_lower(b)).ratio()
-    return ratio >= 0.85
+    # Pahalı karakter karşılaştırması yalnızca kelimelerin en az yarısı ortaksa
+    if common * 2 < min(len(ta), len(tb)):
+        return False
+    sm = SequenceMatcher(None, _tr_lower(a), _tr_lower(b))
+    return sm.quick_ratio() >= 0.85 and sm.ratio() >= 0.85
 
 
 class SeenStore:
@@ -107,6 +113,13 @@ def dedupe(articles: list[Article], seen: SeenStore | None = None) -> list[Artic
             continue
         if key not in by_url:
             by_url[key] = art
+        else:
+            # Aynı link birden fazla akışta: daha belirgin etiket kazanır
+            kept = by_url[key]
+            if art.category == "oyun" and kept.category != "oyun":
+                kept.category = "oyun"
+            if art.topic and not kept.topic:
+                kept.topic = art.topic
 
     groups: list[Article] = []
     for art in by_url.values():  # eskiden yeniye

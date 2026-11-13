@@ -33,6 +33,7 @@ class Article:
     lang: str
     published: datetime
     summary: str = ""
+    topic: str | None = None
     related: list[str] = field(default_factory=list)  # aynı olayı veren diğer kaynaklar
 
 
@@ -114,6 +115,7 @@ def parse_feed(feed: Feed, content: bytes, since: datetime, now: datetime) -> li
                 lang=feed.lang,
                 published=published,
                 summary=clean_text(summary),
+                topic=feed.topic,
             )
         )
     return articles
@@ -124,7 +126,7 @@ def collect(
     hours: float = 24,
     now: datetime | None = None,
     fetcher: Fetcher = http_fetch,
-    workers: int = 8,
+    workers: int = 16,
 ) -> CollectResult:
     """Tüm kaynakları paralel okur. Bir kaynağın hatası diğerlerini etkilemez."""
     now = now or datetime.now(timezone.utc)

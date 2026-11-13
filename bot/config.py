@@ -26,6 +26,7 @@ class Feed:
     category: str
     lang: str = "en"
     enabled: bool = True
+    topic: str | None = None  # ör. "ai" — yapay zekâ odaklı kaynak
     tz: str | None = None  # tarihleri saat dilimsiz veren kaynaklar için (ör. Europe/Istanbul)
 
 
@@ -45,6 +46,7 @@ def load_feeds(path: Path = FEEDS_FILE) -> list[Feed]:
             category=raw["category"],
             lang=str(raw.get("lang", "en")),
             enabled=bool(raw.get("enabled", True)),
+            topic=raw.get("topic"),
             tz=raw.get("tz"),
         )
         if feed.enabled:

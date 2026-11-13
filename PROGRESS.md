@@ -22,14 +22,18 @@ Son güncelleme: 2026-11-13
 - Not: Intel Mac + macOS 26 için Homebrew hazır paket yok; paketler kaynak koddan derleniyor (yavaş)
 
 ## Faz 1 sonuçları
-- `feeds.yaml`: 20 çalışan kaynak (10 teknoloji: 5 EN + 5 TR; 10 oyun: 7 EN + 3 TR)
+- İlk sürüm: 20 kaynak
 - Türkçe oyun: Oyungezer, Merlin'in Kazanı, TurkMMO
 - Kullanıcı isteği ama RSS'i yok: Multiplayer (akış boş/2024), Disket Kutusu (alan adı yanıt vermiyor), LEVEL (bmag.com.tr mağazasına yönleniyor)
 - Oyungezer tarihleri saat dilimsiz → `tz: Europe/Istanbul` desteği eklendi
 - Bağlantı kopmalarına 1 kez yeniden deneme
 - Tekilleştirme: URL normalize + seen.json (30 gün) + benzer başlık birleştirme (aynı dil). Farklı dillerde aynı olay (ör. Wolfenstein 3 haberi 4 kaynakta) Faz 2'de Gemini ile birleştirilecek.
 - Kaynak kategorisi kaynağa göre; teknoloji sitelerindeki oyun haberleri (ör. Webtekno'da GTA 6) Faz 2'de Gemini ile yeniden sınıflanacak.
-- 14 test geçti. `python -m bot collect` ~390 tekil haber gösteriyor.
+- **Kaynak genişletme (kullanıcı isteği):** 55 kaynak — 17 EN teknoloji, 7 EN yapay zekâ (`topic: ai`), 8 TR teknoloji, 21 EN oyun, 5 TR oyun (+ ShiftDelete Oyun, Kayıp Rıhtım).
+  Ayrı Türkçe YZ akışı bulunamadı. Denenip çalışmayanlar `feeds.yaml` sonunda listeli.
+- Aynı link birden fazla akışta → `oyun` kategorisi ve `ai` etiketi korunur.
+- Performans: başlık karşılaştırması 93 sn → <1 sn (kelime ön elemesi + önbellek). `collect` toplam ~13 sn.
+- 15 test geçti. `python -m bot collect` ~835 tekil haber gösteriyor.
 
 ## Sıradaki adım
 Faz 2 (anahtarlar ve metin üretimi) planını sunmak.

@@ -151,3 +151,12 @@ def test_http_fetch_retries_once(monkeypatch):
     monkeypatch.setattr(collector.time, "sleep", lambda s: None)
     assert collector.http_fetch("https://x.test") == b"ok"
     assert calls["n"] == 2
+
+
+def test_same_url_in_two_feeds_prefers_game_category():
+    xml = rss([("Yeni oyun duyuruldu", "https://sd.test/x", 1)])
+    main = Feed("SD", "https://sd.test/feed", "teknoloji", "tr")
+    game = Feed("SD Oyun", "https://sd.test/oyun/feed", "oyun", "tr", topic=None)
+    res = collect([main, game], hours=24, now=NOW, fetcher=lambda u: xml)
+    items = dedupe(res.articles)
+    assert len(items) == 1 and items[0].category == "oyun"
