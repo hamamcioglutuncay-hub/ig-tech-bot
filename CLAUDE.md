@@ -3,7 +3,7 @@
 Her oturumda önce bu dosyayı ve `PROGRESS.md`'yi oku. Ayrıntılı şartname: `CLAUDE_CODE_MASTER_PROMPT_ig_tech_bot_v2.md`.
 
 ## Amaç
-Instagram'da her gün "Günün 5 Teknoloji & Oyun Haberi" Türkçe carousel'ini (7 slayt: kapak + 5 haber + kapanış) yalnızca **ücretsiz katmanlar** ve **resmi API'ler** ile üretip paylaşan bot.
+Instagram'da (@singleplayer_tr) her gün "Günün Teknoloji & Oyun Haberleri" Türkçe carousel'ini (kapak + önemine göre 3–8 haber + kapanış; API sınırı 10 slayt) yalnızca **ücretsiz katmanlar** ve **resmi API'ler** ile üretip paylaşan bot. Metinlerde haber sayısı yazılmaz.
 
 ## Kullanıcı
 - macOS, Türkçe konuşur, teknik olmayan kullanıcı gibi takip eder; görsel tasarımcıdır (tasarım kararlarına dahil et).
@@ -18,7 +18,8 @@ Instagram'da her gün "Günün 5 Teknoloji & Oyun Haberi" Türkçe carousel'ini 
 2. **Maliyet 0:** Yalnızca ücretsiz katman. Kota dolarsa turu atla, Telegram'dan bildir.
 3. **Yalnızca resmi API:** Instagram API with Instagram Login. instagrapi/instaloader/tarayıcı otomasyonu YOK.
 4. **İçerik/telif:** Haberler kendi cümleleriyle özetlenir, kaynak adı yazılır. Görsellerde logo, oyun karakteri, gerçek kişi, yazı yok — soyut arka plan.
-   Caption sonu: "Görseller yapay zekâ ile üretilmiştir."
+   Arka planlar haberin konusunu anlatan sahneler (nesne/mekân/metafor); avatar, takvim, belge gibi yazı/figür çıkaran nesneler de yok.
+   Caption sonu: "Görseller yapay zekâ ile üretilmiştir." Caption ≤2150 karakter.
 5. **Disiplin:** Faz başında kısa plan → onay → uygula. Faz sonunda `pytest`, kabul kriterleri ✅/❌, `PROGRESS.md` güncelle, commit, **dur ve onay bekle**.
    Bir hata 2 denemede çözülmezse dur, neden + seçenekleri anlat. Ekran görüntüsü istemek yerine komutla doğrula.
 6. **Yol:** Proje yolunda boşluk var ("Claude Projeler") → her yerde tırnak, göreli yol; kodda proje kökü `Path(__file__)` ile bulunur.
@@ -50,7 +51,8 @@ Workflow'lar: `generate.yml` (08:30 İstanbul = 05:30 UTC), `publish.yml` (auto:
 ## Komutlar
 - `.venv/bin/python -m bot collect [--hours 24] [--limit 60|0] [--category oyun|teknoloji] [--include-seen]`
 - `.venv/bin/python -m bot check [--no-telegram-test]`
-- `.venv/bin/python -m bot write [--no-mark]`
+- `.venv/bin/python -m bot write [--no-mark] [--images-only]`
+- `.venv/bin/python -m bot render [--date YYYY-AA-GG] [--no-telegram] [--no-open]`
 - `.venv/bin/python -m pytest -q`
 - Paket kurulumu (Intel Mac): `.venv/bin/pip install --only-binary=:all: -r requirements.txt`
 

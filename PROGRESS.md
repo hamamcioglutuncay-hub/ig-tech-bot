@@ -8,8 +8,8 @@ Son güncelleme: 2026-11-13
 | 0 | Ortam ve repo | ✅ Tamamlandı (2026-11-13) |
 | 1 | Haber toplama | ✅ Tamamlandı (2026-11-13) |
 | 2 | Anahtarlar ve metin üretimi | ✅ Tamamlandı (2026-11-13) |
-| 3 | Görsel ve tasarım | ⏳ Sıradaki — plan onayı bekleniyor |
-| 4 | Instagram bağlantısı | ⬜ |
+| 3 | Görsel ve tasarım | ✅ Tamamlandı (2026-11-13) |
+| 4 | Instagram bağlantısı | ⏳ Sıradaki — plan onayı bekleniyor |
 | 5 | Otomasyon | ⬜ |
 | 6 | Canlıya alma ve bakım | ⬜ |
 
@@ -46,8 +46,23 @@ Son güncelleme: 2026-11-13
 - İkinci örnek: caption maddeleri ayrı satırlarda (647/1500).
 - 32 test geçti.
 
+## Faz 3 sonuçları
+- Marka: @singleplayer_tr, logo `assets/logo.png` (kullanıcı ekledi). Palet logodan: lacivert #081030, camgöbeği #00E8F8 (teknoloji), mor #B838F8 (oyun).
+- Font: Archivo Black (başlık) + Archivo değişken (gövde), OFL, `assets/fonts/`.
+- Tasarım turları: 1) A Neon / B Editoryal / C Cesur → kullanıcı B ile C arasında kaldı; 2) B+C karma (panel düzeni + iki tonlu görsel + kutulu BÜYÜK HARF başlık);
+  3) kullanıcı "arka planlar çok boş/soyut" dedi → konuyla ilgili sahne görselleri, görsel panelin üstündeki alana sığdırılıyor. Kullanıcı 3. turu onayladı.
+- Kullanıcı isteğiyle içerik değişti: haber sayısı 3–8 (önem puanı ≥6, denge kuralı), "5 haber" ifadesi hiçbir yerde yok;
+  slaytta 2–3 cümle + "NEDEN ÖNEMLİ?" bloğu; caption'da her haber için başlık + paragraf + kaynak (≤2150 krk, paragraf sınırı haber sayısına göre);
+  her slayt için otomatik alt_text (Faz 4'te Instagram'a gönderilecek).
+- Instagram API carousel sınırı 10 → kapak + en fazla 8 haber + kapanış.
+- `python -m bot render` → output/<gün>/slides/01..NN.jpg, Telegram albüm + caption önizleme, Finder'da açar. Arka planlar `output/<gün>/bg/` önbelleğinde (gitignore).
+- `python -m bot write --images-only` → aynı haberler için yalnızca görsel tariflerini yeniler.
+- FLUX: görsel başına ≈58 neuron (tahmin; API kullanım döndürmüyor), `state/usage.json` + `logs/neurons.log`. Geçici hata (8007/5xx) 3 kez denenir.
+- Bilinen risk: FLUX bazen yazıya benzer şekil üretebiliyor; Gemini bazen kaynakta olmayan ayrıntı ekleyebiliyor → approve döneminde göz kontrolü.
+- Kabul: Türkçe karakter ✅, metin taşmıyor ✅ (3 ve 8 haber, uzun metin testleri), 1080×1350 JPEG ✅ (80–240 KB), logo + kaynak etiketi ✅. 49 test geçti.
+
 ## Sıradaki adım
-Faz 3 (görsel ve tasarım) planını sunmak.
+Faz 4 (Instagram bağlantısı) planını sunmak.
 
 ## Açık sorunlar
 - gh token'ında `workflow` izni yok → Faz 5'ten önce kullanıcı `gh auth refresh -h github.com -s workflow` çalıştırmalı (workflow dosyalarını push etmek için gerekli).
