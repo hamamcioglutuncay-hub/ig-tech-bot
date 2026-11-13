@@ -10,6 +10,8 @@ Akış:
 from __future__ import annotations
 
 import json
+import re
+import time
 from collections import Counter
 from dataclasses import dataclass
 from datetime import datetime, timezone
@@ -20,7 +22,12 @@ from .collector import Article
 from .config import ROOT
 
 PROMPTS_DIR = ROOT / "prompts"
-DEFAULT_MODEL = "gemini-flash-latest"
+# Ücretsiz katmandaki modeller, tercih sırasıyla (2026-11-13'te API'den doğrulandı).
+# Bir model yoğun (503), yok (404) ya da kotası dolu (429) ise sıradakine geçilir.
+# Hepsi ücretsiz; ücretli bir modele asla geçilmez.
+FALLBACK_MODELS = ("gemini-3.8-flash", "gemini-3.7-flash", "gemini-3.5-flash", "gemini-3.5-flash-lite")
+DEFAULT_MODEL = FALLBACK_MODELS[0]
+RETRY_WAIT_S = 20
 
 TITLE_MAX = 60
 TEXT_MAX = 180
@@ -44,34 +51,75 @@ class QuotaError(LLMError):
 
 # --------------------------------------------------------------------------- Gemini çağrısı
 
+def model_chain() -> list[str]:
+    """LLM_MODEL doluysa önce o, ardından yedek modeller."""
+    first = settings.get("LLM_MODEL")
+    return list(dict.fromkeys(([first] if first else []) + list(FALLBACK_MODELS)))
+
+
 def model_name() -> str:
-    return settings.get("LLM_MODEL") or DEFAULT_MODEL
+    return ",".join(model_chain())
+
+
+last_model_used: str | None = None
+
+
+def _call_once(client, model: str, system: str, prompt: str, schema: dict):
+    from google.genai import types
+
+    return client.models.generate_content(
+        model=model,
+        contents=prompt,
+        config=types.GenerateContentConfig(
+            system_instruction=system,
+            response_mime_type="application/json",
+            response_schema=schema,
+            temperature=0.5,
+        ),
+    )
 
 
 def gemini_generate(model: str, system: str, prompt: str, schema: dict) -> str:
+    """`model` virgülle ayrılmış bir liste olabilir; sırayla denenir.
+
+    Tüm modeller yoğunsa (503) 20 sn bekleyip zinciri bir kez daha dener.
+    Tüm modellerin kotası doluysa QuotaError (tur atlanır).
+    """
+    global last_model_used
     from google import genai
-    from google.genai import errors, types
+    from google.genai import errors
 
     key = settings.get("GEMINI_API_KEY")
     if not key:
         raise LLMError("GEMINI_API_KEY boş")
     client = genai.Client(api_key=key)
-    try:
-        resp = client.models.generate_content(
-            model=model,
-            contents=prompt,
-            config=types.GenerateContentConfig(
-                system_instruction=system,
-                response_mime_type="application/json",
-                response_schema=schema,
-                temperature=0.5,
-            ),
-        )
-    except errors.APIError as exc:
-        msg = settings.scrub(f"{exc.code} {getattr(exc, 'status', '')} {getattr(exc, 'message', '')}")
-        if exc.code == 429:
-            raise QuotaError(f"Gemini kotası doldu: {msg[:200]}") from None
-        raise LLMError(f"Gemini hatası: {msg[:300]}") from None
+    models = [m.strip() for m in model.split(",") if m.strip()]
+    problems: dict[str, str] = {}
+    resp = None
+    for round_ in range(2):
+        for m in models:
+            try:
+                resp = _call_once(client, m, system, prompt, schema)
+                last_model_used = m
+                break
+            except errors.APIError as exc:
+                code = exc.code
+                problems[m] = str(code)
+                if code in (429, 503, 500, 404):
+                    continue  # sıradaki ücretsiz modeli dene
+                msg = settings.scrub(f"{code} {getattr(exc, 'message', '')}")
+                raise LLMError(f"Gemini hatası ({m}): {msg[:300]}") from None
+        if resp is not None:
+            break
+        if any(c in ("503", "500") for c in problems.values()) and round_ == 0:
+            time.sleep(RETRY_WAIT_S)
+            continue
+        break
+    if resp is None:
+        summary = ", ".join(f"{m}:{c}" for m, c in problems.items())
+        if all(c == "429" for c in problems.values()):
+            raise QuotaError(f"Gemini ücretsiz kotası tüm modellerde doldu ({summary})")
+        raise LLMError(f"Hiçbir Gemini modeli yanıt vermedi ({summary})")
     if not resp.text:
         raise LLMError("Gemini boş yanıt döndü")
     return resp.text
@@ -225,7 +273,7 @@ def _write_prompt(stories: list[Story], errors: list[str] | None) -> str:
         "- source_url: o hikâyenin listesindeki linklerden biri, aynen (tercihen en bilgilendirici olan).\n"
         "- category: hikâyenin kategorisi.\n"
         "- image_prompt: İngilizce, soyut arka plan; marka/logo/ürün/karakter/kişi/yazı yok.\n"
-        "- caption_body: kısa giriş + 5 haberin numaralı birer satırlık özeti, en fazla 1000 karakter. "
+        "- caption_body: kısa giriş + 5 haberin numaralı birer satırlık özeti; her madde AYRI SATIRDA (\\n ile), en fazla 1000 karakter. "
         "Kaynak listesi, hashtag ve YZ notu EKLEME (onları sistem ekleyecek).\n"
         f"- hashtags: {HASHTAG_MIN}-{HASHTAG_MAX} adet, '#' ile başlayan, boşluksuz.\n\n"
         + _stories_text(stories)
@@ -235,7 +283,13 @@ def _write_prompt(stories: list[Story], errors: list[str] | None) -> str:
     return p
 
 
+def _split_numbered(body: str) -> str:
+    """'... 1. x 2. y' tek satırda geldiyse maddeleri ayrı satırlara böler."""
+    return re.sub(r"\s+(?=(?:[1-9]|10)\.\s)", "\n", body) if "\n1." not in body else body
+
+
 def build_caption(body: str, hashtags: list[str], sources: list[str]) -> str:
+    body = _split_numbered(body)
     uniq_sources = list(dict.fromkeys(sources))
     tail = (
         "\n\nKaynaklar: " + ", ".join(uniq_sources)
@@ -360,12 +414,13 @@ def generate_post(
                 "category": it["category"],
                 "image_prompt": it["image_prompt"].strip(),
                 "all_sources": [{"name": a.source, "url": a.url} for a in st.articles],
+                "headline": st.headline,
             }
         )
     caption = build_caption(data["caption_body"], data["hashtags"], [i["source_name"] for i in items])
     return {
         "generated_at": (now or datetime.now(timezone.utc)).isoformat(timespec="seconds"),
-        "model": model,
+        "model": last_model_used or model,
         "candidates": len(cands),
         "items": items,
         "caption": caption,

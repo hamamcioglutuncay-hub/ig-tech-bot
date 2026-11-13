@@ -122,7 +122,7 @@ def print_post(post: dict) -> None:
 
     for n, it in enumerate(post["items"], 1):
         cat = "[magenta]OYUN[/]" if it["category"] == "oyun" else "[green]TEKNOLOJİ[/]"
-        others = [s["name"] for s in it["all_sources"] if s["name"] != it["source_name"]]
+        others = list(dict.fromkeys(s["name"] for s in it["all_sources"] if s["name"] != it["source_name"]))
         body = (
             f"[bold]{it['slide_title']}[/]  [dim]({len(it['slide_title'])}/60)[/]\n\n"
             f"{it['slide_text']}  [dim]({len(it['slide_text'])}/180)[/]\n\n"
@@ -131,6 +131,7 @@ def print_post(post: dict) -> None:
             + f"\n[dim]Görsel: {it['image_prompt']}[/]"
         )
         console.print(Panel(body, title=f"Slayt {n + 1}/7 · {cat}", title_align="left", width=100))
+    console.print(f"[dim]Model: {post['model']} · {post['candidates']} aday haber arasından seçildi[/]")
     console.print(Panel(post["caption"], title=f"Caption ({len(post['caption'])}/1500)",
                         title_align="left", width=100))
 

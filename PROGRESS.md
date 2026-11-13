@@ -7,7 +7,7 @@ Son güncelleme: 2026-11-13
 |---|---|---|
 | 0 | Ortam ve repo | ✅ Tamamlandı (2026-11-13) |
 | 1 | Haber toplama | ✅ Tamamlandı (2026-11-13) |
-| 2 | Anahtarlar ve metin üretimi | ⏳ Sıradaki — plan onayı bekleniyor |
+| 2 | Anahtarlar ve metin üretimi | ⏳ Kod hazır; Cloudflare token'ı bekleniyor |
 | 3 | Görsel ve tasarım | ⬜ |
 | 4 | Instagram bağlantısı | ⬜ |
 | 5 | Otomasyon | ⬜ |
@@ -35,8 +35,17 @@ Son güncelleme: 2026-11-13
 - Performans: başlık karşılaştırması 93 sn → <1 sn (kelime ön elemesi + önbellek). `collect` toplam ~13 sn.
 - 15 test geçti. `python -m bot collect` ~835 tekil haber gösteriyor.
 
+## Faz 2 durumu
+- `.env` dolduruldu (kullanıcı). `python -m bot check`: Gemini ✅, Telegram ✅ (@singleplayer_tr_bot), Cloudflare ❌ (token 20 karakter, format geçersiz → yeni token gerekli).
+- Gemini: `gemini-flash-latest` takma adı yok (404). Ücretsiz model zinciri: 3.8-flash → 3.7-flash → 3.5-flash → 3.5-flash-lite.
+  3.8/3.7 sık sık 503 (yoğun) veriyor; zincir otomatik geçiyor. Tümü 429 ise tur atlanır + Telegram bildirimi.
+- `pip install` Intel Mac'te bazı paketleri kaynaktan derlemeye çalışabiliyor → `pip install --only-binary=:all: -r requirements.txt`.
+- İlk örnek: `output/2026-11-13/content.json` (model gemini-3.5-flash, 150 adaydan 5 haber, 2 oyun + 3 teknoloji, caption 690/1500).
+  Nvidia/Kress iddiası kaynaklarla doğrulandı.
+- 32 test geçti.
+
 ## Sıradaki adım
-Faz 2 (anahtarlar ve metin üretimi) planını sunmak.
+Kullanıcı yeni Cloudflare token'ını .env'ye yazacak → `python -m bot check` ile Cloudflare ✅ → Faz 2 kapanışı → Faz 3.
 
 ## Açık sorunlar
 - gh token'ında `workflow` izni yok → Faz 5'ten önce kullanıcı `gh auth refresh -h github.com -s workflow` çalıştırmalı (workflow dosyalarını push etmek için gerekli).

@@ -49,7 +49,10 @@ Workflow'lar: `generate.yml` (08:30 İstanbul = 05:30 UTC), `publish.yml` (auto:
 
 ## Komutlar
 - `.venv/bin/python -m bot collect [--hours 24] [--limit 60|0] [--category oyun|teknoloji] [--include-seen]`
+- `.venv/bin/python -m bot check [--no-telegram-test]`
+- `.venv/bin/python -m bot write [--no-mark]`
 - `.venv/bin/python -m pytest -q`
+- Paket kurulumu (Intel Mac): `.venv/bin/pip install --only-binary=:all: -r requirements.txt`
 
 ## Yapı
 ```

@@ -206,3 +206,45 @@ def test_env_file_is_gitignored():
     from bot.config import ROOT
     r = subprocess.run(["git", "check-ignore", "-q", ".env"], cwd=ROOT)
     assert r.returncode == 0
+
+
+def test_caption_numbered_items_split_into_lines():
+    cap = L.build_caption("Giriş: 1. Bir haber. 2. İki haber. 3. Üç.", ["#a"] * 5, ["A"])
+    assert "\n1. Bir haber.\n2. İki haber.\n3. Üç." in cap
+
+
+def test_model_fallback_chain(monkeypatch):
+    """Yoğun (503) ve kotası dolu (429) modeller atlanır, sıradaki ücretsiz modele geçilir."""
+    from google.genai import errors
+
+    calls = []
+
+    class Resp:
+        text = '{"ok": true}'
+
+    def fake_call(client, model, system, prompt, schema):
+        calls.append(model)
+        if model == "m1":
+            raise errors.APIError(503, {"error": {"message": "busy"}})
+        if model == "m2":
+            raise errors.APIError(429, {"error": {"message": "quota"}})
+        return Resp()
+
+    monkeypatch.setenv("GEMINI_API_KEY", "fake-key-for-test-0000")
+    monkeypatch.setattr(L, "_call_once", fake_call)
+    monkeypatch.setattr("google.genai.Client", lambda api_key: object())
+    assert L.gemini_generate("m1,m2,m3", "s", "p", {}) == '{"ok": true}'
+    assert calls == ["m1", "m2", "m3"] and L.last_model_used == "m3"
+
+
+def test_all_models_quota_raises_quota_error(monkeypatch):
+    from google.genai import errors
+
+    def quota(*a):
+        raise errors.APIError(429, {"error": {"message": "quota"}})
+
+    monkeypatch.setenv("GEMINI_API_KEY", "fake-key-for-test-0000")
+    monkeypatch.setattr(L, "_call_once", quota)
+    monkeypatch.setattr("google.genai.Client", lambda api_key: object())
+    with pytest.raises(L.QuotaError):
+        L.gemini_generate("m1,m2", "s", "p", {})

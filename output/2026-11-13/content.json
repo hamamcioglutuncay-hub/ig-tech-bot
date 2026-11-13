@@ -1,0 +1,202 @@
+{
+  "generated_at": "2026-11-13T12:20:27+00:00",
+  "model": "gemini-3.5-flash",
+  "candidates": 150,
+  "items": [
+    {
+      "slide_title": "Nvidia CEO'su Jensen Huang İstifa Etti",
+      "slide_text": "Yapay zekâ devinin kurucusu ve CEO'su Jensen Huang görevinden ayrıldı. Şirket içi soruşturmalar ve çip ihracatı iddiaları sonrası Colette Kress geçici CEO oldu.",
+      "source_name": "The Decoder",
+      "source_url": "https://the-decoder.com/jensen-huang-resigns-as-nvidia-ceo-after-espionage-scandal-wipes-out-1-4-trillion-in-market-value/",
+      "category": "teknoloji",
+      "image_prompt": "abstract glowing circuit board pattern on dark metallic background, deep green and silver light streaks, minimalist technology aesthetic, cinematic depth",
+      "all_sources": [
+        {
+          "name": "Kotaku",
+          "url": "https://kotaku.com/jensen-huang-resigns-from-nvidia-2000756256"
+        },
+        {
+          "name": "ShiftDelete.Net",
+          "url": "https://shiftdelete.net/nvidia-huang-geri-donsun-kampanyasi"
+        },
+        {
+          "name": "PC Gamer",
+          "url": "https://www.pcgamer.com/hardware/who-is-colette-kress-nvidias-new-interim-ceo/"
+        },
+        {
+          "name": "Tom's Hardware",
+          "url": "https://www.tomshardware.com/tech-industry/president-trump-says-apples-tim-cook-is-the-only-man-to-replace-jensen-huang-as-nvidia-ceo-proposes-a-legend-replaces-a-legend-in-call-for-apples-executive-chairman-of-its-board"
+        },
+        {
+          "name": "Ars Technica",
+          "url": "https://arstechnica.com/gadgets/2026/11/ceo-jensen-huangs-job-is-suddenly-on-the-line-at-nvidia/"
+        },
+        {
+          "name": "The Decoder",
+          "url": "https://the-decoder.com/jensen-huang-resigns-as-nvidia-ceo-after-espionage-scandal-wipes-out-1-4-trillion-in-market-value/"
+        },
+        {
+          "name": "DonanımHaber",
+          "url": "https://www.donanimhaber.com/jensen-huang-abd-kongresi-nde-ifade-verecek--212865"
+        },
+        {
+          "name": "The Verge",
+          "url": "https://www.theverge.com/ai-artificial-intelligence/1032339/lets-talk-about-the-nvidia-shitshow"
+        },
+        {
+          "name": "PC Gamer",
+          "url": "https://www.pcgamer.com/hardware/ex-nvidia-ceo-jensen-huang-allegedly-had-an-intimate-relationship-with-a-second-nvidia-employee-according-to-reports/"
+        },
+        {
+          "name": "PC Gamer",
+          "url": "https://www.pcgamer.com/hardware/i-stand-by-jensen-nvidia-employees-come-out-in-support-of-huang-after-resignation/"
+        },
+        {
+          "name": "Tom's Hardware",
+          "url": "https://www.tomshardware.com/tech-industry/how-shanghai-fund-manager-kang-wei-introduced-his-wife-alice-huang-to-jensen-and-built-usd7-5-billion-nvidia-ai-gpu-smuggling-operation-mistresss-husband-joked-she-was-the-ceos-personal-assistant"
+        },
+        {
+          "name": "Tom's Hardware",
+          "url": "https://www.tomshardware.com/tech-industry/artificial-intelligence/mass-smuggling-of-nvidia-ai-gpus-could-be-the-underlying-cause-of-jensen-huangs-departure-analysts-claim-more-than-1-5-gigawatts-of-banned-chips-tracked-to-china-despite-export-controls"
+        },
+        {
+          "name": "The Next Web",
+          "url": "https://thenextweb.com/news/malaysia-speedmatrix-megaspeed-ai-chip-probe"
+        },
+        {
+          "name": "GamesIndustry.biz",
+          "url": "https://www.gamesindustry.biz/nvidias-jensen-huang-resigns-as-ceo-amid-reports-of-affairs-with-alleged-chinese-spy-and-two-employees"
+        }
+      ]
+    },
+    {
+      "slide_title": "Microsoft Servislerinde Küresel Kesinti",
+      "slide_text": "Outlook, Teams ve Xbox Live gibi birçok Microsoft hizmetinde dünya genelinde erişim sorunları yaşanıyor. Şirket onarım çalışmalarının sürdüğünü duyurdu.",
+      "source_name": "Teknoblog",
+      "source_url": "https://www.teknoblog.com/outlook-microsoft-365-kesintisi-13-kasim-2026/",
+      "category": "teknoloji",
+      "image_prompt": "abstract digital grid with glowing blue nodes breaking apart, dark blue backdrop, subtle red warning light reflections, minimal 3d graphic design",
+      "all_sources": [
+        {
+          "name": "VGC",
+          "url": "https://www.videogameschronicle.com/news/microsoft-struggles-to-restore-online-services-after-major-outage/"
+        },
+        {
+          "name": "Insider Gaming",
+          "url": "https://insider-gaming.com/microsoft-outage/"
+        },
+        {
+          "name": "MacRumors",
+          "url": "https://www.macrumors.com/2026/11/13/major-microsoft-365-outage-continues/"
+        },
+        {
+          "name": "Teknoblog",
+          "url": "https://www.teknoblog.com/outlook-microsoft-365-kesintisi-13-kasim-2026/"
+        },
+        {
+          "name": "Kotaku",
+          "url": "https://kotaku.com/xbox-live-microsoft-365-copilot-outlook-outages-ongoing-2000756565"
+        },
+        {
+          "name": "PC Gamer",
+          "url": "https://www.pcgamer.com/software/security/microsoft-says-there-is-no-evidence-of-malicious-activity-being-the-cause-of-the-global-service-outage-affecting-governments-and-organisations-around-the-world/"
+        },
+        {
+          "name": "IGN",
+          "url": "https://www.ign.com/articles/microsoft-struggling-to-fix-global-system-outage-impacting-email-systems-and-more-admits-initial-repairs-not-taking-as-expected"
+        },
+        {
+          "name": "Insider Gaming",
+          "url": "https://insider-gaming.com/microsoft-xbox-outage-global/"
+        }
+      ]
+    },
+    {
+      "slide_title": "Wolfenstein 3 Resmi Yapım Aşamasına Geçti",
+      "slide_text": "MachineGames ve Xbox, efsanevi aksiyon serisinin yeni oyunu Wolfenstein 3 üzerindeki çalışmaların resmi olarak başladığını açıkladı.",
+      "source_name": "DonanımHaber",
+      "source_url": "https://www.donanimhaber.com/wolfenstein-3-resmen-duyuruldu--212852",
+      "category": "oyun",
+      "image_prompt": "abstract golden ember sparks hovering over dark grey smoky background, bold cinematic contrast, dramatic warm backlight, soft volumetric fog",
+      "all_sources": [
+        {
+          "name": "Nintendo Life",
+          "url": "https://www.nintendolife.com/news/2026/11/wolfenstein-3-is-now-officially-in-production-at-machinegames"
+        },
+        {
+          "name": "Kotaku",
+          "url": "https://kotaku.com/wolfenstein-3-in-production-machine-games-microsoft-asha-sharma-2000756436"
+        },
+        {
+          "name": "TurkMMO",
+          "url": "https://www.turkmmo.com/wolfenstein-3-10-yillik-bekleyisten-sonra-resmi-olarak-duyuruldu-h1000164221.html"
+        },
+        {
+          "name": "Rock Paper Shotgun",
+          "url": "https://www.rockpapershotgun.com/wolfenstein-3-and-new-id-software-game-confirmed-as-xbox-boss-somehow-unrelatedly-shouts-about-one-person-soon-wieldling-capabilities-that-once-required-entire-nations"
+        },
+        {
+          "name": "DonanımHaber",
+          "url": "https://www.donanimhaber.com/wolfenstein-3-resmen-duyuruldu--212852"
+        },
+        {
+          "name": "VGC",
+          "url": "https://www.videogameschronicle.com/news/machinegames-has-finally-officially-confirmed-that-wolfenstein-3-is-in-development/"
+        }
+      ]
+    },
+    {
+      "slide_title": "Google Yeni Yapay Zekâ Modeli Gemini 4 Hydrogen'i Tanıttı",
+      "slide_text": "Google, önceki sürümlere kıyasla daha hızlı ve gelişmiş yeteneklere sahip yeni yapay zekâ modeli Gemini 4 Hydrogen'i duyurdu.",
+      "source_name": "Google DeepMind",
+      "source_url": "https://deepmind.google/blog/introducing-gemini-4-hydrogen/",
+      "category": "teknoloji",
+      "image_prompt": "abstract flowing cyan and violet waves of light on dark blue space background, sleek futuristic energy trails, smooth gradient, high resolution rendering",
+      "all_sources": [
+        {
+          "name": "MarkTechPost",
+          "url": "https://www.marktechpost.com/2026/11/13/google-gemini-4-hydrogen/"
+        },
+        {
+          "name": "The Decoder",
+          "url": "https://the-decoder.com/googles-gemini-4-hydrogen-outscores-the-bigger-argon-just-four-weeks-after-its-launch/"
+        },
+        {
+          "name": "Google DeepMind",
+          "url": "https://deepmind.google/blog/introducing-gemini-4-hydrogen/"
+        },
+        {
+          "name": "Google AI Blog",
+          "url": "https://blog.google/products-and-platforms/products/search/gemini-4-hydrogen-search-upgrade/"
+        }
+      ]
+    },
+    {
+      "slide_title": "Oyun Şirketinden Çalışanlarına 5 Günlük GTA 6 İzni",
+      "slide_text": "Palworld yapımcısı Pocketpair, merakla beklenen GTA 6 çıkışı sebebiyle çalışanlarına oyunu oynayabilmeleri için 5 gün özel izin verdiğini açıkladı.",
+      "source_name": "TurkMMO",
+      "source_url": "https://www.turkmmo.com/unlu-oyun-firmasi-calisanlarina-gta-6-icin-5-gun-izin-verdi-h1000164224.html",
+      "category": "oyun",
+      "image_prompt": "abstract glowing vibrant neon pink and teal synthwave grid horizon, soft violet glow, minimalist retro futuristic mood",
+      "all_sources": [
+        {
+          "name": "TurkMMO",
+          "url": "https://www.turkmmo.com/unlu-oyun-firmasi-calisanlarina-gta-6-icin-5-gun-izin-verdi-h1000164224.html"
+        },
+        {
+          "name": "Oyungezer",
+          "url": "//oyungezer.com.tr/haber/pocketpairdan-calisanlarina-gta-6-izni/detay"
+        },
+        {
+          "name": "Webtekno",
+          "url": "https://www.webtekno.com/gta-6-bir-ulkede-neredeyse-yasaklaniyordu-h228925.html"
+        },
+        {
+          "name": "Eurogamer",
+          "url": "https://www.eurogamer.net/gta-6-internet-uk-broadband-ofcom-openreach"
+        }
+      ]
+    }
+  ],
+  "caption": "Günün öne çıkan teknoloji ve oyun haberleri ile karşınızdayız! İşte bugün bilmeniz gereken gelişmeler: 1. Nvidia CEO'su Jensen Huang istifa etti, şirket geçici yönetimle devam ediyor. 2. Microsoft 365 ve Outlook servislerinde dünya genelinde büyük kesinti yaşanıyor. 3. MachineGames ve Xbox, Wolfenstein 3'ün resmi yapım aşamasında olduğunu duyurdu. 4. Google, yeni nesil yapay zekâ modeli Gemini 4 Hydrogen'i çıkardı. 5. Pocketpair, GTA 6'nın çıkışı nedeniyle çalışanlarına 5 gün özel izin tanıdı.\n\nKaynaklar: The Decoder, Teknoblog, DonanımHaber, Google DeepMind, TurkMMO\n\n#teknoloji #oyun #nvidia #microsoft #wolfenstein3 #gemini4 #gta6 #yapayzeka\n\nGörseller yapay zekâ ile üretilmiştir."
+}

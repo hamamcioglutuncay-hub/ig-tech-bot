@@ -10,7 +10,7 @@ from dataclasses import dataclass
 import requests
 
 from . import settings, telegram
-from .llm_gemini import DEFAULT_MODEL, model_name
+from .llm_gemini import DEFAULT_MODEL, model_chain
 
 CF_API = "https://api.cloudflare.com/client/v4"
 TIMEOUT = 20
@@ -62,19 +62,25 @@ def check_gemini() -> Result:
             key=_flash_rank,
             reverse=True,
         )
-        model = model_name()
-        resp = client.models.generate_content(model=model, contents="Sadece 'tamam' yaz.")
     except errors.APIError as exc:
         hint = " (kota doldu)" if exc.code == 429 else (" (anahtar geçersiz)" if exc.code in (400, 401, 403) else "")
-        return Result("Gemini", False, settings.scrub(f"{exc.code}{hint}"))
-    stable = [n for n in flash if _flash_rank(n)[2] and "latest" not in n]
-    suggestion = stable[0] if stable else (flash[0] if flash else DEFAULT_MODEL)
-    note = "" if settings.get("LLM_MODEL") else f" (LLM_MODEL boş → varsayılan {DEFAULT_MODEL})"
+        return Result("Gemini", False, settings.scrub(f"model listesi alınamadı: {exc.code}{hint}"))
+    tried, model, resp = [], None, None
+    for m in model_chain():
+        try:
+            resp = client.models.generate_content(model=m, contents="Sadece 'tamam' yaz.")
+            model = m
+            break
+        except errors.APIError as exc:
+            tried.append(f"{m}:{exc.code}")
+    if model is None:
+        return Result("Gemini", False, f"anahtar geçerli ama hiçbir model yanıt vermedi ({', '.join(tried)})")
+    note = f" (önce denenenler: {', '.join(tried)})" if tried else ""
     msg = (
         f"bağlantı başarılı, anahtar {settings.mask(key)} · model: {model}{note} · yanıt: "
         f"{(resp.text or '').strip()[:20]!r}\n"
         f"     Erişilebilen Flash modelleri: {', '.join(flash[:8]) or '-'}\n"
-        f"     Önerilen sabit model: {suggestion}"
+        f"     Yedek sırası: {' → '.join(model_chain())}"
     )
     return Result("Gemini", True, msg)
 
@@ -90,6 +96,10 @@ def check_cloudflare() -> Result:
     if r.status_code != 200:
         r = requests.get(f"{CF_API}/accounts/{acc}/tokens/verify", headers=h, timeout=TIMEOUT)
     if r.status_code != 200:
+        codes = {e.get("code") for e in (r.json().get("errors") or []) for e in [e, *(e.get("error_chain") or [])]}
+        if 6111 in codes or 6003 in codes:
+            return Result("Cloudflare", False, f"{r.status_code} token formatı geçersiz — eksik ya da yanlış kopyalanmış olabilir "
+                          f"(uzunluk {len(tok)}, API token'ları genelde 40+ karakter)")
         return Result("Cloudflare", False, f"{r.status_code} token doğrulanamadı (yetkisiz ya da geçersiz)")
     status = (r.json().get("result") or {}).get("status", "?")
     # Workers AI erişimi: model listesini sorgula (neuron harcamaz)
