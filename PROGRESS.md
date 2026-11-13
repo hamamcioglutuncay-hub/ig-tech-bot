@@ -80,7 +80,7 @@ Son güncelleme: 2026-11-13
   cleanup.yml (Paz 03:00 UTC). Hepsi `concurrency: ig-tech-bot`. Bot commit'leri "🤖 …".
 - gh `workflow` izni kullanıcı tarafından verildi. Secrets: GEMINI_API_KEY, CF_ACCOUNT_ID, CF_API_TOKEN, TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID, IG_USER_ID, IG_ACCESS_TOKEN.
   Repo değişkeni MODE=dry-run. Eksik: IG_APP_ID, IG_APP_SECRET, GH_PAT (token yenileme için; ısınma sonrası).
-- İlk elle çalıştırma (run 43474171639): ✅ 760 tekil haber → 8 haber (gemini-3.5-flash), 10 slayt, bot commit'i 0f3a2e3. Telegram hatası yok.
+- İlk elle çalıştırma (run 43474171639): ✅ 760 tekil haber → 8 haber (gemini-3.5-flash), 10 slayt, bot commit'i 0f3a2e3. Telegram albümü kullanıcıya ulaştı (kullanıcı teyit etti) ✅.
 - publish.yml dry-run'da: ilk denemede kırmızı (çıkış 1) → düzeltildi, artık yeşil atlama (run 43475266059).
 - Türkçe README: günlük kullanım, modlar, telefondan yayın, düzenleme, anahtarlar, sorun giderme.
 - 71 test geçti.
