@@ -9,8 +9,8 @@ Son güncelleme: 2026-11-13
 | 1 | Haber toplama | ✅ Tamamlandı (2026-11-13) |
 | 2 | Anahtarlar ve metin üretimi | ✅ Tamamlandı (2026-11-13) |
 | 3 | Görsel ve tasarım | ✅ Tamamlandı (2026-11-13) |
-| 4 | Instagram bağlantısı | ⏳ Sıradaki — plan onayı bekleniyor |
-| 5 | Otomasyon | ⬜ |
+| 4 | Instagram bağlantısı | 🟡 Bağlantı ✅, test gönderisi hesap ısınması sonrasına ertelendi |
+| 5 | Otomasyon | ⏳ Sıradaki — dry-run modunda, plan onayı bekleniyor |
 | 6 | Canlıya alma ve bakım | ⬜ |
 
 ## Faz 0 sonuçları
@@ -61,8 +61,22 @@ Son güncelleme: 2026-11-13
 - Bilinen risk: FLUX bazen yazıya benzer şekil üretebiliyor; Gemini bazen kaynakta olmayan ayrıntı ekleyebiliyor → approve döneminde göz kontrolü.
 - Kabul: Türkçe karakter ✅, metin taşmıyor ✅ (3 ve 8 haber, uzun metin testleri), 1080×1350 JPEG ✅ (80–240 KB), logo + kaynak etiketi ✅. 49 test geçti.
 
+## Faz 4 durumu (2026-11-13)
+- Meta panelinde ayrı "Instagram login" (IGAA) ekranı yok; "API setup with Unified login" EAA… token veriyor.
+  Kod iki türü de destekliyor (EAA → graph.facebook.com, IGAA → graph.instagram.com). İzinler: instagram_basic, instagram_content_publish (+ reklam/mesaj, kullanılmıyor).
+- `.env`: IG_USER_ID = sayısal kimlik (••••1600), IG_ACCESS_TOKEN = EAA…. IG_APP_ID/IG_APP_SECRET henüz boş (token yenileme için gerekli).
+- `check`: Instagram ✅ @singleplayer_tr BUSINESS, paylaşım 0/100. `test-url`: Instagram GitHub raw URL'den görsel çekebiliyor ✅ (yayın yok).
+- **Hesap uyarısı (19:58):** Meta, "singleplayer_tr" işletme portföyünü REKLAM için kısıtladı (gerekçe: "otomasyonla oluşturulmuş/kullanılmış görünüyor").
+  Hesap Durumu: yalnızca Para Kazanma ⚠️; Özellikler, içerik, tavsiye ✅ → paylaşım etkilenmiyor.
+  Muhtemel tetikleyici: yeni hesap + yeni işletme portföyü + reklam izinli uygulama aynı dakikalarda (+ benim birkaç başarısız işletme uç noktası okuma isteğim).
+- Karar: test gönderisi 3–5 günlük elle "hesap ısınması" sonrasına ertelendi. Kullanıcı inceleme talep edecek.
+  Isınmayı kullanıcı telefondan KENDİSİ yapar — cihaz/tarayıcı otomasyonu ile etkileşim YAPILMAZ (kural 3, sahte etkileşim).
+- Bundan sonra yalnızca yayın için gereken API çağrıları; işletme/reklam uç noktalarına çağrı yok. Meta panelinde token/hesap değişikliği birkaç gün yapılmayacak.
+- 62 test geçti.
+
 ## Sıradaki adım
-Faz 4 (Instagram bağlantısı) planını sunmak.
+Faz 5 planı (MODE=dry-run: Instagram'a hiç istek yok, yalnızca Telegram önizleme).
+Isınma sonrası (≈2026-11-16/18): `python -m bot publish` ile test gönderisi (kullanıcı "yayınla" derse) → Faz 4 kapanışı.
 
 ## Açık sorunlar
 - gh token'ında `workflow` izni yok → Faz 5'ten önce kullanıcı `gh auth refresh -h github.com -s workflow` çalıştırmalı (workflow dosyalarını push etmek için gerekli).
