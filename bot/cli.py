@@ -260,7 +260,11 @@ def cmd_test_url(args: argparse.Namespace) -> int:
 
 
 def cmd_publish(args: argparse.Namespace) -> int:
-    from . import hosting, instagram, telegram
+    from . import hosting, instagram, settings, telegram
+
+    if settings.mode() == "dry-run" and not args.ignore_mode:
+        console.print("[yellow]⏭️  MODE=dry-run: yayın yapılmaz. (Elle denemek için --ignore-mode)[/]")
+        return 1
 
     day_dir = config.OUTPUT_DIR / args.date if args.date else today_dir()
     content = day_dir / "content.json"
@@ -320,7 +324,7 @@ def cmd_publish(args: argparse.Namespace) -> int:
 
 
 def cmd_refresh_token(args: argparse.Namespace) -> int:
-    from . import telegram, token_refresh
+    from . import settings, telegram, token_refresh
 
     try:
         if args.exchange:
@@ -330,11 +334,60 @@ def cmd_refresh_token(args: argparse.Namespace) -> int:
                 return 0
         else:
             st = token_refresh.refresh_and_store()
+        if args.ci:
+            token_refresh.push_secret("IG_ACCESS_TOKEN", settings.get("IG_ACCESS_TOKEN"))
     except token_refresh.TokenRefreshError as exc:
         console.print(f"[red]❌ Token yenilenemedi: {exc}[/]")
         telegram.notify(f"⚠️ ig-tech-bot: Instagram token yenilenemedi.\n{exc}")
         return 1
-    console.print(f"✅ Token yenilendi ve .env'ye yazıldı (değer gösterilmez). Geçerlilik: {st['expires_at']}")
+    where = "GitHub Secret'a" if args.ci else ".env'ye"
+    console.print(f"✅ Token yenilendi ve {where} yazıldı (değer gösterilmez). Geçerlilik: {st['expires_at']}")
+    return 0
+
+
+MODE_NOTES = {
+    "dry-run": "🧪 Mod: dry-run — bu içerik yayınlanmayacak (yalnızca önizleme).",
+    "approve": "✅ Mod: approve — yayınlamak için GitHub uygulaması → ig-tech-bot → Actions → "
+               "'Instagram'da yayınla' → Run workflow.",
+    "auto": "⏰ Mod: auto — bugün 12:30'da (İstanbul) otomatik yayınlanacak.",
+}
+
+
+def cmd_run(args: argparse.Namespace) -> int:
+    """Günlük akış: topla → yaz → görselle → slayt → Telegram önizleme. Kota dolarsa tur atlanır (çıkış 0)."""
+    from . import settings, telegram
+
+    day = today_dir()
+    if (day / "content.json").exists() and not args.force:
+        console.print(f"[dim]{day.name} içeriği zaten var; yazım adımı atlanıyor (--force ile yeniden üret).[/]")
+    else:
+        rc = cmd_write(argparse.Namespace(hours=24, no_mark=args.no_mark, images_only=False))
+        if rc:
+            return 0 if rc == 2 else rc
+    rc = cmd_render(argparse.Namespace(date=None, design=None, no_telegram=args.no_telegram, no_open=True))
+    if rc:
+        return 0 if rc == 2 else rc
+    if not args.no_telegram:
+        telegram.notify(MODE_NOTES[settings.mode()])
+    return 0
+
+
+def cmd_cleanup(args: argparse.Namespace) -> int:
+    """output/ altında N günden eski gün klasörlerini siler."""
+    import shutil
+    from datetime import date as _date, timedelta
+
+    cutoff = datetime.now(IST).date() - timedelta(days=args.days)
+    removed = []
+    for d in sorted(config.OUTPUT_DIR.iterdir()) if config.OUTPUT_DIR.exists() else []:
+        try:
+            day = _date.fromisoformat(d.name)
+        except ValueError:
+            continue
+        if d.is_dir() and day < cutoff:
+            shutil.rmtree(d)
+            removed.append(d.name)
+    console.print(f"🧹 {len(removed)} eski gün silindi" + (f": {', '.join(removed)}" if removed else ""))
     return 0
 
 
@@ -374,11 +427,23 @@ def build_parser() -> argparse.ArgumentParser:
     pb.add_argument("--date", help="output/ altındaki gün (YYYY-AA-GG)")
     pb.add_argument("--yes", action="store_true", help="onay sormadan yayınla")
     pb.add_argument("--force", action="store_true", help="o gün zaten yayınlandıysa yine de yayınla")
+    pb.add_argument("--ignore-mode", action="store_true", help="MODE=dry-run olsa bile yayınla (elle test)")
     pb.set_defaults(func=cmd_publish)
 
     tk = sub.add_parser("refresh-token", help="Instagram token'ını yenile (60 gün) ve .env'ye yaz")
     tk.add_argument("--exchange", action="store_true", help="kısa ömürlü token'ı uzun ömürlüye çevir (IG_APP_SECRET gerekir)")
+    tk.add_argument("--ci", action="store_true", help="GitHub Actions: yeni token'ı repo Secret'ına yaz (GH_PAT gerekir)")
     tk.set_defaults(func=cmd_refresh_token)
+
+    rn = sub.add_parser("run", help="Günlük akış: topla, yaz, görselle, Telegram önizleme")
+    rn.add_argument("--force", action="store_true", help="bugünün içeriği varsa bile yeniden yaz")
+    rn.add_argument("--no-mark", action="store_true", help="seçilen haberleri seen.json'a yazma")
+    rn.add_argument("--no-telegram", action="store_true", help="Telegram'a gönderme")
+    rn.set_defaults(func=cmd_run)
+
+    cl = sub.add_parser("cleanup", help="Eski çıktıları sil")
+    cl.add_argument("--days", type=int, default=30, help="bu günden eski klasörler silinir (varsayılan 30)")
+    cl.set_defaults(func=cmd_cleanup)
     return p
 
 

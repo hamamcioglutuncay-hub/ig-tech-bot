@@ -139,3 +139,20 @@ def upgrade_if_short_lived(env_file: Path | None = None) -> dict | None:
         return None
     write_env_value("IG_ACCESS_TOKEN", body["access_token"], env_file)
     return save_state(body.get("expires_in", 60 * 86400))
+
+
+def push_secret(name: str, value: str) -> None:
+    """GitHub Actions'ta yeni değeri repo Secret'ına yazar. Değer stdin ile verilir, loglara düşmez.
+    GITHUB_TOKEN secret yazamaz; GH_PAT (Secrets: write yetkili ince ayarlı token) gerekir."""
+    import subprocess
+
+    if not value:
+        raise TokenRefreshError(f"{name} boş, Secret'a yazılamaz")
+    print(f"::add-mask::{value}")  # GitHub Actions bu değeri loglarda gizler
+    pat = os.environ.get("GH_PAT", "")
+    if not pat:
+        raise TokenRefreshError("GH_PAT secret'ı yok — yenilenen token GitHub'a yazılamadı")
+    env = {**os.environ, "GH_TOKEN": pat}
+    r = subprocess.run(["gh", "secret", "set", name], input=value, text=True, env=env, capture_output=True)
+    if r.returncode != 0:
+        raise TokenRefreshError(settings.scrub(f"gh secret set başarısız: {r.stderr.strip()[:200]}"))

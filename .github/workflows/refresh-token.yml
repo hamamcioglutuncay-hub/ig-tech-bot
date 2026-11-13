@@ -1,0 +1,53 @@
+# Haftalık Instagram token yenileme. Yeni token GitHub Secret'a yazılır (GH_PAT gerekir).
+# Başarısız olursa Telegram'a uyarı gider.
+name: Instagram token yenile
+
+on:
+  schedule:
+    - cron: "0 6 * * 1"    # her pazartesi 09:00 İstanbul
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ig-tech-bot
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      MODE: ${{ vars.MODE || 'dry-run' }}
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      LLM_MODEL: ${{ secrets.LLM_MODEL }}
+      CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
+      CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+      TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+      TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+      IG_USER_ID: ${{ secrets.IG_USER_ID }}
+      IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+      IG_APP_ID: ${{ secrets.IG_APP_ID }}
+      IG_APP_SECRET: ${{ secrets.IG_APP_SECRET }}
+      GH_PAT: ${{ secrets.GH_PAT }}
+      COMMIT_MSG: "Token yenileme kaydı"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Git kimliği
+        run: |
+          git config user.name "ig-tech-bot"
+          git config user.email "ig-tech-bot@users.noreply.github.com"
+      - name: Token yenile
+        run: python -m bot refresh-token --ci
+      - name: Durumu kaydet
+        if: success()
+        run: |
+          git add state/token.json
+          git diff --cached --quiet || git commit -m "🤖 $COMMIT_MSG $(TZ=Europe/Istanbul date +%F)"
+          git pull --rebase -q && git push -q
