@@ -264,7 +264,8 @@ def cmd_publish(args: argparse.Namespace) -> int:
 
     if settings.mode() == "dry-run" and not args.ignore_mode:
         console.print("[yellow]⏭️  MODE=dry-run: yayın yapılmaz. (Elle denemek için --ignore-mode)[/]")
-        return 1
+        telegram.notify("⏭️ Yayın atlandı: mod dry-run. Yayına geçmek için modu 'approve' yapın.")
+        return 0  # bilinçli atlama: GitHub'da kırmızı hata olarak görünmesin
 
     day_dir = config.OUTPUT_DIR / args.date if args.date else today_dir()
     content = day_dir / "content.json"

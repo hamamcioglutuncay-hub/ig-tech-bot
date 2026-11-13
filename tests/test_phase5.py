@@ -12,9 +12,12 @@ WF = ROOT / ".github" / "workflows"
 
 
 def test_publish_refuses_in_dry_run(monkeypatch, capsys):
+    from bot import telegram
     monkeypatch.setenv("MODE", "dry-run")
+    sent = []
+    monkeypatch.setattr(telegram, "notify", lambda m: sent.append(m) or True)
     rc = cli.cmd_publish(argparse.Namespace(date=None, yes=True, force=False, ignore_mode=False))
-    assert rc == 1 and "dry-run" in capsys.readouterr().out
+    assert rc == 0 and "dry-run" in capsys.readouterr().out and sent  # atlandı, yayın yok
 
 
 def test_cleanup_removes_only_old_day_dirs(tmp_path, monkeypatch):
