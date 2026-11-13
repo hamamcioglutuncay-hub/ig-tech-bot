@@ -1,238 +1,53 @@
 {
-  "generated_at": "2026-11-13T13:14:21+00:00",
-  "model": "gemini-3.5-flash-lite",
+  "generated_at": "2026-11-13T17:38:17+00:00",
+  "model": "gemini-3.5-flash",
   "candidates": 150,
   "items": [
     {
-      "slide_title": "Jensen Huang Nvidia'dan Ayrıldı",
-      "slide_text": "Nvidia CEO'su Jensen Huang, artan iddialar ve casusluk suçlamaları sonrasında görevinden ayrıldı. Şirket hisselerinde büyük değer kaybı yaşanırken, ABD Kongresi konuyu incelemeye aldı.",
-      "why_it_matters": "Yapay zekâ çip pazarının devi Nvidia'da yaşanan bu sarsıntı, tüm sektörü etkileyebilir.",
-      "caption_paragraph": "Şirket içindeki huzursuzluk ve yönetim tartışmaları derinleşirken, yeni geçici CEO'nun kim olacağı merak ediliyor.",
-      "source_name": "The Decoder",
-      "source_url": "https://the-decoder.com/jensen-huang-resigns-as-nvidia-ceo-after-espionage-scandal-wipes-out-1-4-trillion-in-market-value/",
-      "category": "teknoloji",
-      "image_prompt": "An empty high-backed leather executive chair inside a dimly lit corporate glass boardroom at night. On the polished wooden table sits a glowing microchip shattered down the middle, next to a holographic stock chart trending sharply downward against a shadowy city skyline. Cinematic lighting, photorealistic.",
-      "importance": 10,
-      "all_sources": [
-        {
-          "name": "Kotaku",
-          "url": "https://kotaku.com/jensen-huang-resigns-from-nvidia-2000756256"
-        },
-        {
-          "name": "ShiftDelete.Net",
-          "url": "https://shiftdelete.net/nvidia-huang-geri-donsun-kampanyasi"
-        },
-        {
-          "name": "PC Gamer",
-          "url": "https://www.pcgamer.com/hardware/who-is-colette-kress-nvidias-new-interim-ceo/"
-        },
-        {
-          "name": "Tom's Hardware",
-          "url": "https://www.tomshardware.com/tech-industry/president-trump-says-apples-tim-cook-is-the-only-man-to-replace-jensen-huang-as-nvidia-ceo-proposes-a-legend-replaces-a-legend-in-call-for-apples-executive-chairman-of-its-board"
-        },
-        {
-          "name": "Ars Technica",
-          "url": "https://arstechnica.com/gadgets/2026/11/ceo-jensen-huangs-job-is-suddenly-on-the-line-at-nvidia/"
-        },
-        {
-          "name": "The Decoder",
-          "url": "https://the-decoder.com/jensen-huang-resigns-as-nvidia-ceo-after-espionage-scandal-wipes-out-1-4-trillion-in-market-value/"
-        },
-        {
-          "name": "PC Gamer",
-          "url": "https://www.pcgamer.com/hardware/graphics-cards/clear-national-security-concerns-that-need-to-be-addressed-immediately-new-letters-to-jensen-huang-from-congress-strike-a-tougher-tone-for-the-ex-nvidia-ceo/"
-        },
-        {
-          "name": "Engadget",
-          "url": "https://www.engadget.com/2315710/bloomberg-details-web-of-chinese-ai-companies-with-smuggled-nvidia-chips-linked-to-alice-huang/"
-        },
-        {
-          "name": "TechCrunch",
-          "url": "https://techcrunch.com/2026/11/13/israels-vcs-see-opportunity-for-challengers-in-nvidias-turmoil/"
-        },
-        {
-          "name": "TechCrunch",
-          "url": "https://techcrunch.com/2026/11/13/jensen-huang-didnt-show-confidence-in-his-successor-report-says/"
-        },
-        {
-          "name": "DonanımHaber",
-          "url": "https://www.donanimhaber.com/jensen-huang-abd-kongresi-nde-ifade-verecek--212865"
-        },
-        {
-          "name": "The Verge",
-          "url": "https://www.theverge.com/ai-artificial-intelligence/1032339/lets-talk-about-the-nvidia-shitshow"
-        },
-        {
-          "name": "PC Gamer",
-          "url": "https://www.pcgamer.com/hardware/ex-nvidia-ceo-jensen-huang-allegedly-had-an-intimate-relationship-with-a-second-nvidia-employee-according-to-reports/"
-        }
-      ],
-      "headline": "Nvidia CEO'su Jensen Huang skandalların ardından istifa etti, ABD Kongresi ifadeye çağırdı.",
-      "alt_text": "Teknoloji haberi: Jensen Huang Nvidia'dan Ayrıldı. Nvidia CEO'su Jensen Huang, artan iddialar ve casusluk suçlamaları sonrasında görevinden ayrıldı. Şirket hisselerinde büyük değer kaybı yaşanırken, ABD Kongresi konuyu incelemeye aldı. Neden önemli: Yapay zekâ çip pazarının devi Nvidia'da yaşanan bu sarsıntı, tüm sektörü etkileyebilir. Kaynak: The Decoder."
-    },
-    {
-      "slide_title": "Wolfenstein 3 Resmi Olarak Duyuruldu",
-      "slide_text": "MachineGames, uzun süredir beklenen yeni Wolfenstein oyununun yapım aşamasında olduğunu doğruladı. Stüdyo, serinin hayranlarını heyecanlandıracak ilk detayları da paylaştı.",
-      "why_it_matters": "Kökleri klasik dönem FPS oyunlarına dayanan bu ikonik seri, yeni nesilde geri dönüyor.",
-      "caption_paragraph": "Xbox'ın 25. yıl kutlamaları kapsamında duyurulan oyun için ekip şimdiden motion capture çalışmalarına başladı.",
-      "source_name": "VGC",
-      "source_url": "https://www.videogameschronicle.com/news/machinegames-has-finally-officially-confirmed-that-wolfenstein-3-is-in-development/",
+      "slide_title": "GTA 6 Ön Siparişlerde 1 Milyar Dolara Ulaştı",
+      "slide_text": "Rockstar Games'in merakla beklenen yeni oyunu GTA 6, çıkışına günler kala ön siparişlerde 1 milyar dolar gelir elde etti. Ayrıca oyun içinde izlenebilecek çizgi dizinin ilk fragmanı yayınlandı. İlk gün online mod sunulmayacak.",
+      "why_it_matters": "Oyun dünyasının en büyük çıkışlarından birine imza atmaya hazırlanan yapım rekor kırıyor.",
+      "caption_paragraph": "Rockstar Games, GTA 6 için Macca & Friends adlı çizgi dizinin fragmanını da paylaşarak oyun içi içerikleri detaylandırdı.",
+      "source_name": "Polygon",
+      "source_url": "https://www.polygon.com/gta-6-preorders-1-billion-dollars-ps5-xbox-series-x/",
       "category": "oyun",
-      "image_prompt": "A dimly lit bunker room from an alternate history era, featuring heavy steel doors, glowing vacuum tubes, retro-futuristic mechanical blueprints spread across a metal desk, and an old iron helmet resting beside a brass steampunk mechanical gear. Cinematic mood, detailed textures, dark moody atmosphere.",
+      "image_prompt": "A sleek unbranded game console sitting on a polished dark desk in a modern room lit by purple and pink ambient lighting, with a large television screen displaying glowing soft light, creating an atmospheric gaming environment, captured in a cinematic high detail style.",
       "importance": 9,
       "all_sources": [
         {
-          "name": "Nintendo Life",
-          "url": "https://www.nintendolife.com/news/2026/11/wolfenstein-3-is-now-officially-in-production-at-machinegames"
-        },
-        {
-          "name": "PC Gamer",
-          "url": "https://www.pcgamer.com/games/fps/doom-studio-id-software-confirms-its-working-on-a-new-game/"
-        },
-        {
-          "name": "Eurogamer",
-          "url": "https://www.eurogamer.net/wolfenstein-3-new-id-software-game-announced-xbox"
-        },
-        {
-          "name": "Oyungezer",
-          "url": "//oyungezer.com.tr/haber/id-software-yeni-bir-oyun-uzerinde-calisiyor/detay"
+          "name": "Destructoid",
+          "url": "https://www.destructoid.com/rockstar-teases-an-entire-animated-tv-show-you-can-watch-in-gta-6/"
         },
         {
           "name": "Polygon",
-          "url": "https://www.polygon.com/wolfenstein-doom-bethesda-new-game-announced/"
+          "url": "https://www.polygon.com/gta-6-rockstar-macca-and-friends-animated-trailer/"
         },
         {
-          "name": "Kotaku",
-          "url": "https://kotaku.com/wolfenstein-3-in-production-machine-games-microsoft-asha-sharma-2000756436"
+          "name": "Polygon",
+          "url": "https://www.polygon.com/gta-6-preorders-1-billion-dollars-ps5-xbox-series-x/"
         },
         {
-          "name": "TurkMMO",
-          "url": "https://www.turkmmo.com/wolfenstein-3-10-yillik-bekleyisten-sonra-resmi-olarak-duyuruldu-h1000164221.html"
-        },
-        {
-          "name": "Rock Paper Shotgun",
-          "url": "https://www.rockpapershotgun.com/wolfenstein-3-and-new-id-software-game-confirmed-as-xbox-boss-somehow-unrelatedly-shouts-about-one-person-soon-wieldling-capabilities-that-once-required-entire-nations"
-        },
-        {
-          "name": "Oyungezer",
-          "url": "//oyungezer.com.tr/haber/machinegames-dogruladi-yeni-wolfenstein-gelistirilme-asamasinda/detay"
-        },
-        {
-          "name": "VGC",
-          "url": "https://www.videogameschronicle.com/news/machinegames-has-finally-officially-confirmed-that-wolfenstein-3-is-in-development/"
+          "name": "Push Square",
+          "url": "https://www.pushsquare.com/news/2026/11/psa-gta-6-does-not-have-online-multiplayer-at-launch"
         }
       ],
-      "headline": "Wolfenstein 3 resmen duyuruldu ve id Software yeni oyunu üzerinde çalışmaya başladı.",
-      "alt_text": "Oyun haberi: Wolfenstein 3 Resmi Olarak Duyuruldu. MachineGames, uzun süredir beklenen yeni Wolfenstein oyununun yapım aşamasında olduğunu doğruladı. Stüdyo, serinin hayranlarını heyecanlandıracak ilk detayları da paylaştı. Neden önemli: Kökleri klasik dönem FPS oyunlarına dayanan bu ikonik seri, yeni nesilde geri dönüyor. Kaynak: VGC."
+      "headline": "GTA 6 ön sipariş rekorları kırarken oyuna dahil çizgi dizi ve çıkış detayları duyuruldu.",
+      "alt_text": "Oyun haberi: GTA 6 Ön Siparişlerde 1 Milyar Dolara Ulaştı. Rockstar Games'in merakla beklenen yeni oyunu GTA 6, çıkışına günler kala ön siparişlerde 1 milyar dolar gelir elde etti. Ayrıca oyun içinde izlenebilecek çizgi dizinin ilk fragmanı yayınlandı. İlk gün online mod sunulmayacak. Neden önemli: Oyun dünyasının en büyük çıkışlarından birine imza atmaya hazırlanan yapım rekor kırıyor. Kaynak: Polygon."
     },
     {
-      "slide_title": "Microsoft Servislerinde Büyük Kesinti",
-      "slide_text": "Microsoft 365, Outlook ve Teams gibi temel bulut hizmetleri dünya genelinde kesintiye uğradı. Şirket onarım çalışmalarının sürdüğünü belirtirken kullanıcılar erişim sorunu yaşıyor.",
-      "why_it_matters": "Milyonlarca insanı ve kurumu etkileyen bu aksama, bulut bağımlılığının risklerini gösteriyor.",
-      "caption_paragraph": "Kesinti dünya genelinde kurumları ve kullanıcıları etkilerken, sorunun tam nedeni araştırılıyor.",
-      "source_name": "MacRumors",
-      "source_url": "https://www.macrumors.com/2026/11/13/major-microsoft-365-outage-continues/",
+      "slide_title": "Google Gemini 4 Hydrogen Modeli Tanıtıldı",
+      "slide_text": "Google, yeni yapay zekâ modeli Gemini 4 Hydrogen'i duyurdu. Modelin Gemini 3.8 Flash'a göre 2,5 kat daha hızlı olduğu ve 1 milyon token penceresi sunduğu açıklandı. Yeni model Google Arama altyapısına da entegre ediliyor.",
+      "why_it_matters": "Yapay zekâ sistemlerinin hızı ve arama motorlarındaki yetenekleri yeni seviyeye ulaşıyor.",
+      "caption_paragraph": "Yeni model 4 farklı düşünme seviyesi ve uygun fiyatlandırma seçenekleriyle geliştiricilerin kullanımına sunuluyor.",
+      "source_name": "MarkTechPost",
+      "source_url": "https://www.marktechpost.com/2026/11/13/google-gemini-4-hydrogen/",
       "category": "teknoloji",
-      "image_prompt": "A dark high-tech server room with endless rows of server racks. Pulsing red warning lights illuminate the floor while unplugged glowing fiber optic cables hang loose. A floating translucent globe in the center shows disconnected holographic network nodes fading away. Atmospheric neon red and blue lighting.",
+      "image_prompt": "A glowing translucent neural network sphere floating above a polished metallic desk inside a clean futuristic research laboratory surrounded by soft blue ambient lighting, representing advanced artificial intelligence computing power, captured in a highly detailed cinematic photographic composition.",
       "importance": 9,
-      "all_sources": [
-        {
-          "name": "Rock Paper Shotgun",
-          "url": "https://www.rockpapershotgun.com/microsoft-suffer-system-outage-affecting-outlook-teams-and-copilot-exec-says-theres-no-indication-this-is-the-result-of-malicious-or-cyber-activity"
-        },
-        {
-          "name": "Tom's Hardware",
-          "url": "https://www.tomshardware.com/software/japanese-workers-return-to-fax-machines-during-ongoing-microsoft-365-outage-were-going-full-analog-say-workers-forced-to-ditch-pdfs"
-        },
-        {
-          "name": "The Verge",
-          "url": "https://www.theverge.com/tech/1032862/microsoft-outlook-down-outage"
-        },
-        {
-          "name": "VGC",
-          "url": "https://www.videogameschronicle.com/news/microsoft-struggles-to-restore-online-services-after-major-outage/"
-        },
-        {
-          "name": "Insider Gaming",
-          "url": "https://insider-gaming.com/microsoft-outage/"
-        },
-        {
-          "name": "MacRumors",
-          "url": "https://www.macrumors.com/2026/11/13/major-microsoft-365-outage-continues/"
-        },
-        {
-          "name": "Teknoblog",
-          "url": "https://www.teknoblog.com/outlook-microsoft-365-kesintisi-13-kasim-2026/"
-        },
-        {
-          "name": "Kotaku",
-          "url": "https://kotaku.com/xbox-live-microsoft-365-copilot-outlook-outages-ongoing-2000756565"
-        },
-        {
-          "name": "IGN",
-          "url": "https://www.ign.com/articles/microsoft-struggling-to-fix-global-system-outage-impacting-email-systems-and-more-admits-initial-repairs-not-taking-as-expected"
-        }
-      ],
-      "headline": "Microsoft 365, Outlook ve Teams servislerinde küresel çapta büyük kesinti yaşanıyor.",
-      "alt_text": "Teknoloji haberi: Microsoft Servislerinde Büyük Kesinti. Microsoft 365, Outlook ve Teams gibi temel bulut hizmetleri dünya genelinde kesintiye uğradı. Şirket onarım çalışmalarının sürdüğünü belirtirken kullanıcılar erişim sorunu yaşıyor. Neden önemli: Milyonlarca insanı ve kurumu etkileyen bu aksama, bulut bağımlılığının risklerini gösteriyor. Kaynak: MacRumors."
-    },
-    {
-      "slide_title": "Fable'dan Yeni Oynanış Görüntüleri",
-      "slide_text": "Playground Games tarafından geliştirilen yeni Fable oyunundan dört dakikalık kesintisiz bir video paylaşıldı. Tanıtım, oyunun atmosferi ve düşman tasarımları hakkında fikir verdi.",
-      "why_it_matters": "Xbox'ın en önemli rol yapma oyunlarından biri olan yapım, seriye taze bir soluk getirecek.",
-      "caption_paragraph": "Yayınlanan karanlık tonlardaki sahneler oyuncu topluluğunda farklı tepkilere neden oldu.",
-      "source_name": "GameSpot",
-      "source_url": "https://www.gamespot.com/articles/fable-is-looking-a-lot-darker-than-we-expected/",
-      "category": "oyun",
-      "image_prompt": "A lush enchanted fantasy forest at dusk with cobblestone paths, glowing magical mushrooms, ancient overgrown stone ruins, and a distant cozy medieval village tucked between misty hills under a giant glowing full moon. Magical fantasy art style, rich colors, tranquil yet atmospheric scene.",
-      "importance": 8,
-      "all_sources": [
-        {
-          "name": "Merlin'in Kazanı",
-          "url": "https://www.merlininkazani.com/fable-dan-dort-dakikalik-yeni-oynanis-videosu-yayinlandi-haber-264317"
-        },
-        {
-          "name": "Xbox Wire",
-          "url": "https://news.xbox.com/en-us/2026/11/12/fable-new-quest-gameplay-for-xboxs-25th-anniversary/"
-        },
-        {
-          "name": "Pure Xbox",
-          "url": "https://www.purexbox.com/news/2026/11/fables-latest-showing-didnt-exactly-blow-our-socks-off"
-        },
-        {
-          "name": "DonanımHaber",
-          "url": "https://www.donanimhaber.com/fable-dan-4-dakikalik-kesintisiz-oynanis-videosu-geldi--212855"
-        },
-        {
-          "name": "Polygon",
-          "url": "https://www.polygon.com/fable-new-gameplay-trailer-xbox/"
-        },
-        {
-          "name": "GameSpot",
-          "url": "https://www.gamespot.com/articles/fable-is-looking-a-lot-darker-than-we-expected/"
-        }
-      ],
-      "headline": "Xbox 25. yıl kutlamaları kapsamında yeni Fable oyunundan 4 dakikalık oynanış videosu geldi.",
-      "alt_text": "Oyun haberi: Fable'dan Yeni Oynanış Görüntüleri. Playground Games tarafından geliştirilen yeni Fable oyunundan dört dakikalık kesintisiz bir video paylaşıldı. Tanıtım, oyunun atmosferi ve düşman tasarımları hakkında fikir verdi. Neden önemli: Xbox'ın en önemli rol yapma oyunlarından biri olan yapım, seriye taze bir soluk getirecek. Kaynak: GameSpot."
-    },
-    {
-      "slide_title": "Google'dan Hızlı Yapay Zekâ Modeli",
-      "slide_text": "Google, Flash serisinin yerini alacak yeni yapay zekâ modeli Gemini 4 Hydrogen'i duyurdu. Model, önceki sürümlere kıyasla daha yüksek hız ve uygun maliyet vadediyor.",
-      "why_it_matters": "Yapay zekâ araçlarının günlük iş akışlarındaki hızını ve erişilebilirliğini artırıyor.",
-      "caption_paragraph": "Yeni model arama motoru entegrasyonuyla da dikkat çekerken, yapay zekâ pazarındaki rekabeti kızıştırıyor.",
-      "source_name": "Google DeepMind",
-      "source_url": "https://deepmind.google/blog/introducing-gemini-4-hydrogen/",
-      "category": "teknoloji",
-      "image_prompt": "A sleek futuristic research laboratory featuring a glowing translucent sphere made of light and energy, floating above a minimalist workstation. Bright blue and cyan light trails swirl rapidly around the sphere, representing extreme processing speed and efficiency against a clean metallic background.",
-      "importance": 8,
       "all_sources": [
         {
           "name": "MarkTechPost",
           "url": "https://www.marktechpost.com/2026/11/13/google-gemini-4-hydrogen/"
-        },
-        {
-          "name": "The Decoder",
-          "url": "https://the-decoder.com/googles-gemini-4-hydrogen-outscores-the-bigger-argon-just-four-weeks-after-its-launch/"
         },
         {
           "name": "Google DeepMind",
@@ -243,82 +58,155 @@
           "url": "https://blog.google/products-and-platforms/products/search/gemini-4-hydrogen-search-upgrade/"
         }
       ],
-      "headline": "Google, 2.5 kat daha hızlı yeni nesil yapay zekâ modeli Gemini 4 Hydrogen'i tanıttı.",
-      "alt_text": "Teknoloji haberi: Google'dan Hızlı Yapay Zekâ Modeli. Google, Flash serisinin yerini alacak yeni yapay zekâ modeli Gemini 4 Hydrogen'i duyurdu. Model, önceki sürümlere kıyasla daha yüksek hız ve uygun maliyet vadediyor. Neden önemli: Yapay zekâ araçlarının günlük iş akışlarındaki hızını ve erişilebilirliğini artırıyor. Kaynak: Google DeepMind."
+      "headline": "Google, yeni yapay zeka modeli Gemini 4 Hydrogen'i ve Arama entegrasyonunu duyurdu.",
+      "alt_text": "Teknoloji haberi: Google Gemini 4 Hydrogen Modeli Tanıtıldı. Google, yeni yapay zekâ modeli Gemini 4 Hydrogen'i duyurdu. Modelin Gemini 3.8 Flash'a göre 2,5 kat daha hızlı olduğu ve 1 milyon token penceresi sunduğu açıklandı. Yeni model Google Arama altyapısına da entegre ediliyor. Neden önemli: Yapay zekâ sistemlerinin hızı ve arama motorlarındaki yetenekleri yeni seviyeye ulaşıyor. Kaynak: MarkTechPost."
     },
     {
-      "slide_title": "Çalışanlara GTA 6 İçin İzin Müjdesi",
-      "slide_text": "Palworld geliştiricisi Pocketpair, merakla beklenen GTA 6'nın çıkış gününde personeline beş günlük izin vereceğini açıkladı. Şirket bu hamleyle çalışan memnuniyetini artırmayı hedefliyor.",
-      "why_it_matters": "Oyun dünyasında şimdiye kadar görülmemiş bu yaklaşım, sektörde eğlenceli bir yankı uyandırdı.",
-      "caption_paragraph": "Oyunun çıkış tarihine yaklaşırken küresel çapta internet altyapısının bu yoğunluğu nasıl kaldıracağı da tartışılıyor.",
-      "source_name": "Eurogamer",
-      "source_url": "https://www.eurogamer.net/gta-6-internet-uk-broadband-ofcom-openreach",
-      "category": "oyun",
-      "image_prompt": "An empty game development studio at night seen from a low angle, rows of desks with monitors glowing softly in violet, office chairs pushed in, a bowl of popcorn and a blank game controller resting on the nearest desk, festive relaxed mood of a day off",
-      "importance": 7,
+      "slide_title": "ChatGPT Wallet ile Yapay Zekâ Alışveriş Yapabilecek",
+      "slide_text": "OpenAI, kullanıcıların onayıyla yapay zekâ ajanlarının alışveriş yapmasına olanak tanıyan ChatGPT Wallet özelliğini duyurdu. Sistem, mevcut kart korumalarıyla ABD'deki Pro aboneleri için kademeli olarak erişime açılıyor.",
+      "why_it_matters": "Otonom yapay zekâ ajanları doğrudan günlük finansal işlemleri gerçekleştirmeye başlıyor.",
+      "caption_paragraph": "Özellik ilk etapta ABD'deki Pro kullanıcılarına sunulurken işlemler kullanıcının onayıyla gerçekleştirilecek.",
+      "source_name": "TechCrunch",
+      "source_url": "https://techcrunch.com/2026/11/13/chatgpts-new-wallet-lets-ai-agents-shop-and-check-out-for-you/",
+      "category": "teknoloji",
+      "image_prompt": "A glowing transparent digital payment card floating gently above a polished dark glass desk in a minimalist futuristic room, illuminated by soft blue light trails and subtle particle effects, representing automated shopping technology, rendered in a crisp photographic style.",
+      "importance": 8,
       "all_sources": [
         {
-          "name": "TurkMMO",
-          "url": "https://www.turkmmo.com/unlu-oyun-firmasi-calisanlarina-gta-6-icin-5-gun-izin-verdi-h1000164224.html"
+          "name": "OpenAI News",
+          "url": "https://openai.com/index/introducing-chatgpt-wallet"
         },
         {
-          "name": "Oyungezer",
-          "url": "//oyungezer.com.tr/haber/pocketpairdan-calisanlarina-gta-6-izni/detay"
+          "name": "Engadget",
+          "url": "https://www.engadget.com/2316137/you-can-now-tempt-fate-and-give-your-banking-information-to-chatgpt/"
         },
+        {
+          "name": "TechCrunch",
+          "url": "https://techcrunch.com/2026/11/13/chatgpts-new-wallet-lets-ai-agents-shop-and-check-out-for-you/"
+        }
+      ],
+      "headline": "OpenAI, yapay zekanın kullanıcı adına ödeme yapmasını sağlayan ChatGPT Wallet özelliğini tanıttı.",
+      "alt_text": "Teknoloji haberi: ChatGPT Wallet ile Yapay Zekâ Alışveriş Yapabilecek. OpenAI, kullanıcıların onayıyla yapay zekâ ajanlarının alışveriş yapmasına olanak tanıyan ChatGPT Wallet özelliğini duyurdu. Sistem, mevcut kart korumalarıyla ABD'deki Pro aboneleri için kademeli olarak erişime açılıyor. Neden önemli: Otonom yapay zekâ ajanları doğrudan günlük finansal işlemleri gerçekleştirmeye başlıyor. Kaynak: TechCrunch."
+    },
+    {
+      "slide_title": "Wolfenstein 3 Resmi Olarak Geliştirilmeye Başlandı",
+      "slide_text": "MachineGames stüdyosu, popüler serinin yeni oyunu Wolfenstein 3'ün yapım aşamasında olduğunu resmen doğruladı. Yılın başlarında gündeme gelen iddiaların ardından projenin resmi olarak geliştirildiği açıklandı.",
+      "why_it_matters": "Sevilen aksiyon serisi uzun zaman sonra yeni bir ana oyunla geri dönüyor.",
+      "caption_paragraph": "Ocak ayında ortaya çıkan söylentilerin ardından MachineGames yeni oyunun stüdyoda yapım aşamasında olduğunu onayladı.",
+      "source_name": "Nintendo Life",
+      "source_url": "https://www.nintendolife.com/news/2026/11/wolfenstein-3-is-now-officially-in-production-at-machinegames",
+      "category": "oyun",
+      "image_prompt": "A dramatic retro futuristic underground bunker with thick concrete walls, illuminated by warm glowing industrial lamps, featuring heavy metallic gears and dark iron machinery shrouded in light mist, creating a tense cinematic atmosphere with deep shadows and high contrast.",
+      "importance": 8,
+      "all_sources": [
+        {
+          "name": "Nintendo Life",
+          "url": "https://www.nintendolife.com/news/2026/11/wolfenstein-3-is-now-officially-in-production-at-machinegames"
+        }
+      ],
+      "headline": "MachineGames, Wolfenstein 3'ün resmi olarak yapım aşamasında olduğunu doğruladı.",
+      "alt_text": "Oyun haberi: Wolfenstein 3 Resmi Olarak Geliştirilmeye Başlandı. MachineGames stüdyosu, popüler serinin yeni oyunu Wolfenstein 3'ün yapım aşamasında olduğunu resmen doğruladı. Yılın başlarında gündeme gelen iddiaların ardından projenin resmi olarak geliştirildiği açıklandı. Neden önemli: Sevilen aksiyon serisi uzun zaman sonra yeni bir ana oyunla geri dönüyor. Kaynak: Nintendo Life."
+    },
+    {
+      "slide_title": "PS5 İçin QSSR Yapay Zekâ Güncellemesi Genişliyor",
+      "slide_text": "Sony'nin ana PS5 konsolları için sunduğu QSSR yapay zekâ ölçekleme teknolojisi yeni oyunlara ulaşıyor. Marvel’s Spider-Man 2, Control Resonant, The Finals, ARC Raiders ve No Man's Sky gibi yapımlar performans güncellemeleri alıyor.",
+      "why_it_matters": "Standart konsol sahipleri ek donanım almadan daha yüksek grafik performansına kavuşuyor.",
+      "caption_paragraph": "Geliştiricilerin ilgisini çeken teknoloji, mevcut konsollarda grafik performansını önemli ölçüde artırmayı hedefliyor.",
+      "source_name": "PlayStation Blog",
+      "source_url": "https://blog.playstation.com/2026/11/13/qssr-arrives-in-marvels-spider-man-2-control-resonant-the-finals-arc-raiders-and-hell-let-loose-vietnam/",
+      "category": "oyun",
+      "image_prompt": "A sleek unbranded black and white gaming console resting on a wooden TV stand, soft cyan ambient light glowing from behind, cinematic room setup with subtle light beams reflecting on the glossy surface, high quality indoor photography.",
+      "importance": 8,
+      "all_sources": [
+        {
+          "name": "PlayStation Blog",
+          "url": "https://blog.playstation.com/2026/11/13/qssr-arrives-in-marvels-spider-man-2-control-resonant-the-finals-arc-raiders-and-hell-let-loose-vietnam/"
+        },
+        {
+          "name": "GamesRadar+",
+          "url": "https://www.gamesradar.com/hardware/sonys-base-ps5-ai-upscaling-tech-is-making-that-usd900-ps5-pro-price-look-worse-as-marvels-spider-man-2-no-mans-sky-and-more-get-visual-updates/"
+        },
+        {
+          "name": "VGC",
+          "url": "https://www.videogameschronicle.com/news/6-more-games-receive-ps5-performance-updates-via-qssr-including-arc-raiders-and-control-resonant/"
+        },
+        {
+          "name": "Kotaku",
+          "url": "https://kotaku.com/spider-man-2-and-a-bunch-of-other-great-games-are-about-to-look-even-better-on-base-ps5-2000756594"
+        }
+      ],
+      "headline": "PlayStation 5 için AI tabanlı görüntü yükseltme teknolojisi QSSR yeni oyunlara eklendi.",
+      "alt_text": "Oyun haberi: PS5 İçin QSSR Yapay Zekâ Güncellemesi Genişliyor. Sony'nin ana PS5 konsolları için sunduğu QSSR yapay zekâ ölçekleme teknolojisi yeni oyunlara ulaşıyor. Marvel’s Spider-Man 2, Control Resonant, The Finals, ARC Raiders ve No Man's Sky gibi yapımlar performans güncellemeleri alıyor. Neden önemli: Standart konsol sahipleri ek donanım almadan daha yüksek grafik performansına kavuşuyor. Kaynak: PlayStation Blog."
+    },
+    {
+      "slide_title": "Meta Muse Sizin Yerinize Telefon Görüşmesi Yapabiliyor",
+      "slide_text": "Meta'nın 10 milyondan fazla kullanıcısı olan yapay zekâ asistanı Muse, ABD'deki ücretli aboneler için telefon aramaları yapma özelliğini kazandı. Asistan restoran veya hizmet sağlayıcılarını arayabiliyor ancak işletmeler AI'ı kapatabiliyor.",
+      "why_it_matters": "Yapay zekâ asistanları insan adına doğrudan iletişim kurma noktasına ilerliyor.",
+      "caption_paragraph": "Meta'nın AI başkanı Alexandr Wang, asistanın 10 milyondan fazla kullanıcıya ulaştığını ve yeniliklerin süreceğini belirtti.",
+      "source_name": "The Decoder",
+      "source_url": "https://the-decoder.com/metas-muse-now-calls-businesses-for-you-but-many-companies-might-just-hang-up-on-the-ai/",
+      "category": "teknoloji",
+      "image_prompt": "An unbranded modern smartphone resting on a dark wooden desk with subtle glowing sound wave visuals displayed on the illuminated screen, surrounded by warm ambient lighting in a quiet office environment, creating a sophisticated artificial intelligence concept picture.",
+      "importance": 8,
+      "all_sources": [
         {
           "name": "Webtekno",
-          "url": "https://www.webtekno.com/gta-6-bir-ulkede-neredeyse-yasaklaniyordu-h228925.html"
+          "url": "https://www.webtekno.com/meta-muse-sizin-yerinize-telefon-gorusmesi-yapabiliyor-h228916.html"
         },
         {
-          "name": "Eurogamer",
-          "url": "https://www.eurogamer.net/gta-6-internet-uk-broadband-ofcom-openreach"
+          "name": "The Decoder",
+          "url": "https://the-decoder.com/metas-muse-now-calls-businesses-for-you-but-many-companies-might-just-hang-up-on-the-ai/"
         }
       ],
-      "headline": "Palworld geliştiricisi Pocketpair, GTA 6'nın çıkış günü için çalışanlarına 5 gün izin verdi.",
-      "alt_text": "Oyun haberi: Çalışanlara GTA 6 İçin İzin Müjdesi. Palworld geliştiricisi Pocketpair, merakla beklenen GTA 6'nın çıkış gününde personeline beş günlük izin vereceğini açıkladı. Şirket bu hamleyle çalışan memnuniyetini artırmayı hedefliyor. Neden önemli: Oyun dünyasında şimdiye kadar görülmemiş bu yaklaşım, sektörde eğlenceli bir yankı uyandırdı. Kaynak: Eurogamer."
+      "headline": "Meta'nın yapay zeka asistanı Muse, kullanıcılar yerine telefon görüşmesi yapmaya başladı.",
+      "alt_text": "Teknoloji haberi: Meta Muse Sizin Yerinize Telefon Görüşmesi Yapabiliyor. Meta'nın 10 milyondan fazla kullanıcısı olan yapay zekâ asistanı Muse, ABD'deki ücretli aboneler için telefon aramaları yapma özelliğini kazandı. Asistan restoran veya hizmet sağlayıcılarını arayabiliyor ancak işletmeler AI'ı kapatabiliyor. Neden önemli: Yapay zekâ asistanları insan adına doğrudan iletişim kurma noktasına ilerliyor. Kaynak: The Decoder."
     },
     {
-      "slide_title": "Orijinal Xbox Oyunları PC'ye Geliyor",
-      "slide_text": "Xbox, 25. yıl kutlamaları kapsamında yirmi beş orijinal yapımı geriye uyumluluk özelliğiyle PC'ye taşıyor. Bazı klasik oyunlara başarımlar da eklendi.",
-      "why_it_matters": "Geçmişin klasik yapımlarını modern oyuncularla buluşturarak arşivlerin yaşamasını sağlıyor.",
-      "caption_paragraph": "Firma aynı zamanda döneme özel tematik oyun içi kozmetikleri de oyuncuların beğenisine sundu.",
-      "source_name": "Xbox Wire",
-      "source_url": "https://news.xbox.com/en-us/2026/11/12/25-original-xbox-games-now-available-on-pc/",
-      "category": "oyun",
-      "image_prompt": "A vintage bulky black game controller connected via a thick black cable directly into a sleek, modern gaming PC tower glowing with RGB lighting on a wooden desk. Classic glowing digital pixel artifacts float softly around the setup in a nostalgic glowing atmosphere.",
-      "importance": 7,
-      "all_sources": [
-        {
-          "name": "Xbox Wire",
-          "url": "https://news.xbox.com/en-us/2026/11/12/25-original-xbox-games-now-available-on-pc/"
-        },
-        {
-          "name": "Pure Xbox",
-          "url": "https://www.purexbox.com/guides/heres-how-to-claim-all-the-xbox-25th-anniversary-in-game-items"
-        }
-      ],
-      "headline": "Xbox 25. yıl dönümünde 25 klasik orijinal Xbox oyunu geriye dönük uyumlulukla PC'ye geldi.",
-      "alt_text": "Oyun haberi: Orijinal Xbox Oyunları PC'ye Geliyor. Xbox, 25. yıl kutlamaları kapsamında yirmi beş orijinal yapımı geriye uyumluluk özelliğiyle PC'ye taşıyor. Bazı klasik oyunlara başarımlar da eklendi. Neden önemli: Geçmişin klasik yapımlarını modern oyuncularla buluşturarak arşivlerin yaşamasını sağlıyor. Kaynak: Xbox Wire."
-    },
-    {
-      "slide_title": "Claude Yapay Zekâ Toplantılara Katılıyor",
-      "slide_text": "Anthropic, Claude asistanının doğrudan görüntülü görüşmelere katılmasına olanak tanıyan yeni özelliğini duyurdu. Araç, toplantı notlarını eş zamanlı olarak hazırlayabiliyor.",
-      "why_it_matters": "İş yerindeki verimlilik araçlarını yapay zekâ entegrasyonuyla tamamen dönüştürüyor.",
-      "caption_paragraph": "Beta sürecinde olan özellik şimdilik belirli kurumsal planlar için erişime açılmış durumda.",
+      "slide_title": "Anthropic Halka Arzında Talep Rekor Seviyeye Ulaştı",
+      "slide_text": "Yapay zekâ şirketi Anthropic'in halka arzında yatırımcı talebi satışa sunulan hisselerin 6 katına ulaştı. Şirket, bu gelişmeyle birlikte tarihin en büyük halka arzlarından birini gerçekleştirmeye hazırlanıyor.",
+      "why_it_matters": "Yapay zekâ sektörüne yönelik devasa yatırımcı ilgisi finans piyasalarında rekor kırıyor.",
+      "caption_paragraph": "Halka arz talebinin hisse miktarını altıya katlaması, şirketin finans dünyasındaki güçlü konumunu göz önüne seriyor.",
       "source_name": "The Decoder",
-      "source_url": "https://the-decoder.com/claude-meetings-lets-anthropics-ai-join-your-video-calls/",
+      "source_url": "https://the-decoder.com/anthropics-ipo-is-six-times-oversubscribed-and-on-track-to-become-the-largest-public-offering-in-history/",
       "category": "teknoloji",
-      "image_prompt": "A modern meeting room with a long dark wooden table and empty chairs, an open unbranded laptop at the head of the table emitting a soft glowing cyan orb of light, a coffee cup and a pen beside it, large window with evening city glow",
-      "importance": 7,
+      "image_prompt": "A grand modern glass skyscraper atrium bathed in bright natural sunlight, featuring sleek geometric architectural structures with glossy floor reflections, soaring high ceilings, and an elegant corporate design, creating a sense of massive growth and success, high quality wide angle photograph.",
+      "importance": 8,
       "all_sources": [
         {
           "name": "The Decoder",
-          "url": "https://the-decoder.com/claude-meetings-lets-anthropics-ai-join-your-video-calls/"
+          "url": "https://the-decoder.com/anthropics-ipo-is-six-times-oversubscribed-and-on-track-to-become-the-largest-public-offering-in-history/"
         }
       ],
-      "headline": "Anthropic'in yeni Claude Meetings özelliği yapay zekânın görüntülü toplantılara katılmasını sağlıyor.",
-      "alt_text": "Teknoloji haberi: Claude Yapay Zekâ Toplantılara Katılıyor. Anthropic, Claude asistanının doğrudan görüntülü görüşmelere katılmasına olanak tanıyan yeni özelliğini duyurdu. Araç, toplantı notlarını eş zamanlı olarak hazırlayabiliyor. Neden önemli: İş yerindeki verimlilik araçlarını yapay zekâ entegrasyonuyla tamamen dönüştürüyor. Kaynak: The Decoder."
+      "headline": "Anthropic'in halka arzı rekor taleple 6 kat fazla başvuru alarak tarihe geçmeye hazırlanıyor.",
+      "alt_text": "Teknoloji haberi: Anthropic Halka Arzında Talep Rekor Seviyeye Ulaştı. Yapay zekâ şirketi Anthropic'in halka arzında yatırımcı talebi satışa sunulan hisselerin 6 katına ulaştı. Şirket, bu gelişmeyle birlikte tarihin en büyük halka arzlarından birini gerçekleştirmeye hazırlanıyor. Neden önemli: Yapay zekâ sektörüne yönelik devasa yatırımcı ilgisi finans piyasalarında rekor kırıyor. Kaynak: The Decoder."
+    },
+    {
+      "slide_title": "Microsoft Servisleri Kesintinin Ardından Düzeliyor",
+      "slide_text": "Microsoft Outlook, Teams ve 365 servislerinde yaşanan yaklaşık iki günlük küresel kesinti sonrasında hizmetler kademeli olarak geri dönüyor. Kesintiden okullar, hastaneler ve resmi kurumlar dahil milyonlarca kullanıcı etkilendi.",
+      "why_it_matters": "Tek bir bulut altyapısına olan bağımlılığın küresel sistemler üzerindeki riski bir kez daha görüldü.",
+      "caption_paragraph": "Küresel çaptaki aksama iki gün boyunca sürerken, yetkililer erişimin kademeli olarak yeniden sağlandığını duyurdu.",
+      "source_name": "Engadget",
+      "source_url": "https://www.engadget.com/2316029/microsoft-services-are-returning-after-an-outage-took-down-outlook-teams-and-more/",
+      "category": "teknoloji",
+      "image_prompt": "A dark server room filled with endless rows of tall computing racks, featuring blinking amber warning lights and dangling network cables, lit by subtle blue and red accent lights, capturing a sense of system failure, photorealistic high detail shot.",
+      "importance": 8,
+      "all_sources": [
+        {
+          "name": "Wired",
+          "url": "https://www.wired.com/story/the-microsoft-outage-is-a-warning-for-the-world/"
+        },
+        {
+          "name": "Engadget",
+          "url": "https://www.engadget.com/2316029/microsoft-services-are-returning-after-an-outage-took-down-outlook-teams-and-more/"
+        },
+        {
+          "name": "The Verge",
+          "url": "https://www.theverge.com/tech/1032862/microsoft-outlook-down-outage"
+        }
+      ],
+      "headline": "Microsoft servislerinde yaşanan küresel kesinti dünya genelinde sistemleri aksattı.",
+      "alt_text": "Teknoloji haberi: Microsoft Servisleri Kesintinin Ardından Düzeliyor. Microsoft Outlook, Teams ve 365 servislerinde yaşanan yaklaşık iki günlük küresel kesinti sonrasında hizmetler kademeli olarak geri dönüyor. Kesintiden okullar, hastaneler ve resmi kurumlar dahil milyonlarca kullanıcı etkilendi. Neden önemli: Tek bir bulut altyapısına olan bağımlılığın küresel sistemler üzerindeki riski bir kez daha görüldü. Kaynak: Engadget."
     }
   ],
-  "caption": "Bugünün öne çıkan teknoloji ve oyun gelişmelerini derledik. Sektördeki önemli duyuruları ve yaşanan son olayları bir araya getirdik.\n\n💻 Jensen Huang Nvidia'dan Ayrıldı\nŞirket içindeki huzursuzluk ve yönetim tartışmaları derinleşirken, yeni geçici CEO'nun kim olacağı merak ediliyor.\nKaynak: The Decoder\n\n🎮 Wolfenstein 3 Resmi Olarak Duyuruldu\nXbox'ın 25. yıl kutlamaları kapsamında duyurulan oyun için ekip şimdiden motion capture çalışmalarına başladı.\nKaynak: VGC\n\n💻 Microsoft Servislerinde Büyük Kesinti\nKesinti dünya genelinde kurumları ve kullanıcıları etkilerken, sorunun tam nedeni araştırılıyor.\nKaynak: MacRumors\n\n🎮 Fable'dan Yeni Oynanış Görüntüleri\nYayınlanan karanlık tonlardaki sahneler oyuncu topluluğunda farklı tepkilere neden oldu.\nKaynak: GameSpot\n\n💻 Google'dan Hızlı Yapay Zekâ Modeli\nYeni model arama motoru entegrasyonuyla da dikkat çekerken, yapay zekâ pazarındaki rekabeti kızıştırıyor.\nKaynak: Google DeepMind\n\n🎮 Çalışanlara GTA 6 İçin İzin Müjdesi\nOyunun çıkış tarihine yaklaşırken küresel çapta internet altyapısının bu yoğunluğu nasıl kaldıracağı da tartışılıyor.\nKaynak: Eurogamer\n\n🎮 Orijinal Xbox Oyunları PC'ye Geliyor\nFirma aynı zamanda döneme özel tematik oyun içi kozmetikleri de oyuncuların beğenisine sundu.\nKaynak: Xbox Wire\n\n💻 Claude Yapay Zekâ Toplantılara Katılıyor\nBeta sürecinde olan özellik şimdilik belirli kurumsal planlar için erişime açılmış durumda.\nKaynak: The Decoder\n\n#teknoloji #oyun #yapayzeka #donanim #gundem\n\nGörseller yapay zekâ ile üretilmiştir."
+  "caption": "Teknoloji ve oyun dünyasında bugün hareketli anlar yaşandı. Yapay zekâ asistanlarından dev oyun güncellemelerine ve sektördeki büyük gelişmelere kadar günün öne çıkan başlıklarını derledik.\n\n🎮 GTA 6 Ön Siparişlerde 1 Milyar Dolara Ulaştı\nRockstar Games, GTA 6 için Macca & Friends adlı çizgi dizinin fragmanını da paylaşarak oyun içi içerikleri detaylandırdı.\nKaynak: Polygon\n\n💻 Google Gemini 4 Hydrogen Modeli Tanıtıldı\nYeni model 4 farklı düşünme seviyesi ve uygun fiyatlandırma seçenekleriyle geliştiricilerin kullanımına sunuluyor.\nKaynak: MarkTechPost\n\n💻 ChatGPT Wallet ile Yapay Zekâ Alışveriş Yapabilecek\nÖzellik ilk etapta ABD'deki Pro kullanıcılarına sunulurken işlemler kullanıcının onayıyla gerçekleştirilecek.\nKaynak: TechCrunch\n\n🎮 Wolfenstein 3 Resmi Olarak Geliştirilmeye Başlandı\nOcak ayında ortaya çıkan söylentilerin ardından MachineGames yeni oyunun stüdyoda yapım aşamasında olduğunu onayladı.\nKaynak: Nintendo Life\n\n🎮 PS5 İçin QSSR Yapay Zekâ Güncellemesi Genişliyor\nGeliştiricilerin ilgisini çeken teknoloji, mevcut konsollarda grafik performansını önemli ölçüde artırmayı hedefliyor.\nKaynak: PlayStation Blog\n\n💻 Meta Muse Sizin Yerinize Telefon Görüşmesi Yapabiliyor\nMeta'nın AI başkanı Alexandr Wang, asistanın 10 milyondan fazla kullanıcıya ulaştığını ve yeniliklerin süreceğini belirtti.\nKaynak: The Decoder\n\n💻 Anthropic Halka Arzında Talep Rekor Seviyeye Ulaştı\nHalka arz talebinin hisse miktarını altıya katlaması, şirketin finans dünyasındaki güçlü konumunu göz önüne seriyor.\nKaynak: The Decoder\n\n💻 Microsoft Servisleri Kesintinin Ardından Düzeliyor\nKüresel çaptaki aksama iki gün boyunca sürerken, yetkililer erişimin kademeli olarak yeniden sağlandığını duyurdu.\nKaynak: Engadget\n\n#teknoloji #oyun #yapayzeka #gta6 #ps5 #nintendo #microsoft\n\nGörseller yapay zekâ ile üretilmiştir."
 }
