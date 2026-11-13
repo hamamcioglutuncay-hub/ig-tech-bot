@@ -1,6 +1,0 @@
-# Varyasyon C — Cesur tipografi: kategori rengiyle iki tonlu görsel, BÜYÜK HARF başlık, renkli satır kutuları
-variant_name: "C · Cesur"
-layout: overlay
-background: {tint: duotone, tint_strength: 0.75, brightness: 0.9}
-title: {upper: true, highlight: true, max_size: 74, min_size: 46, line_spacing: 1.22}
-gradient: {max_opacity: 0.9}

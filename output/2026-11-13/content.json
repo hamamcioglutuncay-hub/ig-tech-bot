@@ -1,15 +1,18 @@
 {
-  "generated_at": "2026-11-13T12:30:40+00:00",
-  "model": "gemini-3.5-flash",
+  "generated_at": "2026-11-13T13:14:21+00:00",
+  "model": "gemini-3.5-flash-lite",
   "candidates": 150,
   "items": [
     {
-      "slide_title": "Nvidia CEO'su Jensen Huang Görevinden İstifa Etti",
-      "slide_text": "Şirket içi ilişki iddiaları ve milyarlarca dolarlık çip kaçakçılığı skandalının ardından Nvidia kurucusu Jensen Huang CEO'luk görevinden ayrıldı.",
-      "source_name": "Kotaku",
-      "source_url": "https://kotaku.com/jensen-huang-resigns-from-nvidia-2000756256",
+      "slide_title": "Jensen Huang Nvidia'dan Ayrıldı",
+      "slide_text": "Nvidia CEO'su Jensen Huang, artan iddialar ve casusluk suçlamaları sonrasında görevinden ayrıldı. Şirket hisselerinde büyük değer kaybı yaşanırken, ABD Kongresi konuyu incelemeye aldı.",
+      "why_it_matters": "Yapay zekâ çip pazarının devi Nvidia'da yaşanan bu sarsıntı, tüm sektörü etkileyebilir.",
+      "caption_paragraph": "Şirket içindeki huzursuzluk ve yönetim tartışmaları derinleşirken, yeni geçici CEO'nun kim olacağı merak ediliyor.",
+      "source_name": "The Decoder",
+      "source_url": "https://the-decoder.com/jensen-huang-resigns-as-nvidia-ceo-after-espionage-scandal-wipes-out-1-4-trillion-in-market-value/",
       "category": "teknoloji",
-      "image_prompt": "abstract futuristic glowing silicon wafer matrix, dark background, emerald green and metallic accents, minimal, cinematic light",
+      "image_prompt": "abstract flowing neon circuitry over deep indigo gradient, soft volumetric light, minimal, cinematic",
+      "importance": 10,
       "all_sources": [
         {
           "name": "Kotaku",
@@ -36,6 +39,18 @@
           "url": "https://the-decoder.com/jensen-huang-resigns-as-nvidia-ceo-after-espionage-scandal-wipes-out-1-4-trillion-in-market-value/"
         },
         {
+          "name": "PC Gamer",
+          "url": "https://www.pcgamer.com/hardware/graphics-cards/clear-national-security-concerns-that-need-to-be-addressed-immediately-new-letters-to-jensen-huang-from-congress-strike-a-tougher-tone-for-the-ex-nvidia-ceo/"
+        },
+        {
+          "name": "Engadget",
+          "url": "https://www.engadget.com/2315710/bloomberg-details-web-of-chinese-ai-companies-with-smuggled-nvidia-chips-linked-to-alice-huang/"
+        },
+        {
+          "name": "TechCrunch",
+          "url": "https://techcrunch.com/2026/11/13/israels-vcs-see-opportunity-for-challengers-in-nvidias-turmoil/"
+        },
+        {
           "name": "TechCrunch",
           "url": "https://techcrunch.com/2026/11/13/jensen-huang-didnt-show-confidence-in-his-successor-report-says/"
         },
@@ -50,30 +65,89 @@
         {
           "name": "PC Gamer",
           "url": "https://www.pcgamer.com/hardware/ex-nvidia-ceo-jensen-huang-allegedly-had-an-intimate-relationship-with-a-second-nvidia-employee-according-to-reports/"
+        }
+      ],
+      "headline": "Nvidia CEO'su Jensen Huang skandalların ardından istifa etti, ABD Kongresi ifadeye çağırdı.",
+      "alt_text": "Teknoloji haberi: Jensen Huang Nvidia'dan Ayrıldı. Nvidia CEO'su Jensen Huang, artan iddialar ve casusluk suçlamaları sonrasında görevinden ayrıldı. Şirket hisselerinde büyük değer kaybı yaşanırken, ABD Kongresi konuyu incelemeye aldı. Neden önemli: Yapay zekâ çip pazarının devi Nvidia'da yaşanan bu sarsıntı, tüm sektörü etkileyebilir. Kaynak: The Decoder."
+    },
+    {
+      "slide_title": "Wolfenstein 3 Resmi Olarak Duyuruldu",
+      "slide_text": "MachineGames, uzun süredir beklenen yeni Wolfenstein oyununun yapım aşamasında olduğunu doğruladı. Stüdyo, serinin hayranlarını heyecanlandıracak ilk detayları da paylaştı.",
+      "why_it_matters": "Kökleri klasik dönem FPS oyunlarına dayanan bu ikonik seri, yeni nesilde geri dönüyor.",
+      "caption_paragraph": "Xbox'ın 25. yıl kutlamaları kapsamında duyurulan oyun için ekip şimdiden motion capture çalışmalarına başladı.",
+      "source_name": "VGC",
+      "source_url": "https://www.videogameschronicle.com/news/machinegames-has-finally-officially-confirmed-that-wolfenstein-3-is-in-development/",
+      "category": "oyun",
+      "image_prompt": "dark gritty cinematic lighting, abstract metallic textures, moody industrial atmosphere, minimal",
+      "importance": 9,
+      "all_sources": [
+        {
+          "name": "Nintendo Life",
+          "url": "https://www.nintendolife.com/news/2026/11/wolfenstein-3-is-now-officially-in-production-at-machinegames"
         },
         {
           "name": "PC Gamer",
-          "url": "https://www.pcgamer.com/hardware/i-stand-by-jensen-nvidia-employees-come-out-in-support-of-huang-after-resignation/"
+          "url": "https://www.pcgamer.com/games/fps/doom-studio-id-software-confirms-its-working-on-a-new-game/"
         },
         {
-          "name": "Tom's Hardware",
-          "url": "https://www.tomshardware.com/tech-industry/how-shanghai-fund-manager-kang-wei-introduced-his-wife-alice-huang-to-jensen-and-built-usd7-5-billion-nvidia-ai-gpu-smuggling-operation-mistresss-husband-joked-she-was-the-ceos-personal-assistant"
+          "name": "Eurogamer",
+          "url": "https://www.eurogamer.net/wolfenstein-3-new-id-software-game-announced-xbox"
         },
         {
-          "name": "Tom's Hardware",
-          "url": "https://www.tomshardware.com/tech-industry/artificial-intelligence/mass-smuggling-of-nvidia-ai-gpus-could-be-the-underlying-cause-of-jensen-huangs-departure-analysts-claim-more-than-1-5-gigawatts-of-banned-chips-tracked-to-china-despite-export-controls"
+          "name": "Oyungezer",
+          "url": "//oyungezer.com.tr/haber/id-software-yeni-bir-oyun-uzerinde-calisiyor/detay"
+        },
+        {
+          "name": "Polygon",
+          "url": "https://www.polygon.com/wolfenstein-doom-bethesda-new-game-announced/"
+        },
+        {
+          "name": "Kotaku",
+          "url": "https://kotaku.com/wolfenstein-3-in-production-machine-games-microsoft-asha-sharma-2000756436"
+        },
+        {
+          "name": "TurkMMO",
+          "url": "https://www.turkmmo.com/wolfenstein-3-10-yillik-bekleyisten-sonra-resmi-olarak-duyuruldu-h1000164221.html"
+        },
+        {
+          "name": "Rock Paper Shotgun",
+          "url": "https://www.rockpapershotgun.com/wolfenstein-3-and-new-id-software-game-confirmed-as-xbox-boss-somehow-unrelatedly-shouts-about-one-person-soon-wieldling-capabilities-that-once-required-entire-nations"
+        },
+        {
+          "name": "Oyungezer",
+          "url": "//oyungezer.com.tr/haber/machinegames-dogruladi-yeni-wolfenstein-gelistirilme-asamasinda/detay"
+        },
+        {
+          "name": "VGC",
+          "url": "https://www.videogameschronicle.com/news/machinegames-has-finally-officially-confirmed-that-wolfenstein-3-is-in-development/"
         }
       ],
-      "headline": "Nvidia CEO'su Jensen Huang istifa etti, tartışmalar sürüyor"
+      "headline": "Wolfenstein 3 resmen duyuruldu ve id Software yeni oyunu üzerinde çalışmaya başladı.",
+      "alt_text": "Oyun haberi: Wolfenstein 3 Resmi Olarak Duyuruldu. MachineGames, uzun süredir beklenen yeni Wolfenstein oyununun yapım aşamasında olduğunu doğruladı. Stüdyo, serinin hayranlarını heyecanlandıracak ilk detayları da paylaştı. Neden önemli: Kökleri klasik dönem FPS oyunlarına dayanan bu ikonik seri, yeni nesilde geri dönüyor. Kaynak: VGC."
     },
     {
-      "slide_title": "Microsoft Servislerinde Küresel Kesinti Yaşanıyor",
-      "slide_text": "Outlook, Teams ve Xbox Live gibi birçok Microsoft hizmeti küresel çapta erişim sorunu yaşıyor. Şirket sorunun tespiti ve çözümü için çalışmalarını sürdürüyor.",
-      "source_name": "Teknoblog",
-      "source_url": "https://www.teknoblog.com/outlook-microsoft-365-kesintisi-13-kasim-2026/",
+      "slide_title": "Microsoft Servislerinde Büyük Kesinti",
+      "slide_text": "Microsoft 365, Outlook ve Teams gibi temel bulut hizmetleri dünya genelinde kesintiye uğradı. Şirket onarım çalışmalarının sürdüğünü belirtirken kullanıcılar erişim sorunu yaşıyor.",
+      "why_it_matters": "Milyonlarca insanı ve kurumu etkileyen bu aksama, bulut bağımlılığının risklerini gösteriyor.",
+      "caption_paragraph": "Bazı ülkelerde resmi kurumlar analog sistemlere geri dönmek zorunda kalırken, kesintinin tam nedeni araştırılıyor.",
+      "source_name": "MacRumors",
+      "source_url": "https://www.macrumors.com/2026/11/13/major-microsoft-365-outage-continues/",
       "category": "teknoloji",
-      "image_prompt": "abstract representation of broken digital networks, subtle blue light traces fading into shadow, minimalist geometric shapes",
+      "image_prompt": "abstract glowing digital glitch patterns over dark blue background, minimal, cyber aesthetic",
+      "importance": 9,
       "all_sources": [
+        {
+          "name": "Rock Paper Shotgun",
+          "url": "https://www.rockpapershotgun.com/microsoft-suffer-system-outage-affecting-outlook-teams-and-copilot-exec-says-theres-no-indication-this-is-the-result-of-malicious-or-cyber-activity"
+        },
+        {
+          "name": "Tom's Hardware",
+          "url": "https://www.tomshardware.com/software/japanese-workers-return-to-fax-machines-during-ongoing-microsoft-365-outage-were-going-full-analog-say-workers-forced-to-ditch-pdfs"
+        },
+        {
+          "name": "The Verge",
+          "url": "https://www.theverge.com/tech/1032862/microsoft-outlook-down-outage"
+        },
         {
           "name": "VGC",
           "url": "https://www.videogameschronicle.com/news/microsoft-struggles-to-restore-online-services-after-major-outage/"
@@ -95,62 +169,23 @@
           "url": "https://kotaku.com/xbox-live-microsoft-365-copilot-outlook-outages-ongoing-2000756565"
         },
         {
-          "name": "PC Gamer",
-          "url": "https://www.pcgamer.com/software/security/microsoft-says-there-is-no-evidence-of-malicious-activity-being-the-cause-of-the-global-service-outage-affecting-governments-and-organisations-around-the-world/"
-        },
-        {
           "name": "IGN",
           "url": "https://www.ign.com/articles/microsoft-struggling-to-fix-global-system-outage-impacting-email-systems-and-more-admits-initial-repairs-not-taking-as-expected"
-        },
-        {
-          "name": "Insider Gaming",
-          "url": "https://insider-gaming.com/microsoft-xbox-outage-global/"
         }
       ],
-      "headline": "Küresel Microsoft 365 ve Xbox kesintisi yaşanıyor"
+      "headline": "Microsoft 365, Outlook ve Teams servislerinde küresel çapta büyük kesinti yaşanıyor.",
+      "alt_text": "Teknoloji haberi: Microsoft Servislerinde Büyük Kesinti. Microsoft 365, Outlook ve Teams gibi temel bulut hizmetleri dünya genelinde kesintiye uğradı. Şirket onarım çalışmalarının sürdüğünü belirtirken kullanıcılar erişim sorunu yaşıyor. Neden önemli: Milyonlarca insanı ve kurumu etkileyen bu aksama, bulut bağımlılığının risklerini gösteriyor. Kaynak: MacRumors."
     },
     {
-      "slide_title": "Wolfenstein 3 Geliştirilme Aşamasına Girdi",
-      "slide_text": "Xbox yöneticileri, MachineGames stüdyosunun Wolfenstein 3 üzerinde çalışmaya başladığını ve id Software'in de yeni bir proje geliştirdiğini doğruladı.",
-      "source_name": "Eurogamer",
-      "source_url": "https://www.eurogamer.net/wolfenstein-3-new-id-software-game-announced-xbox",
+      "slide_title": "Fable'dan Yeni Oynanış Görüntüleri",
+      "slide_text": "Playground Games tarafından geliştirilen yeni Fable oyunundan dört dakikalık kesintisiz bir video paylaşıldı. Tanıtım, oyunun atmosferi ve düşman tasarımları hakkında fikir verdi.",
+      "why_it_matters": "Xbox'ın en önemli rol yapma oyunlarından biri olan yapım, seriye taze bir soluk getirecek.",
+      "caption_paragraph": "Yayınlanan karanlık tonlardaki sahneler oyuncu topluluğunda farklı tepkilere neden oldu.",
+      "source_name": "GameSpot",
+      "source_url": "https://www.gamespot.com/articles/fable-is-looking-a-lot-darker-than-we-expected/",
       "category": "oyun",
-      "image_prompt": "abstract dark crimson and charcoal embers glowing, industrial metallic textures, sharp contrast, atmospheric smoke",
-      "all_sources": [
-        {
-          "name": "Nintendo Life",
-          "url": "https://www.nintendolife.com/news/2026/11/wolfenstein-3-is-now-officially-in-production-at-machinegames"
-        },
-        {
-          "name": "Eurogamer",
-          "url": "https://www.eurogamer.net/wolfenstein-3-new-id-software-game-announced-xbox"
-        },
-        {
-          "name": "Polygon",
-          "url": "https://www.polygon.com/wolfenstein-doom-bethesda-new-game-announced/"
-        },
-        {
-          "name": "Kotaku",
-          "url": "https://kotaku.com/wolfenstein-3-in-production-machine-games-microsoft-asha-sharma-2000756436"
-        },
-        {
-          "name": "Rock Paper Shotgun",
-          "url": "https://www.rockpapershotgun.com/wolfenstein-3-and-new-id-software-game-confirmed-as-xbox-boss-somehow-unrelatedly-shouts-about-one-person-soon-wieldling-capabilities-that-once-required-entire-nations"
-        },
-        {
-          "name": "VGC",
-          "url": "https://www.videogameschronicle.com/news/machinegames-has-finally-officially-confirmed-that-wolfenstein-3-is-in-development/"
-        }
-      ],
-      "headline": "MachineGames, Wolfenstein 3 oyununu resmi olarak duyurdu"
-    },
-    {
-      "slide_title": "Yeni Fable Oyunundan Oynanış Videosu Yayınlandı",
-      "slide_text": "Xbox'ın 25. yılına özel paylaşılan dört dakikalık video, Fable dünyasının karanlık atmosferini ve aksiyon dolu yeni oynanış detaylarını gözler önüne seriyor.",
-      "source_name": "Merlin'in Kazanı",
-      "source_url": "https://www.merlininkazani.com/fable-dan-dort-dakikalik-yeni-oynanis-videosu-yayinlandi-haber-264317",
-      "category": "oyun",
-      "image_prompt": "abstract enchanted forest mist, deep emerald and golden ambient glow, ethereal light rays through shadows",
+      "image_prompt": "mystical dark forest with glowing soft light, abstract fantasy textures, cinematic minimal",
+      "importance": 8,
       "all_sources": [
         {
           "name": "Merlin'in Kazanı",
@@ -161,19 +196,35 @@
           "url": "https://news.xbox.com/en-us/2026/11/12/fable-new-quest-gameplay-for-xboxs-25th-anniversary/"
         },
         {
+          "name": "Pure Xbox",
+          "url": "https://www.purexbox.com/news/2026/11/fables-latest-showing-didnt-exactly-blow-our-socks-off"
+        },
+        {
+          "name": "DonanımHaber",
+          "url": "https://www.donanimhaber.com/fable-dan-4-dakikalik-kesintisiz-oynanis-videosu-geldi--212855"
+        },
+        {
+          "name": "Polygon",
+          "url": "https://www.polygon.com/fable-new-gameplay-trailer-xbox/"
+        },
+        {
           "name": "GameSpot",
           "url": "https://www.gamespot.com/articles/fable-is-looking-a-lot-darker-than-we-expected/"
         }
       ],
-      "headline": "Fable için yeni ve karanlık bir oynanış videosu paylaşıldı"
+      "headline": "Xbox 25. yıl kutlamaları kapsamında yeni Fable oyunundan 4 dakikalık oynanış videosu geldi.",
+      "alt_text": "Oyun haberi: Fable'dan Yeni Oynanış Görüntüleri. Playground Games tarafından geliştirilen yeni Fable oyunundan dört dakikalık kesintisiz bir video paylaşıldı. Tanıtım, oyunun atmosferi ve düşman tasarımları hakkında fikir verdi. Neden önemli: Xbox'ın en önemli rol yapma oyunlarından biri olan yapım, seriye taze bir soluk getirecek. Kaynak: GameSpot."
     },
     {
-      "slide_title": "Google Yeni Yapay Zekâ Modeli Gemini 4'ü Tanıttı",
-      "slide_text": "Google, Gemini 4 Hydrogen modelini duyurdu. Önceki sürümlere göre çok daha hızlı çalışan model, karmaşık görevler ve Arama motoru entegrasyonu için tasarlandı.",
+      "slide_title": "Google'dan Hızlı Yapay Zekâ Modeli",
+      "slide_text": "Google, Flash serisinin yerini alacak yeni yapay zekâ modeli Gemini 4 Hydrogen'i duyurdu. Model, önceki sürümlere kıyasla daha yüksek hız ve uygun maliyet vadediyor.",
+      "why_it_matters": "Yapay zekâ araçlarının günlük iş akışlarındaki hızını ve erişilebilirliğini artırıyor.",
+      "caption_paragraph": "Yeni model arama motoru entegrasyonuyla da dikkat çekerken, yapay zekâ pazarındaki rekabeti kızıştırıyor.",
       "source_name": "Google DeepMind",
       "source_url": "https://deepmind.google/blog/introducing-gemini-4-hydrogen/",
       "category": "teknoloji",
-      "image_prompt": "abstract translucent flowing energy waves, vibrant cyan and deep purple gradient, smooth light reflections, high tech background",
+      "image_prompt": "abstract glowing light particles flowing over dark minimalist background, clean futuristic",
+      "importance": 8,
       "all_sources": [
         {
           "name": "MarkTechPost",
@@ -192,8 +243,82 @@
           "url": "https://blog.google/products-and-platforms/products/search/gemini-4-hydrogen-search-upgrade/"
         }
       ],
-      "headline": "Google, yeni yapay zekâ modeli Gemini 4 Hydrogen'i tanıttı"
+      "headline": "Google, 2.5 kat daha hızlı yeni nesil yapay zekâ modeli Gemini 4 Hydrogen'i tanıttı.",
+      "alt_text": "Teknoloji haberi: Google'dan Hızlı Yapay Zekâ Modeli. Google, Flash serisinin yerini alacak yeni yapay zekâ modeli Gemini 4 Hydrogen'i duyurdu. Model, önceki sürümlere kıyasla daha yüksek hız ve uygun maliyet vadediyor. Neden önemli: Yapay zekâ araçlarının günlük iş akışlarındaki hızını ve erişilebilirliğini artırıyor. Kaynak: Google DeepMind."
+    },
+    {
+      "slide_title": "Çalışanlara GTA 6 İçin İzin Müjdesi",
+      "slide_text": "Palworld geliştiricisi Pocketpair, merakla beklenen GTA 6'nın çıkış gününde personeline beş günlük izin vereceğini açıkladı. Şirket bu hamleyle çalışan memnuniyetini artırmayı hedefliyor.",
+      "why_it_matters": "Oyun dünyasında şimdiye kadar görülmemiş bu yaklaşım, sektörde eğlenceli bir yankı uyandırdı.",
+      "caption_paragraph": "Oyunun çıkış tarihine yaklaşırken küresel çapta internet altyapısının bu yoğunluğu nasıl kaldıracağı da tartışılıyor.",
+      "source_name": "Eurogamer",
+      "source_url": "https://www.eurogamer.net/gta-6-internet-uk-broadband-ofcom-openreach",
+      "category": "oyun",
+      "image_prompt": "abstract magenta and violet light streaks in motion over deep navy, soft bokeh particles, cinematic",
+      "importance": 7,
+      "all_sources": [
+        {
+          "name": "TurkMMO",
+          "url": "https://www.turkmmo.com/unlu-oyun-firmasi-calisanlarina-gta-6-icin-5-gun-izin-verdi-h1000164224.html"
+        },
+        {
+          "name": "Oyungezer",
+          "url": "//oyungezer.com.tr/haber/pocketpairdan-calisanlarina-gta-6-izni/detay"
+        },
+        {
+          "name": "Webtekno",
+          "url": "https://www.webtekno.com/gta-6-bir-ulkede-neredeyse-yasaklaniyordu-h228925.html"
+        },
+        {
+          "name": "Eurogamer",
+          "url": "https://www.eurogamer.net/gta-6-internet-uk-broadband-ofcom-openreach"
+        }
+      ],
+      "headline": "Palworld geliştiricisi Pocketpair, GTA 6'nın çıkış günü için çalışanlarına 5 gün izin verdi.",
+      "alt_text": "Oyun haberi: Çalışanlara GTA 6 İçin İzin Müjdesi. Palworld geliştiricisi Pocketpair, merakla beklenen GTA 6'nın çıkış gününde personeline beş günlük izin vereceğini açıkladı. Şirket bu hamleyle çalışan memnuniyetini artırmayı hedefliyor. Neden önemli: Oyun dünyasında şimdiye kadar görülmemiş bu yaklaşım, sektörde eğlenceli bir yankı uyandırdı. Kaynak: Eurogamer."
+    },
+    {
+      "slide_title": "Orijinal Xbox Oyunları PC'ye Geliyor",
+      "slide_text": "Xbox, 25. yıl kutlamaları kapsamında yirmi beş orijinal yapımı geriye uyumluluk özelliğiyle PC'ye taşıyor. Bazı klasik oyunlara başarımlar da eklendi.",
+      "why_it_matters": "Geçmişin klasik yapımlarını modern oyuncularla buluşturarak arşivlerin yaşamasını sağlıyor.",
+      "caption_paragraph": "Firma aynı zamanda döneme özel tematik oyun içi kozmetikleri de oyuncuların beğenisine sundu.",
+      "source_name": "Xbox Wire",
+      "source_url": "https://news.xbox.com/en-us/2026/11/12/25-original-xbox-games-now-available-on-pc/",
+      "category": "oyun",
+      "image_prompt": "abstract emerald green glowing light over dark matte texture, minimal tech aesthetic",
+      "importance": 7,
+      "all_sources": [
+        {
+          "name": "Xbox Wire",
+          "url": "https://news.xbox.com/en-us/2026/11/12/25-original-xbox-games-now-available-on-pc/"
+        },
+        {
+          "name": "Pure Xbox",
+          "url": "https://www.purexbox.com/guides/heres-how-to-claim-all-the-xbox-25th-anniversary-in-game-items"
+        }
+      ],
+      "headline": "Xbox 25. yıl dönümünde 25 klasik orijinal Xbox oyunu geriye dönük uyumlulukla PC'ye geldi.",
+      "alt_text": "Oyun haberi: Orijinal Xbox Oyunları PC'ye Geliyor. Xbox, 25. yıl kutlamaları kapsamında yirmi beş orijinal yapımı geriye uyumluluk özelliğiyle PC'ye taşıyor. Bazı klasik oyunlara başarımlar da eklendi. Neden önemli: Geçmişin klasik yapımlarını modern oyuncularla buluşturarak arşivlerin yaşamasını sağlıyor. Kaynak: Xbox Wire."
+    },
+    {
+      "slide_title": "Claude Yapay Zekâ Toplantılara Katılıyor",
+      "slide_text": "Anthropic, Claude asistanının doğrudan görüntülü görüşmelere katılmasına olanak tanıyan yeni özelliğini duyurdu. Araç, toplantı notlarını eş zamanlı olarak hazırlayabiliyor.",
+      "why_it_matters": "İş yerindeki verimlilik araçlarını yapay zekâ entegrasyonuyla tamamen dönüştürüyor.",
+      "caption_paragraph": "Beta sürecinde olan özellik şimdilik belirli kurumsal planlar için erişime açılmış durumda.",
+      "source_name": "The Decoder",
+      "source_url": "https://the-decoder.com/claude-meetings-lets-anthropics-ai-join-your-video-calls/",
+      "category": "teknoloji",
+      "image_prompt": "abstract geometric lines intersecting over smooth gradient background, minimal design",
+      "importance": 7,
+      "all_sources": [
+        {
+          "name": "The Decoder",
+          "url": "https://the-decoder.com/claude-meetings-lets-anthropics-ai-join-your-video-calls/"
+        }
+      ],
+      "headline": "Anthropic'in yeni Claude Meetings özelliği yapay zekânın görüntülü toplantılara katılmasını sağlıyor.",
+      "alt_text": "Teknoloji haberi: Claude Yapay Zekâ Toplantılara Katılıyor. Anthropic, Claude asistanının doğrudan görüntülü görüşmelere katılmasına olanak tanıyan yeni özelliğini duyurdu. Araç, toplantı notlarını eş zamanlı olarak hazırlayabiliyor. Neden önemli: İş yerindeki verimlilik araçlarını yapay zekâ entegrasyonuyla tamamen dönüştürüyor. Kaynak: The Decoder."
     }
   ],
-  "caption": "Teknoloji ve oyun dünyasında öne çıkan günün gelişmeleri:\n1. Nvidia CEO'su Jensen Huang, yaşanan skandalların ardından istifa etti.\n2. Microsoft servislerinde küresel çaptaki erişim sorunları devam ediyor.\n3. MachineGames stüdyosu Wolfenstein 3'ün geliştirilme sürecine başladığını duyurdu.\n4. Yeni Fable oyunundan dört dakikalık sürpriz bir oynanış videosu paylaşıldı.\n5. Google, çok daha hızlı çalışan yeni yapay zekâ modeli Gemini 4 Hydrogen'i çıkardı.\n\nKaynaklar: Kotaku, Teknoblog, Eurogamer, Merlin'in Kazanı, Google DeepMind\n\n#teknoloji #oyun #nvidia #microsoft #wolfenstein #fable #gemini #yapayzeka\n\nGörseller yapay zekâ ile üretilmiştir."
+  "caption": "Bugünün öne çıkan teknoloji ve oyun gelişmelerini derledik. Sektördeki önemli duyuruları ve yaşanan son olayları bir araya getirdik.\n\n💻 Jensen Huang Nvidia'dan Ayrıldı\nŞirket içindeki huzursuzluk ve yönetim tartışmaları derinleşirken, yeni geçici CEO'nun kim olacağı merak ediliyor.\nKaynak: The Decoder\n\n🎮 Wolfenstein 3 Resmi Olarak Duyuruldu\nXbox'ın 25. yıl kutlamaları kapsamında duyurulan oyun için ekip şimdiden motion capture çalışmalarına başladı.\nKaynak: VGC\n\n💻 Microsoft Servislerinde Büyük Kesinti\nBazı ülkelerde resmi kurumlar analog sistemlere geri dönmek zorunda kalırken, kesintinin tam nedeni araştırılıyor.\nKaynak: MacRumors\n\n🎮 Fable'dan Yeni Oynanış Görüntüleri\nYayınlanan karanlık tonlardaki sahneler oyuncu topluluğunda farklı tepkilere neden oldu.\nKaynak: GameSpot\n\n💻 Google'dan Hızlı Yapay Zekâ Modeli\nYeni model arama motoru entegrasyonuyla da dikkat çekerken, yapay zekâ pazarındaki rekabeti kızıştırıyor.\nKaynak: Google DeepMind\n\n🎮 Çalışanlara GTA 6 İçin İzin Müjdesi\nOyunun çıkış tarihine yaklaşırken küresel çapta internet altyapısının bu yoğunluğu nasıl kaldıracağı da tartışılıyor.\nKaynak: Eurogamer\n\n🎮 Orijinal Xbox Oyunları PC'ye Geliyor\nFirma aynı zamanda döneme özel tematik oyun içi kozmetikleri de oyuncuların beğenisine sundu.\nKaynak: Xbox Wire\n\n💻 Claude Yapay Zekâ Toplantılara Katılıyor\nBeta sürecinde olan özellik şimdilik belirli kurumsal planlar için erişime açılmış durumda.\nKaynak: The Decoder\n\n#teknoloji #oyun #yapayzeka #donanim #gundem\n\nGörseller yapay zekâ ile üretilmiştir."
 }

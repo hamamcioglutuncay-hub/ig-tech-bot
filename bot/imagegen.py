@@ -96,7 +96,7 @@ def generate_image(concept: str, out_path: Path, session=requests) -> Path:
         raise ImageGenError("CF_ACCOUNT_ID / CF_API_TOKEN boş")
 
     last = ""
-    for attempt in range(2):
+    for attempt in range(3):
         try:
             r = session.post(
                 URL.format(acc=acc),
@@ -106,7 +106,7 @@ def generate_image(concept: str, out_path: Path, session=requests) -> Path:
             )
         except requests.RequestException as exc:
             last = settings.scrub(type(exc).__name__)
-            time.sleep(3)
+            time.sleep(5 * (attempt + 1))
             continue
         if r.status_code == 200:
             try:
@@ -122,7 +122,7 @@ def generate_image(concept: str, out_path: Path, session=requests) -> Path:
         if r.status_code == 429 or "4006" in body or "allocation" in body.lower():
             raise ImageQuotaError(f"Cloudflare ücretsiz kotası doldu ({r.status_code})")
         last = settings.scrub(f"{r.status_code} {body}")
-        if r.status_code < 500:
-            break
-        time.sleep(3)
+        if r.status_code in (400, 401, 403) and "8007" not in body:
+            break  # yetki/istek hatası: tekrar denemenin anlamı yok
+        time.sleep(5 * (attempt + 1))  # geçici hata (5xx, 8007 kapasite vb.)
     raise ImageGenError(f"FLUX isteği başarısız: {last[:200]}")

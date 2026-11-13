@@ -1,4 +1,4 @@
-"""Pillow ile carousel slaytları: kapak + 5 haber + kapanış (1080×1350 JPEG).
+"""Pillow ile carousel slaytları: kapak + 3–8 haber + kapanış (1080×1350 JPEG).
 
 Bütün görsel kararlar design.yaml'dan (ve isteğe bağlı designs/*.yaml üst yazımından) gelir.
 assets/templates/{cover,slide,outro}.png varsa, arka planın üstüne katman olarak eklenir.
@@ -107,6 +107,9 @@ class Fitted:
 
 
 def wrap(text: str, font: ImageFont.FreeTypeFont, max_w: int) -> list[str]:
+    """Kelime bazlı satır kırma; metindeki elle konmuş satır sonlarına (\\n) uyar."""
+    if "\n" in text:
+        return [l for part in text.split("\n") for l in wrap(part, font, max_w)]
     words, lines, cur = text.split(), [], ""
     for w in words:
         trial = f"{cur} {w}".strip()
@@ -261,39 +264,54 @@ class Composer:
         source_h = d["source"]["size"] + 8
 
         panel = d.get("layout") == "panel"
+        pad_top = badge_h // 2 + 34
         if panel:
-            area_top = int(self.H * (1 - d["panel_ratio"])) + badge_h // 2 + 40
+            area_top = int(self.H * (1 - d["panel_ratio"])) + pad_top
         else:
             area_top = 260
         area_bottom = self.H - self.M
         avail = area_bottom - area_top
 
-        # Başlık ve metni birlikte küçülterek alana sığdır
-        for scale in [1.0, 0.94, 0.88, 0.82, 0.76, 0.7]:
-            tt = d["title"]
-            tx = d["text"]
+        why = (item.get("why_it_matters") or "").strip()
+        wy = d.get("why", {})
+        why_indent = 24
+        why_label_h = wy.get("label_size", 22) + 10
+
+        # Başlık, metin ve "Neden önemli?" bloğunu birlikte küçülterek alana sığdır
+        for scale in [1.0, 0.94, 0.88, 0.82, 0.76, 0.7, 0.64]:
+            tt, tx = d["title"], d["text"]
             ft = self.fit(title_text, tt.get("font", "heading"), tt["max_size"], tt["min_size"],
                           text_w, tt["max_lines"], tt["line_spacing"], scale)
             fx = self.fit(item["slide_text"], tx.get("font", "body"), tx["max_size"], tx["min_size"],
                           self.W - 2 * self.M, tx["max_lines"], tx["line_spacing"], scale)
+            fw = None
+            why_h = 0
+            if why and wy:
+                fw = self.fit(why, wy.get("font", "body"), wy["max_size"], wy["min_size"],
+                              self.W - 2 * self.M - why_indent, wy["max_lines"], wy["line_spacing"], scale)
+                why_h = why_label_h + fw.height
             total_h = (0 if panel else badge_h + g["badge_title"]) + ft.height + g["title_text"] \
-                + fx.height + g["text_source"] + source_h
+                + fx.height + (g.get("text_why", 30) + why_h if fw else 0) + g["text_source"] + source_h
             if total_h <= avail:
                 break
 
-        # Yerleşim: alttan yukarı
         y_source = area_bottom - source_h
-        y_text = y_source - g["text_source"] - fx.height
-        y_title = y_text - g["title_text"] - ft.height
-        y_badge = y_title - g["badge_title"] - badge_h
-
         if panel:
-            py = int(self.H * (1 - d["panel_ratio"]))
-            img = self._shade(img, py - 140, py, 0.0, 1.0)
+            # Panel yüksekliği içeriğe göre: kısa haberde görsel daha çok yer kaplar
+            min_py = int(self.H * (1 - d["panel_ratio"]))
+            max_py = int(self.H * (1 - d.get("panel_min_ratio", d["panel_ratio"])))
+            py = min(max_py, max(min_py, area_bottom - total_h - pad_top))
+            area_top = py + pad_top
+            img = self._shade(img, py - 160, py, 0.0, 1.0)
             y_badge = py - badge_h // 2
             y_title = area_top                      # panelde metin yukarıdan akar
             y_text = y_title + ft.height + g["title_text"]
-        else:
+            y_why = y_text + fx.height + g.get("text_why", 30)
+        else:                                       # görsel üstünde: alttan yukarı
+            y_why = y_source - g["text_source"] - why_h
+            y_text = (y_why - g.get("text_why", 30) if fw else y_source - g["text_source"]) - fx.height
+            y_title = y_text - g["title_text"] - ft.height
+            y_badge = y_title - g["badge_title"] - badge_h
             gy = y_badge - d["gradient"]["extend_above_text"]
             img = self._shade(img, gy, y_badge + 120, 0.0, float(d["gradient"]["max_opacity"]))
         img = self._top_shade(img)
@@ -303,14 +321,22 @@ class Composer:
         self._header(img, f"{index}/{total}")
         draw = ImageDraw.Draw(img)
         self._badge(draw, self.M, y_badge, label, accent)
-        self._draw_title(draw, self.M + (int(ft.size * 0.18) if d["title"].get("highlight") else 0),
-                         y_title, ft, accent)
+        hl = d["title"].get("highlight")
+        self._draw_title(draw, self.M + (int(ft.size * 0.18) if hl else 0), y_title, ft, accent)
         ab = d["accent_bar"]
-        if not d["title"].get("highlight"):
+        if not hl:
             bar_y = y_title + ft.height + g["title_text"] // 2 - ab["height"] // 2
             draw.rectangle((self.M, bar_y, self.M + ab["width"], bar_y + ab["height"]), fill=accent)
         for i, line in enumerate(fx.lines):
             draw.text((self.M, y_text + i * fx.line_h), line, font=fx.font, fill=self.c["text"])
+
+        if fw:
+            fl = self.font("label", wy.get("label_size", 22))
+            draw.rectangle((self.M, y_why + 4, self.M + 5, y_why + why_h - 6), fill=accent)
+            draw.text((self.M + why_indent, y_why - 2), wy.get("label", "NEDEN ÖNEMLİ?"), font=fl, fill=accent)
+            for i, line in enumerate(fw.lines):
+                draw.text((self.M + why_indent, y_why + why_label_h + i * fw.line_h), line, font=fw.font,
+                          fill=self.c["text_muted"])
 
         fs = self.font("label", d["source"]["size"])
         draw.text((self.M, y_source), d["source"]["prefix"] + item["source_name"], font=fs,
@@ -318,8 +344,8 @@ class Composer:
         hint = d["source"].get("swipe_hint")
         if hint:
             draw.text((self.W - self.M - fs.getlength(hint), y_source), hint, font=fs, fill=accent)
-        self.last_layout = {"title": ft, "text": fx, "y_title": y_title, "y_text": y_text,
-                            "y_source": y_source, "y_badge": y_badge}
+        self.last_layout = {"title": ft, "text": fx, "why": fw, "why_h": why_h, "y_title": y_title,
+                            "y_text": y_text, "y_why": y_why, "y_source": y_source, "y_badge": y_badge}
         return img.convert("RGB")
 
     # ---- kapak
@@ -341,13 +367,22 @@ class Composer:
         hw = fh.getlength(d["brand"]["handle"])
         draw.text(((self.W - hw) / 2, y), d["brand"]["handle"], font=fh, fill=self.c["text"])
 
-        # Başlık bloğu (ortalanmış)
-        y = int(self.H * 0.40)
+        logo_bottom = y + 60
+        # İçerik listesi (alt kısım) — haber sayısına göre boyut
+        n_items = len(items)
+        list_size = cv["list_size"] if n_items <= 5 else int(cv["list_size"] * 0.88)
+        line_h = int(list_size * 1.55)
+        list_top = self.H - self.M - 46 - line_h * n_items
+
+        # Başlık bloğu (ortalanmış), listenin üstüne sığacak şekilde
+        ft = self.fit(cv["title"], "heading", cv["title_size"], 56, self.W - 2 * self.M,
+                      cv["title"].count("\n") + 1, 1.04)
+        block_h = 52 + ft.height + 18 + 40
+        y = max(logo_bottom, min(int(self.H * 0.40), list_top - block_h - 50))
         fk = self.font("label", 34)
         kick = cv["kicker"]
         draw.text(((self.W - fk.getlength(kick)) / 2, y), kick, font=fk, fill=self.c["teknoloji"])
         y += 52
-        ft = self.fit(cv["title"], "heading", cv["title_size"], 60, self.W - 2 * self.M, 3, 1.04)
         for line in ft.lines:
             lw = ft.font.getlength(line)
             draw.text(((self.W - lw) / 2, y), line, font=ft.font, fill=self.c["text"])
@@ -356,12 +391,11 @@ class Composer:
         fd = self.font("body", 32)
         ds = tr_date(day)
         draw.text(((self.W - fd.getlength(ds)) / 2, y), ds, font=fd, fill=self.c["text_muted"])
+        date_bottom = y + 40
 
-        # İçerik listesi (alt kısım)
-        fl = self.font("body", cv["list_size"])
-        fn = self.font("label", cv["list_size"])
-        line_h = int(cv["list_size"] * 1.6)
-        y = self.H - self.M - 40 - line_h * len(items)
+        fl = self.font("body", list_size)
+        fn = self.font("label", list_size)
+        y = list_top
         maxw = self.W - 2 * self.M - 70
         for n, it in enumerate(items, 1):
             acc = self.c[it["category"]]
@@ -371,6 +405,7 @@ class Composer:
                 t = t[:-2].rstrip() + "…" if not t.endswith("…") else t[:-3].rstrip() + "…"
             draw.text((self.M + 70, y), t, font=fl, fill=self.c["text"])
             y += line_h
+        self.last_cover = {"date_bottom": date_bottom, "list_top": list_top}
         fs = self.font("label", d["source"]["size"])
         hint = d["source"].get("swipe_hint", "")
         draw.text((self.W - self.M - fs.getlength(hint), self.H - self.M - 4), hint, font=fs,

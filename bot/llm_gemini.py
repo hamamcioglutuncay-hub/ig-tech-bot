@@ -2,8 +2,8 @@
 
 Akış:
   1) prefilter  — yüzlerce haberden ~150 aday (kod ile, ücretsiz)
-  2) select     — Gemini: aynı olayları birleştir, kategoriyi düzelt, en iyi 8 hikâyeyi sırala
-  3) pick_five  — kod: denge kuralına (≥2 oyun, ≥2 teknoloji) uyan 5 hikâye
+  2) select     — Gemini: aynı olayları birleştir, kategoriyi düzelt, en önemli 12 hikâyeyi puanla
+  3) pick_stories — kod: önem eşiği + denge kuralı ile 3–8 hikâye
   4) write      — Gemini: slayt metinleri + caption gövdesi + hashtag'ler
   5) validate   — kod: şema ve sınırlar; bozuksa hatalarla birlikte 1 kez yeniden dene
 """
@@ -30,12 +30,17 @@ DEFAULT_MODEL = FALLBACK_MODELS[0]
 RETRY_WAIT_S = 20
 
 TITLE_MAX = 60
-TEXT_MAX = 180
-CAPTION_MAX = 1500
+TEXT_MAX = 260          # slayt gövde metni
+WHY_MAX = 120           # "Neden önemli?" satırı
+PARA_MIN, PARA_MAX = 80, 330   # caption'daki haber paragrafı (haber sayısına göre daraltılır: para_limits)
+INTRO_MAX = 220
+CAPTION_MAX = 2150      # Instagram sınırı 2200; güvenlik payı
 HASHTAG_MIN, HASHTAG_MAX = 5, 10
 AI_NOTE = "Görseller yapay zekâ ile üretilmiştir."
-N_ITEMS = 5
-MIN_PER_CATEGORY = 2
+MIN_ITEMS, MAX_ITEMS = 3, 8     # Instagram API carousel sınırı 10 = kapak + en fazla 8 haber + kapanış
+IMPORTANCE_THRESHOLD = 6        # 1–10; bu puanın altındaki hikâyeler yalnızca minimumu doldurmak için alınır
+N_SELECT = 12                   # Gemini'nin sıralayacağı en fazla hikâye
+CATEGORY_EMOJI = {"teknoloji": "💻", "oyun": "🎮"}
 
 # generate(model, system_instruction, prompt, schema) -> JSON metni.  Testlerde sahtesi verilir.
 Generator = Callable[[str, str, str, dict], str]
@@ -189,9 +194,10 @@ SELECT_SCHEMA = {
                 "properties": {
                     "ids": {"type": "ARRAY", "items": {"type": "INTEGER"}},
                     "category": {"type": "STRING", "enum": ["teknoloji", "oyun"]},
+                    "importance": {"type": "INTEGER"},
                     "headline_tr": {"type": "STRING"},
                 },
-                "required": ["ids", "category", "headline_tr"],
+                "required": ["ids", "category", "importance", "headline_tr"],
             },
         }
     },
@@ -204,6 +210,7 @@ class Story:
     articles: list[Article]
     category: str
     headline: str
+    importance: int = 5
 
 
 def _candidates_text(cands: list[Article]) -> str:
@@ -222,8 +229,10 @@ def select_stories(cands: list[Article], generate: Generator, model: str, system
         "Aşağıda son 24 saatin aday haberleri var. Görevin:\n"
         "1. Aynı olayı anlatan adayları (farklı dillerde olsa bile) tek hikâyede birleştir (ids listesi).\n"
         "2. Her hikâyenin kategorisini konuya göre belirle (teknoloji / oyun).\n"
-        "3. Türk okur için en önemli 8 hikâyeyi önem sırasına göre döndür; "
+        f"3. Türk okur için en önemli en fazla {N_SELECT} hikâyeyi önem sırasına göre döndür; "
         "içlerinde en az 3 oyun ve en az 3 teknoloji olsun.\n"
+        "4. importance: 1–10 önem puanı. 9–10 = günün manşeti, herkesin konuşacağı gelişme; "
+        "7–8 = önemli ve ilgi çekici; 6 = paylaşmaya değer; 5 ve altı = sıradan. Puanları cömert verme.\n"
         "headline_tr: hikâyenin kısa Türkçe özeti (sadece senin takibin için).\n\n"
         + _candidates_text(cands)
     )
@@ -234,24 +243,53 @@ def select_stories(cands: list[Article], generate: Generator, model: str, system
         if not ids or s.get("category") not in ("teknoloji", "oyun"):
             continue
         used.update(ids)
-        stories.append(Story([cands[i] for i in ids], s["category"], str(s.get("headline_tr", ""))))
+        imp = s.get("importance")
+        imp = max(1, min(10, int(imp))) if isinstance(imp, (int, float)) else 5
+        stories.append(Story([cands[i] for i in ids], s["category"], str(s.get("headline_tr", "")), imp))
     return stories
 
 
-def pick_five(stories: list[Story]) -> list[Story]:
-    """Sırayı koruyarak ≥2 oyun ve ≥2 teknoloji içeren 5 hikâye seçer."""
-    picked: list[Story] = []
-    for cat in ("teknoloji", "oyun"):
-        picked += [s for s in stories if s.category == cat][:MIN_PER_CATEGORY]
-    for s in stories:
-        if len(picked) >= N_ITEMS:
-            break
-        if all(s is not p for p in picked):
-            picked.append(s)
-    cats = Counter(s.category for s in picked)
-    if len(picked) < N_ITEMS or min(cats["oyun"], cats["teknoloji"]) < MIN_PER_CATEGORY:
-        raise LLMError("Denge kuralına uyan 5 hikâye seçilemedi")
+def min_per_category(n: int) -> int:
+    return 1 if n <= 3 else 2
+
+
+def pick_stories(stories: list[Story], min_n: int = MIN_ITEMS, max_n: int = MAX_ITEMS,
+                 threshold: int = IMPORTANCE_THRESHOLD) -> list[Story]:
+    """Önem eşiğini geçen hikâyeleri (en az min_n, en fazla max_n) Gemini'nin sırasını koruyarak seçer.
+
+    Denge: 3 haberde her kategoriden en az 1, 4+ haberde en az 2.
+    Eksik kategori varsa en zayıf fazlalık, eksik kategorinin en iyisiyle değiştirilir.
+    """
     order = {id(s): i for i, s in enumerate(stories)}
+    picked = [s for s in stories if s.importance >= threshold][:max_n]
+    if len(picked) < min_n:
+        picked = stories[:min_n]
+
+    def count(cat):
+        return sum(s.category == cat for s in picked)
+
+    for _ in range(4):  # ekleme 3→4 geçişinde gereksinimi artırabilir; kararlı olana dek tekrarla
+        changed = False
+        for cat, other in (("oyun", "teknoloji"), ("teknoloji", "oyun")):
+            while count(cat) < min_per_category(len(picked)):
+                pool = [s for s in stories if s.category == cat and all(s is not p for p in picked)]
+                if not pool:
+                    raise LLMError(f"Denge kuralı için yeterli '{cat}' hikâyesi yok")
+                strong = pool[0].importance >= threshold or len(picked) < min_n
+                if len(picked) < max_n and strong:
+                    picked.append(pool[0])                      # güçlü hikâye: listeyi büyüt
+                elif count(other) > min_per_category(len(picked)):
+                    weakest = max((s for s in picked if s.category == other), key=lambda s: order[id(s)])
+                    picked = [s for s in picked if s is not weakest] + [pool[0]]  # zayıfsa takas et
+                elif len(picked) < max_n:
+                    picked.append(pool[0])
+                else:
+                    raise LLMError("Denge kuralına uyan seçim yapılamadı")
+                changed = True
+        if not changed:
+            break
+    if len(picked) < min_n:
+        raise LLMError("Yeterli hikâye seçilemedi")
     return sorted(picked, key=lambda s: order[id(s)])
 
 
@@ -267,17 +305,20 @@ WRITE_SCHEMA = {
                 "properties": {
                     "slide_title": {"type": "STRING"},
                     "slide_text": {"type": "STRING"},
+                    "why_it_matters": {"type": "STRING"},
+                    "caption_paragraph": {"type": "STRING"},
                     "source_url": {"type": "STRING"},
                     "category": {"type": "STRING", "enum": ["teknoloji", "oyun"]},
                     "image_prompt": {"type": "STRING"},
                 },
-                "required": ["slide_title", "slide_text", "source_url", "category", "image_prompt"],
+                "required": ["slide_title", "slide_text", "why_it_matters", "caption_paragraph",
+                             "source_url", "category", "image_prompt"],
             },
         },
-        "caption_body": {"type": "STRING"},
+        "caption_intro": {"type": "STRING"},
         "hashtags": {"type": "ARRAY", "items": {"type": "STRING"}},
     },
-    "required": ["items", "caption_body", "hashtags"],
+    "required": ["items", "caption_intro", "hashtags"],
 }
 
 
@@ -291,15 +332,25 @@ def _stories_text(stories: list[Story]) -> str:
 
 
 def _write_prompt(stories: list[Story], errors: list[str] | None) -> str:
+    n = len(stories)
+    pmin, pmax = para_limits(n)
     p = (
-        f"Aşağıdaki {len(stories)} hikâye için, AYNI SIRAYLA, {len(stories)} slayt yaz.\n"
-        f"- slide_title ≤ {TITLE_MAX} karakter, slide_text ≤ {TEXT_MAX} karakter (boşluklar dahil).\n"
+        f"Aşağıdaki {n} hikâye için, AYNI SIRAYLA, {n} öğe yaz (karakter sınırlarına boşluklar dahildir):\n"
+        f"- slide_title ≤ {TITLE_MAX}: çarpıcı ve bilgi veren başlık.\n"
+        f"- slide_text ≤ {TEXT_MAX}: 2–3 cümle; ne oldu, kim, ne zaman, temel ayrıntı.\n"
+        f"- why_it_matters ≤ {WHY_MAX}: tek cümle; okur için neden önemli (etkisi, bağlamı).\n"
+        f"- caption_paragraph {pmin}–{pmax}: Instagram açıklaması için bu habere özel {'1–2' if pmax < 200 else '2–3'} cümlelik paragraf; "
+        "slayttakini kelimesi kelimesine tekrar etme, ek bağlam ver. Başlık, numara, emoji, kaynak adı EKLEME.\n"
         "- source_url: o hikâyenin listesindeki linklerden biri, aynen (tercihen en bilgilendirici olan).\n"
         "- category: hikâyenin kategorisi.\n"
-        "- image_prompt: İngilizce, soyut arka plan; marka/logo/ürün/karakter/kişi/yazı yok.\n"
-        "- caption_body: kısa giriş + 5 haberin numaralı birer satırlık özeti; her madde AYRI SATIRDA (\\n ile), en fazla 1000 karakter. "
-        "Kaynak listesi, hashtag ve YZ notu EKLEME (onları sistem ekleyecek).\n"
-        f"- hashtags: {HASHTAG_MIN}-{HASHTAG_MAX} adet, '#' ile başlayan, boşluksuz.\n\n"
+        "- image_prompt: İngilizce, tamamen soyut arka plan (ışık, şekil, parçacık, doku); marka/logo/ürün/"
+        "karakter/kişi/yazı yok; tabela, ekran, vitrin, poster, şehir sokağı yok.\n"
+        f"- caption_intro ≤ {INTRO_MAX}: GÜNÜN öne çıkanlarını anan 1–2 cümlelik giriş ('haftanın' deme). Haber SAYISI YAZMA.\n"
+        f"- hashtags: {HASHTAG_MIN}-{HASHTAG_MAX} adet, '#' ile başlayan, boşluksuz.\n"
+        "Kaynak listesi, hashtag ve YZ notunu caption alanlarına EKLEME (sistem ekleyecek).\n"
+        "DOĞRULUK: Bütün alanlarda YALNIZCA aşağıdaki başlık ve özetlerde açıkça yazan bilgileri kullan. "
+        "Özetlerde olmayan ayrıntı, sonuç, tepki ya da rakam EKLEME; ek bağlam gerekiyorsa diğer kaynakların "
+        "özetlerinden al. Emin değilsen daha genel yaz.\n\n"
         + _stories_text(stories)
     )
     if errors:
@@ -307,24 +358,48 @@ def _write_prompt(stories: list[Story], errors: list[str] | None) -> str:
     return p
 
 
-def _split_numbered(body: str) -> str:
-    """'... 1. x 2. y' tek satırda geldiyse maddeleri ayrı satırlara böler."""
-    return re.sub(r"\s+(?=(?:[1-9]|10)\.\s)", "\n", body) if "\n1." not in body else body
+def para_limits(n: int) -> tuple[int, int]:
+    """Caption 2.200 sınırına sığması için haber başına paragraf aralığı.
+    Sabit kısımlar (giriş, hashtag, YZ notu) ≈400, haber başına başlık+kaynak ≈95 karakter."""
+    hi = max(110, min(PARA_MAX, (CAPTION_MAX - 400 - 95 * n) // max(1, n)))
+    return min(PARA_MIN, hi - 40), hi
 
 
-def build_caption(body: str, hashtags: list[str], sources: list[str]) -> str:
-    body = _split_numbered(body)
-    uniq_sources = list(dict.fromkeys(sources))
-    tail = (
-        "\n\nKaynaklar: " + ", ".join(uniq_sources)
-        + "\n\n" + " ".join(hashtags)
-        + "\n\n" + AI_NOTE
-    )
-    body = body.strip()
-    room = CAPTION_MAX - len(tail)
-    if len(body) > room:
-        body = body[: room - 1].rstrip() + "…"
-    return body + tail
+def _shorten_to_sentence(text: str, limit: int) -> str:
+    limit = max(40, limit)
+    if len(text) <= limit:
+        return text
+    cut = text[:limit]
+    end = max(cut.rfind(". "), cut.rfind("! "), cut.rfind("? "))
+    return cut[: end + 1] if end > limit * 0.5 else cut[: limit - 1].rstrip() + "…"
+
+
+def build_caption(intro: str, items: list[dict], hashtags: list[str]) -> str:
+    """Giriş + her haber için başlık/paragraf/kaynak + hashtag + YZ notu (≤ CAPTION_MAX)."""
+    tail = "\n\n" + " ".join(hashtags) + "\n\n" + AI_NOTE
+    paras = [it["caption_paragraph"].strip() for it in items]
+
+    def assemble(ps):
+        blocks = [intro.strip()]
+        for it, para in zip(items, ps):
+            blocks.append(f"{CATEGORY_EMOJI.get(it['category'], '•')} {it['slide_title']}\n{para}\n"
+                          f"Kaynak: {it['source_name']}")
+        return "\n\n".join(blocks) + tail
+
+    cap = assemble(paras)
+    if len(cap) > CAPTION_MAX:
+        # Taşma varsa her paragrafa eşit bütçe ver ve cümle sınırında kısalt
+        fixed = len(assemble([""] * len(paras)))
+        budget = max(60, (CAPTION_MAX - fixed) // max(1, len(paras)))
+        paras = [_shorten_to_sentence(pa, budget) for pa in paras]
+        cap = assemble(paras)
+    return cap if len(cap) <= CAPTION_MAX else cap[: CAPTION_MAX - 1] + "…"
+
+
+def build_alt_text(item: dict) -> str:
+    label = "Teknoloji" if item["category"] == "teknoloji" else "Oyun"
+    return (f"{label} haberi: {item['slide_title']}. {item['slide_text']} "
+            f"Neden önemli: {item['why_it_matters']} Kaynak: {item['source_name']}.")[:1000]
 
 
 def validate(data: dict, stories: list[Story]) -> list[str]:
@@ -333,16 +408,15 @@ def validate(data: dict, stories: list[Story]) -> list[str]:
     items = data.get("items")
     if not isinstance(items, list) or len(items) != len(stories):
         return [f"items tam olarak {len(stories)} öğe olmalı"]
+    limits = {"slide_title": (1, TITLE_MAX), "slide_text": (1, TEXT_MAX),
+              "why_it_matters": (1, WHY_MAX), "caption_paragraph": para_limits(len(items))}
     for n, (it, st) in enumerate(zip(items, stories), 1):
-        t, x = str(it.get("slide_title", "")), str(it.get("slide_text", ""))
-        if not t.strip():
-            errs.append(f"{n}. slide_title boş")
-        if len(t) > TITLE_MAX:
-            errs.append(f"{n}. slide_title {len(t)} karakter (en fazla {TITLE_MAX})")
-        if not x.strip():
-            errs.append(f"{n}. slide_text boş")
-        if len(x) > TEXT_MAX:
-            errs.append(f"{n}. slide_text {len(x)} karakter (en fazla {TEXT_MAX})")
+        for field, (lo, hi) in limits.items():
+            v = str(it.get(field, "")).strip()
+            if len(v) < lo:
+                errs.append(f"{n}. {field} boş ya da çok kısa (en az {lo})")
+            elif len(v) > hi:
+                errs.append(f"{n}. {field} {len(v)} karakter (en fazla {hi})")
         if it.get("source_url") not in {a.url for a in st.articles}:
             errs.append(f"{n}. source_url hikâyenin linklerinden biri değil")
         if it.get("category") not in ("teknoloji", "oyun"):
@@ -350,16 +424,18 @@ def validate(data: dict, stories: list[Story]) -> list[str]:
         ip = str(it.get("image_prompt", ""))
         if not ip.strip() or len(ip) > 500 or not ip.isascii():
             errs.append(f"{n}. image_prompt boş, çok uzun ya da İngilizce değil")
+    need = min_per_category(len(items))
     cats = Counter(it.get("category") for it in items)
-    if cats["oyun"] < MIN_PER_CATEGORY or cats["teknoloji"] < MIN_PER_CATEGORY:
-        errs.append("en az 2 oyun ve en az 2 teknoloji haberi olmalı")
+    if cats["oyun"] < need or cats["teknoloji"] < need:
+        errs.append(f"her kategoriden en az {need} haber olmalı")
     tags = data.get("hashtags") or []
     if not (HASHTAG_MIN <= len(tags) <= HASHTAG_MAX) or any(
         not str(h).startswith("#") or " " in str(h) for h in tags
     ):
         errs.append(f"hashtags {HASHTAG_MIN}-{HASHTAG_MAX} adet, '#' ile başlayan ve boşluksuz olmalı")
-    if not str(data.get("caption_body", "")).strip():
-        errs.append("caption_body boş")
+    intro = str(data.get("caption_intro", "")).strip()
+    if not intro or len(intro) > INTRO_MAX:
+        errs.append(f"caption_intro boş ya da {INTRO_MAX} karakterden uzun")
     return errs
 
 
@@ -404,19 +480,17 @@ def generate_post(
     model: str | None = None,
     now: datetime | None = None,
 ) -> dict:
-    """Tekilleştirilmiş haberlerden günün carousel içeriğini üretir."""
+    """Tekilleştirilmiş haberlerden günün carousel içeriğini üretir (3–8 haber, önemine göre)."""
     model = model or model_name()
     system = load_system_prompt()
     cands = prefilter(articles)
-    if len(cands) < N_ITEMS:
+    if len(cands) < MIN_ITEMS:
         raise LLMError(f"Yeterli aday haber yok ({len(cands)})")
 
-    stories: list[Story] = []
     chosen: list[Story] | None = None
     for _ in range(2):  # seçim de bozuksa 1 kez tekrar
         try:
-            stories = select_stories(cands, generate, model, system)
-            chosen = pick_five(stories)
+            chosen = pick_stories(select_stories(cands, generate, model, system))
             break
         except QuotaError:
             raise
@@ -429,19 +503,22 @@ def generate_post(
     url_source = {a.url: a.source for s in chosen for a in s.articles}
     items = []
     for it, st in zip(data["items"], chosen):
-        items.append(
-            {
-                "slide_title": it["slide_title"].strip(),
-                "slide_text": it["slide_text"].strip(),
-                "source_name": url_source[it["source_url"]],
-                "source_url": it["source_url"],
-                "category": it["category"],
-                "image_prompt": it["image_prompt"].strip(),
-                "all_sources": [{"name": a.source, "url": a.url} for a in st.articles],
-                "headline": st.headline,
-            }
-        )
-    caption = build_caption(data["caption_body"], data["hashtags"], [i["source_name"] for i in items])
+        item = {
+            "slide_title": it["slide_title"].strip(),
+            "slide_text": it["slide_text"].strip(),
+            "why_it_matters": it["why_it_matters"].strip(),
+            "caption_paragraph": it["caption_paragraph"].strip(),
+            "source_name": url_source[it["source_url"]],
+            "source_url": it["source_url"],
+            "category": it["category"],
+            "image_prompt": it["image_prompt"].strip(),
+            "importance": st.importance,
+            "all_sources": [{"name": a.source, "url": a.url} for a in st.articles],
+            "headline": st.headline,
+        }
+        item["alt_text"] = build_alt_text(item)
+        items.append(item)
+    caption = build_caption(data["caption_intro"], items, data["hashtags"])
     return {
         "generated_at": (now or datetime.now(timezone.utc)).isoformat(timespec="seconds"),
         "model": last_model_used or model,

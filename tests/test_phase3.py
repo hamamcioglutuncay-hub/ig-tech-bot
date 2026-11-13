@@ -12,15 +12,27 @@ from bot import composer as C
 from bot import imagegen as G
 from bot.config import ROOT
 
-DESIGNS = [None, ROOT / "designs/a_neon.yaml", ROOT / "designs/b_editorial.yaml", ROOT / "designs/c_bold.yaml"]
+OVERLAY = {"layout": "overlay", "background": {"tint": "none"}, "title": {"upper": False, "highlight": False}}
+
+
+@pytest.fixture(params=["panel", "overlay"])
+def variant(request, tmp_path):
+    if request.param == "panel":
+        return None  # design.yaml (panel düzeni)
+    import yaml
+    f = tmp_path / "overlay.yaml"
+    f.write_text(yaml.safe_dump(OVERLAY), encoding="utf-8")
+    return f
 TR = "ğĞşŞıİöÖüÜçÇ"
 
 LONG = {
     "slide_title": "Çok uzun bir başlık: Şirketin İstanbul'daki ğüşıöç yatırımı " * 2,
     "slide_text": "Uzun açıklama metni ğüşıöçİ " * 20,
+    "why_it_matters": "Bu gelişme sektörü derinden etkileyebilir çünkü ğüşıöç " * 4,
     "source_name": "DonanımHaber", "category": "oyun", "image_prompt": "x",
 }
 ITEM = {"slide_title": "Yeni İşlemci Tanıtıldı: Çığır Açan Güç", "slide_text": "Şirket, ğüşıöç İçin yeni çipini duyurdu.",
+        "why_it_matters": "Dizüstü pazarında rekabeti artırabilir.",
         "source_name": "Webtekno", "category": "teknoloji", "image_prompt": "x"}
 
 
@@ -40,7 +52,6 @@ def test_tr_upper_and_date():
     assert C.tr_date(date(2026, 11, 13)) == "13 Kasım 2026 · Cuma"
 
 
-@pytest.mark.parametrize("variant", DESIGNS)
 def test_long_text_stays_in_canvas(variant):
     d = C.load_design(variant)
     comp = C.Composer(d)
@@ -52,17 +63,20 @@ def test_long_text_stays_in_canvas(variant):
         ft = lay[key]
         assert len(ft.lines) <= d[key]["max_lines"]
         assert all(ft.font.getlength(l) <= 1080 - 2 * m for l in ft.lines)
-    # metin bloğu kaynak etiketinin üstünde bitmeli, başlık header'ın altında başlamalı
-    assert lay["y_text"] + lay["text"].height <= lay["y_source"]
+    # bloklar üst üste binmemeli ve kaynak etiketinin üstünde bitmeli
+    assert lay["y_title"] + lay["title"].height <= lay["y_text"]
+    assert lay["y_text"] + lay["text"].height <= lay["y_why"]
+    assert lay["y_why"] + lay["why_h"] <= lay["y_source"]
     assert lay["y_title"] >= 150
     assert lay["y_source"] + d["source"]["size"] <= 1350 - m + 10
 
 
-def test_render_carousel_outputs_seven_jpegs(tmp_path):
-    post = {"items": [dict(ITEM, category=c) for c in ["teknoloji", "oyun", "teknoloji", "oyun", "teknoloji"]]}
-    bgs = {"cover": bg(), 1: bg(), 2: None, 3: bg(), 4: bg(), 5: bg()}  # 2: marka zemini yedeği
+@pytest.mark.parametrize("n", [3, 5, 8])
+def test_render_carousel_variable_count(tmp_path, n):
+    post = {"items": [dict(ITEM, category="oyun" if i % 2 else "teknoloji") for i in range(n)]}
+    bgs = {"cover": bg(), **{i: bg() for i in range(1, n + 1)}, 2: None}  # 2: marka zemini yedeği
     paths = C.render_carousel(post, bgs, date(2026, 11, 13), tmp_path, C.load_design())
-    assert [p.name for p in paths] == [f"{i:02d}.jpg" for i in range(1, 8)]
+    assert [p.name for p in paths] == [f"{i:02d}.jpg" for i in range(1, n + 3)]
     for p in paths:
         im = Image.open(p)
         assert im.format == "JPEG" and im.size == (1080, 1350)
@@ -151,3 +165,12 @@ def test_server_error_retried_once(cf_env):
     s = FakeSession([FakeResp(500, text="boom"), FakeResp(200, {"result": {"image": _jpeg_b64()}})])
     G.generate_image("x", cf_env / "c.jpg", session=s)
     assert len(s.calls) == 2
+
+
+def test_cover_has_no_fixed_count_and_list_fits():
+    d = C.load_design()
+    assert not any(ch.isdigit() for ch in d["cover"]["title"] + d["cover"]["kicker"] + d["outro"]["subtitle"])
+    comp = C.Composer(d)
+    items = [dict(ITEM, category="oyun" if i % 2 else "teknoloji") for i in range(8)]
+    comp.cover_slide(bg(), date(2026, 11, 13), items, 10)
+    assert comp.last_cover["date_bottom"] <= comp.last_cover["list_top"]

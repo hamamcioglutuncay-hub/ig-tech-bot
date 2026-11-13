@@ -27,13 +27,15 @@ fonts:                  # OFL lisanslı, assets/fonts içinde
 
 margin: 72              # kenar boşluğu
 
-layout: overlay         # overlay = metin görselin üstünde | panel = görsel üstte, metin altta düz zeminde
-panel_ratio: 0.48       # (panel) alt metin panelinin yüksekliği
+# Tur 2 (2026-11-13): B + C karışımı — B'nin panel düzeni + C'nin iki tonlu görseli ve kutulu BÜYÜK HARF başlığı
+layout: panel           # overlay = metin görselin üstünde | panel = görsel üstte, metin altta düz zeminde
+panel_ratio: 0.58       # (panel) metin paneli en fazla bu oranda (uzun haber)
+panel_min_ratio: 0.42   # (panel) kısa haberde panel bu orana kadar küçülür, görsel büyür
 
 background:
-  tint: none            # none | duotone (kategori rengiyle iki tonlu)
-  tint_strength: 0.0    # 0–1
-  brightness: 0.85      # arka planı hafif karart
+  tint: duotone         # none | duotone (kategori rengiyle iki tonlu)
+  tint_strength: 0.55   # 0–1
+  brightness: 1.0      # arka planı hafif karart
 
 gradient:               # (overlay) okunabilirlik için alttan koyulaşan geçiş
   extend_above_text: 260
@@ -54,19 +56,28 @@ badge:                  # kategori etiketi
 
 title:
   font: heading
-  max_size: 78
-  min_size: 48
-  max_lines: 4
-  line_spacing: 1.08
-  upper: false
-  highlight: false      # true = her satırın arkasına kategori renginde kutu
+  max_size: 60
+  min_size: 40
+  max_lines: 3
+  line_spacing: 1.26
+  upper: true           # BÜYÜK HARF (Türkçe İ/I doğru)
+  highlight: true       # true = her satırın arkasına kategori renginde kutu
 
 text:
   font: body
-  max_size: 40
-  min_size: 30
+  max_size: 34
+  min_size: 26
   max_lines: 6
   line_spacing: 1.32
+
+why:                    # "Neden önemli?" bloğu (sol kenarda kategori renginde çizgi)
+  label: "NEDEN ÖNEMLİ?"
+  label_size: 22
+  font: body
+  max_size: 29
+  min_size: 23
+  max_lines: 3
+  line_spacing: 1.3
 
 source:
   size: 25
@@ -75,18 +86,18 @@ source:
 
 accent_bar: {width: 96, height: 7}
 
-gaps: {badge_title: 26, title_text: 44, text_source: 40}
+gaps: {badge_title: 26, title_text: 30, text_why: 30, text_source: 36}
 
 cover:
   prompt: "abstract split composition, left side luminous cyan energy streams, right side glowing violet particles, meeting in the center with a soft burst of light, dark navy space"
   kicker: "GÜNÜN"
-  title: "5 TEKNOLOJİ & OYUN HABERİ"
-  title_size: 104
+  title: "TEKNOLOJİ & OYUN\nHABERLERİ"   # \n = satır sonu
+  title_size: 96
   logo_size: 230
   list_size: 30
 
 outro:
   title: "TAKİP ET"
-  subtitle: "Her gün en güncel 5 teknoloji & oyun haberi"
+  subtitle: "Her gün en güncel teknoloji & oyun haberleri"
   cta: "Kaydet  •  Paylaş  •  Yorumla"
   logo_size: 360

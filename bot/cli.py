@@ -120,24 +120,26 @@ def cmd_write(args: argparse.Namespace) -> int:
 def print_post(post: dict) -> None:
     from rich.panel import Panel
 
+    total = len(post["items"]) + 2
     for n, it in enumerate(post["items"], 1):
         cat = "[magenta]OYUN[/]" if it["category"] == "oyun" else "[green]TEKNOLOJİ[/]"
         others = list(dict.fromkeys(s["name"] for s in it["all_sources"] if s["name"] != it["source_name"]))
         body = (
             f"[bold]{it['slide_title']}[/]  [dim]({len(it['slide_title'])}/60)[/]\n\n"
-            f"{it['slide_text']}  [dim]({len(it['slide_text'])}/180)[/]\n\n"
+            f"{it['slide_text']}  [dim]({len(it['slide_text'])}/260)[/]\n\n"
+            f"[cyan]Neden önemli?[/] {it.get('why_it_matters', '')}  [dim]({len(it.get('why_it_matters', ''))}/120)[/]\n\n"
             f"[cyan]Kaynak:[/] {it['source_name']}"
             + (f" [dim](+ {', '.join(others)})[/]" if others else "")
-            + f"\n[dim]Görsel: {it['image_prompt']}[/]"
+            + f"\n[dim]Önem: {it.get('importance', '-')}/10 · Görsel: {it['image_prompt']}[/]"
         )
-        console.print(Panel(body, title=f"Slayt {n + 1}/7 · {cat}", title_align="left", width=100))
-    console.print(f"[dim]Model: {post['model']} · {post['candidates']} aday haber arasından seçildi[/]")
-    console.print(Panel(post["caption"], title=f"Caption ({len(post['caption'])}/1500)",
+        console.print(Panel(body, title=f"Slayt {n + 1}/{total} · {cat}", title_align="left", width=100))
+    console.print(f"[dim]Model: {post['model']} · {post['candidates']} aday haber arasından "
+                  f"{len(post['items'])} haber seçildi[/]")
+    console.print(Panel(post["caption"], title=f"Caption ({len(post['caption'])}/2200)",
                         title_align="left", width=100))
 
-
 def make_backgrounds(post: dict, day_dir: Path, design: dict) -> dict:
-    """Kapak + 5 haber için FLUX arka planlarını üretir (önbellekli: dosya varsa yeniden üretmez)."""
+    """Kapak + her haber için FLUX arka planlarını üretir (önbellekli: dosya varsa yeniden üretmez)."""
     from PIL import Image
 
     from .imagegen import ImageGenError, ImageQuotaError, generate_image
@@ -224,7 +226,7 @@ def build_parser() -> argparse.ArgumentParser:
     k.add_argument("--no-telegram-test", action="store_true", help="Telegram'a test mesajı gönderme")
     k.set_defaults(func=cmd_check)
 
-    w = sub.add_parser("write", help="Günün 5 haberini seç ve Türkçe slayt metinlerini üret")
+    w = sub.add_parser("write", help="Günün haberlerini (3–8) seç ve Türkçe slayt metinlerini üret")
     w.add_argument("--hours", type=float, default=24, help="zaman penceresi (saat)")
     w.add_argument("--no-mark", action="store_true", help="seçilen haberleri seen.json'a yazma (deneme)")
     w.set_defaults(func=cmd_write)
