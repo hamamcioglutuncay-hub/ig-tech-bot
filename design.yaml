@@ -34,7 +34,7 @@ panel_min_ratio: 0.42   # (panel) kısa haberde panel bu orana kadar küçülür
 
 background:
   tint: duotone         # none | duotone (kategori rengiyle iki tonlu)
-  tint_strength: 0.55   # 0–1
+  tint_strength: 0.3    # 0–1 (sahne okunabilsin diye düşük)
   brightness: 1.0      # arka planı hafif karart
 
 gradient:               # (overlay) okunabilirlik için alttan koyulaşan geçiş
@@ -89,7 +89,7 @@ accent_bar: {width: 96, height: 7}
 gaps: {badge_title: 26, title_text: 30, text_why: 30, text_source: 36}
 
 cover:
-  prompt: "abstract split composition, left side luminous cyan energy streams, right side glowing violet particles, meeting in the center with a soft burst of light, dark navy space"
+  prompt: "a dark modern desk at night seen from above, a blank game controller on the left lit in violet, an open unbranded laptop and a glowing computer chip on the right lit in cyan, scattered cables, cinematic"
   kicker: "GÜNÜN"
   title: "TEKNOLOJİ & OYUN\nHABERLERİ"   # \n = satır sonu
   title_size: 96

@@ -11,7 +11,7 @@
       "source_name": "The Decoder",
       "source_url": "https://the-decoder.com/jensen-huang-resigns-as-nvidia-ceo-after-espionage-scandal-wipes-out-1-4-trillion-in-market-value/",
       "category": "teknoloji",
-      "image_prompt": "abstract flowing neon circuitry over deep indigo gradient, soft volumetric light, minimal, cinematic",
+      "image_prompt": "An empty high-backed leather executive chair inside a dimly lit corporate glass boardroom at night. On the polished wooden table sits a glowing microchip shattered down the middle, next to a holographic stock chart trending sharply downward against a shadowy city skyline. Cinematic lighting, photorealistic.",
       "importance": 10,
       "all_sources": [
         {
@@ -78,7 +78,7 @@
       "source_name": "VGC",
       "source_url": "https://www.videogameschronicle.com/news/machinegames-has-finally-officially-confirmed-that-wolfenstein-3-is-in-development/",
       "category": "oyun",
-      "image_prompt": "dark gritty cinematic lighting, abstract metallic textures, moody industrial atmosphere, minimal",
+      "image_prompt": "A dimly lit bunker room from an alternate history era, featuring heavy steel doors, glowing vacuum tubes, retro-futuristic mechanical blueprints spread across a metal desk, and an old iron helmet resting beside a brass steampunk mechanical gear. Cinematic mood, detailed textures, dark moody atmosphere.",
       "importance": 9,
       "all_sources": [
         {
@@ -133,7 +133,7 @@
       "source_name": "MacRumors",
       "source_url": "https://www.macrumors.com/2026/11/13/major-microsoft-365-outage-continues/",
       "category": "teknoloji",
-      "image_prompt": "abstract glowing digital glitch patterns over dark blue background, minimal, cyber aesthetic",
+      "image_prompt": "A dark high-tech server room with endless rows of server racks. Pulsing red warning lights illuminate the floor while unplugged glowing fiber optic cables hang loose. A floating translucent globe in the center shows disconnected holographic network nodes fading away. Atmospheric neon red and blue lighting.",
       "importance": 9,
       "all_sources": [
         {
@@ -184,7 +184,7 @@
       "source_name": "GameSpot",
       "source_url": "https://www.gamespot.com/articles/fable-is-looking-a-lot-darker-than-we-expected/",
       "category": "oyun",
-      "image_prompt": "mystical dark forest with glowing soft light, abstract fantasy textures, cinematic minimal",
+      "image_prompt": "A lush enchanted fantasy forest at dusk with cobblestone paths, glowing magical mushrooms, ancient overgrown stone ruins, and a distant cozy medieval village tucked between misty hills under a giant glowing full moon. Magical fantasy art style, rich colors, tranquil yet atmospheric scene.",
       "importance": 8,
       "all_sources": [
         {
@@ -223,7 +223,7 @@
       "source_name": "Google DeepMind",
       "source_url": "https://deepmind.google/blog/introducing-gemini-4-hydrogen/",
       "category": "teknoloji",
-      "image_prompt": "abstract glowing light particles flowing over dark minimalist background, clean futuristic",
+      "image_prompt": "A sleek futuristic research laboratory featuring a glowing translucent sphere made of light and energy, floating above a minimalist workstation. Bright blue and cyan light trails swirl rapidly around the sphere, representing extreme processing speed and efficiency against a clean metallic background.",
       "importance": 8,
       "all_sources": [
         {
@@ -254,7 +254,7 @@
       "source_name": "Eurogamer",
       "source_url": "https://www.eurogamer.net/gta-6-internet-uk-broadband-ofcom-openreach",
       "category": "oyun",
-      "image_prompt": "abstract magenta and violet light streaks in motion over deep navy, soft bokeh particles, cinematic",
+      "image_prompt": "An empty game development studio at night seen from a low angle, rows of desks with monitors glowing softly in violet, office chairs pushed in, a bowl of popcorn and a blank game controller resting on the nearest desk, festive relaxed mood of a day off",
       "importance": 7,
       "all_sources": [
         {
@@ -285,7 +285,7 @@
       "source_name": "Xbox Wire",
       "source_url": "https://news.xbox.com/en-us/2026/11/12/25-original-xbox-games-now-available-on-pc/",
       "category": "oyun",
-      "image_prompt": "abstract emerald green glowing light over dark matte texture, minimal tech aesthetic",
+      "image_prompt": "A vintage bulky black game controller connected via a thick black cable directly into a sleek, modern gaming PC tower glowing with RGB lighting on a wooden desk. Classic glowing digital pixel artifacts float softly around the setup in a nostalgic glowing atmosphere.",
       "importance": 7,
       "all_sources": [
         {
@@ -308,7 +308,7 @@
       "source_name": "The Decoder",
       "source_url": "https://the-decoder.com/claude-meetings-lets-anthropics-ai-join-your-video-calls/",
       "category": "teknoloji",
-      "image_prompt": "abstract geometric lines intersecting over smooth gradient background, minimal design",
+      "image_prompt": "A modern meeting room with a long dark wooden table and empty chairs, an open unbranded laptop at the head of the table emitting a soft glowing cyan orb of light, a coffee cup and a pen beside it, large window with evening city glow",
       "importance": 7,
       "all_sources": [
         {

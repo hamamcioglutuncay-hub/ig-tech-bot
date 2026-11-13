@@ -343,8 +343,9 @@ def _write_prompt(stories: list[Story], errors: list[str] | None) -> str:
         "slayttakini kelimesi kelimesine tekrar etme, ek bağlam ver. Başlık, numara, emoji, kaynak adı EKLEME.\n"
         "- source_url: o hikâyenin listesindeki linklerden biri, aynen (tercihen en bilgilendirici olan).\n"
         "- category: hikâyenin kategorisi.\n"
-        "- image_prompt: İngilizce, tamamen soyut arka plan (ışık, şekil, parçacık, doku); marka/logo/ürün/"
-        "karakter/kişi/yazı yok; tabela, ekran, vitrin, poster, şehir sokağı yok.\n"
+        "- image_prompt: İngilizce, 40–60 kelime; haberin KONUSUNU anlatan konsept sahne (ilgili nesne, mekân, metafor). "
+        "Soyut desen değil. Marka/logo/tanınabilir ürün/oyun karakteri/kişi/insan figürü/avatar/okunabilir yazı yok; "
+        "takvim, belge, grafik, saat gibi rakam/yazı çıkaran nesneler yok.\n"
         f"- caption_intro ≤ {INTRO_MAX}: GÜNÜN öne çıkanlarını anan 1–2 cümlelik giriş ('haftanın' deme). Haber SAYISI YAZMA.\n"
         f"- hashtags: {HASHTAG_MIN}-{HASHTAG_MAX} adet, '#' ile başlayan, boşluksuz.\n"
         "Kaynak listesi, hashtag ve YZ notunu caption alanlarına EKLEME (sistem ekleyecek).\n"
@@ -526,3 +527,32 @@ def generate_post(
         "items": items,
         "caption": caption,
     }
+
+
+IMAGE_SCHEMA = {
+    "type": "OBJECT",
+    "properties": {"image_prompts": {"type": "ARRAY", "items": {"type": "STRING"}}},
+    "required": ["image_prompts"],
+}
+
+
+def refresh_image_prompts(post: dict, generate: Generator = gemini_generate, model: str | None = None) -> dict:
+    """Mevcut içerikte yalnızca görsel tariflerini yeniden yazar (tasarım denemeleri için)."""
+    model = model or model_name()
+    items = post["items"]
+    listing = "\n".join(
+        f"{n}. [{it['category']}] {it['slide_title']} — {it['slide_text']}" for n, it in enumerate(items, 1)
+    )
+    prompt = (
+        f"Aşağıdaki {len(items)} haber için, AYNI SIRAYLA, birer image_prompt yaz. "
+        "Kurallar sistem talimatındaki image_prompt bölümündedir (konuyu anlatan konsept sahne, 40–60 kelime, "
+        "İngilizce; marka/logo/tanınabilir ürün/karakter/kişi/yazı yok).\n\n" + listing
+    )
+    for _ in range(2):
+        data = _parse_json(generate(model, load_system_prompt(), prompt, IMAGE_SCHEMA))
+        prompts = [str(x).strip() for x in data.get("image_prompts", [])]
+        if len(prompts) == len(items) and all(x and x.isascii() and len(x) <= 600 for x in prompts):
+            for it, ip in zip(items, prompts):
+                it["image_prompt"] = ip
+            return post
+    raise LLMError("Görsel tarifleri yenilenemedi")

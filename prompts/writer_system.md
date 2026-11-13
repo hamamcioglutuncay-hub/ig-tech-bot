@@ -32,10 +32,19 @@ yoğunluğuna göre 3 ile 8 arasında değişir; metinlerde haber sayısını as
 - slide_text: en fazla 260 karakter; 2–3 cümle. Ne oldu, kim yaptı, temel ayrıntı (tarih, platform, fiyat — yalnızca kaynakta varsa).
 - why_it_matters: en fazla 120 karakter, tek cümle. Okur için neden önemli: etkisi, sektördeki yeri, kimi ilgilendirdiği.
 - source_name / source_url: verilen listedeki linklerden biri, aynen.
-- image_prompt: İngilizce, soyut/konsept bir arka plan tarifi. Marka, logo, ürün, oyun karakteri,
-  gerçek kişi, yazı, harf, rakam İÇERMEZ. Tabela, ekran, vitrin, poster, şehir sokağı gibi yazı
-  çıkarabilecek sahneler de YOK. Yalnızca ışık, şekil, parçacık, doku ve renk tarif et.
-  Örnek: "abstract flowing neon circuitry over deep indigo gradient, soft volumetric light, minimal, cinematic"
+- image_prompt: İngilizce, HABERİN KONUSUNU anlatan konsept bir sahne (40–60 kelime). Haberi gören biri görselden
+  konuyu tahmin edebilmeli. Haberle ilgili NESNELER, MEKÂNLAR ve METAFORLAR kullan; soyut desen kullanma.
+  - İyi örnekler:
+    - CEO istifası → "an empty leather executive chair in a dim glass boardroom at night, a single glowing computer chip on the polished table"
+    - Bulut servis kesintisi → "a dark server room with rows of racks, red warning lights blinking, unplugged network cables hanging"
+    - Fantastik RPG fragmanı → "a misty medieval village at dusk with crooked stone cottages and lanterns, a dark forest behind it"
+    - Yeni yapay zekâ modeli → "a glowing translucent neural network sphere floating above a desk in a futuristic lab"
+    - Konsol oyunlarının PC'ye gelmesi → "a vintage blank game controller connected by a cable to a sleek modern PC tower on a desk"
+  - YASAK: marka logosu, marka adı, tanınabilir ürün tasarımı (ör. belirli konsol ya da telefon modeli), oyun karakteri,
+    gerçek kişi, insan figürü, yüz, avatar, siluet, figürin, okunabilir yazı, tabela, poster.
+    Rakam ya da yazı çıkarabilecek nesneler de YOK: takvim, belge/kâğıt, grafik, saat, klavye tuşu, menü.
+    Ekran gerekiyorsa "screen glowing with soft abstract light" de.
+  - Nesneler markasız ve genel olsun ("a blank game controller", "an unbranded smartphone").
 
 ## Caption (Instagram açıklaması)
 - caption_intro: 1–2 cümlelik giriş; GÜNÜN öne çıkan konularına değin (paylaşım günlüktür, 'haftanın' deme). Haber sayısı yazma.

@@ -172,10 +172,17 @@ class Composer:
             return Image.open(p).convert("RGBA").resize((self.W, self.H), Image.LANCZOS)
         return None
 
-    def _background(self, bg: Image.Image | None, accent: tuple | None) -> Image.Image:
+    def _background(self, bg: Image.Image | None, accent: tuple | None, region_h: int | None = None) -> Image.Image:
+        """Arka plan. region_h verilirse görsel yalnızca üstteki görünür alana sığdırılır
+        (panel düzeninde ana nesne metin panelinin arkasında kalmasın diye)."""
         if bg is None:
             return self.brand_backdrop()
-        img = cover_fit(bg, self.W, self.H)
+        if region_h:
+            canvas = Image.new("RGB", (self.W, self.H), self.c["bg"])
+            canvas.paste(cover_fit(bg, self.W, min(self.H, region_h)), (0, 0))
+            img = canvas
+        else:
+            img = cover_fit(bg, self.W, self.H)
         b = self.d["background"]
         if b.get("tint") == "duotone" and accent:
             img = duotone(img, self.c["bg"], accent, float(b.get("tint_strength", 0.6)))
@@ -302,6 +309,7 @@ class Composer:
             max_py = int(self.H * (1 - d.get("panel_min_ratio", d["panel_ratio"])))
             py = min(max_py, max(min_py, area_bottom - total_h - pad_top))
             area_top = py + pad_top
+            img = self._background(bg, accent, region_h=py + 120)  # görsel panelin hemen altına kadar
             img = self._shade(img, py - 160, py, 0.0, 1.0)
             y_badge = py - badge_h // 2
             y_title = area_top                      # panelde metin yukarıdan akar

@@ -81,6 +81,24 @@ def cmd_write(args: argparse.Namespace) -> int:
     from . import telegram
     from .llm_gemini import LLMError, QuotaError, generate_post, model_name
 
+    if args.images_only:
+        from .llm_gemini import refresh_image_prompts
+
+        day_dir = today_dir()
+        path = day_dir / "content.json"
+        post = json.loads(path.read_text(encoding="utf-8"))
+        with console.status("Gemini görsel tariflerini yeniden yazıyor…"):
+            refresh_image_prompts(post)
+        path.write_text(json.dumps(post, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        removed = 0
+        for f in (day_dir / "bg").glob("bg_*.jpg"):
+            f.unlink()
+            removed += 1
+        for n, it in enumerate(post["items"], 1):
+            console.print(f"[cyan]{n}.[/] {it['slide_title']}\n   [dim]{it['image_prompt']}[/]")
+        console.print(f"[dim]{removed} eski arka plan silindi; 'python -m bot render' yenilerini üretecek.[/]")
+        return 0
+
     feeds = config.load_feeds()
     with console.status(f"{len(feeds)} kaynak okunuyor…"):
         result = collect(feeds, hours=args.hours)
@@ -229,6 +247,7 @@ def build_parser() -> argparse.ArgumentParser:
     w = sub.add_parser("write", help="Günün haberlerini (3–8) seç ve Türkçe slayt metinlerini üret")
     w.add_argument("--hours", type=float, default=24, help="zaman penceresi (saat)")
     w.add_argument("--no-mark", action="store_true", help="seçilen haberleri seen.json'a yazma (deneme)")
+    w.add_argument("--images-only", action="store_true", help="bugünkü içerikte yalnızca görsel tariflerini yenile")
     w.set_defaults(func=cmd_write)
 
     r = sub.add_parser("render", help="Arka planları üret ve 7 slaytlık carousel'i oluştur")
