@@ -1,0 +1,92 @@
+# ig-tech-bot tasarım sistemi — bütün görsel kararlar burada.
+# Renkler HEX, boyutlar piksel (tuval 1080×1350). Oranlar 0–1 arası.
+# designs/ klasöründeki dosyalar bu dosyanın ÜZERİNE yazılan varyasyonlardır.
+
+brand:
+  name: SINGLEPLAYER
+  handle: "@singleplayer_tr"
+  logo: assets/logo.png
+
+canvas:
+  width: 1080
+  height: 1350
+  jpeg_quality: 90
+
+colors:                 # logodan alındı
+  bg: "#081030"         # lacivert zemin
+  text: "#FFFFFF"
+  text_muted: "#B9C0DC"
+  teknoloji: "#00E8F8"  # camgöbeği
+  oyun: "#B838F8"       # mor
+  on_accent: "#081030"  # vurgu rengi üstündeki yazı
+
+fonts:                  # OFL lisanslı, assets/fonts içinde
+  heading: {file: assets/fonts/ArchivoBlack-Regular.ttf}
+  body:    {file: assets/fonts/Archivo-Variable.ttf, weight: 400, width: 100}
+  label:   {file: assets/fonts/Archivo-Variable.ttf, weight: 800, width: 100}
+
+margin: 72              # kenar boşluğu
+
+layout: overlay         # overlay = metin görselin üstünde | panel = görsel üstte, metin altta düz zeminde
+panel_ratio: 0.48       # (panel) alt metin panelinin yüksekliği
+
+background:
+  tint: none            # none | duotone (kategori rengiyle iki tonlu)
+  tint_strength: 0.0    # 0–1
+  brightness: 0.85      # arka planı hafif karart
+
+gradient:               # (overlay) okunabilirlik için alttan koyulaşan geçiş
+  extend_above_text: 260
+  max_opacity: 0.94
+
+top_shade: 0.55         # üst kenardaki logo/numara için hafif karartma
+
+header:
+  logo_size: 84
+  handle_size: 27
+  number_size: 27
+
+badge:                  # kategori etiketi
+  style: pill           # pill | line
+  size: 25
+  pad_x: 22
+  pad_y: 11
+
+title:
+  font: heading
+  max_size: 78
+  min_size: 48
+  max_lines: 4
+  line_spacing: 1.08
+  upper: false
+  highlight: false      # true = her satırın arkasına kategori renginde kutu
+
+text:
+  font: body
+  max_size: 40
+  min_size: 30
+  max_lines: 6
+  line_spacing: 1.32
+
+source:
+  size: 25
+  prefix: "Kaynak: "
+  swipe_hint: "Kaydır →"
+
+accent_bar: {width: 96, height: 7}
+
+gaps: {badge_title: 26, title_text: 44, text_source: 40}
+
+cover:
+  prompt: "abstract split composition, left side luminous cyan energy streams, right side glowing violet particles, meeting in the center with a soft burst of light, dark navy space"
+  kicker: "GÜNÜN"
+  title: "5 TEKNOLOJİ & OYUN HABERİ"
+  title_size: 104
+  logo_size: 230
+  list_size: 30
+
+outro:
+  title: "TAKİP ET"
+  subtitle: "Her gün en güncel 5 teknoloji & oyun haberi"
+  cta: "Kaydet  •  Paylaş  •  Yorumla"
+  logo_size: 360

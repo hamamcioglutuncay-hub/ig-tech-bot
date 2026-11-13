@@ -1,0 +1,5 @@
+# Varyasyon A — Neon: tam ekran görsel, güçlü alt gradyan, hap şeklinde kategori etiketi
+variant_name: "A · Neon"
+layout: overlay
+badge: {style: pill}
+title: {upper: false, highlight: false, max_size: 78}

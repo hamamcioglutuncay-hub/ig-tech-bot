@@ -9,7 +9,7 @@ import requests
 from . import settings
 
 API = "https://api.telegram.org/bot{token}/{method}"
-TIMEOUT = 30
+TIMEOUT = 120
 
 
 class TelegramError(RuntimeError):
@@ -55,3 +55,29 @@ def notify(text: str) -> bool:
         return True
     except TelegramError:
         return False
+
+
+def send_media_group(paths: list, caption: str | None = None) -> list:
+    """En fazla 10 görseli albüm olarak gönderir. Albüm açıklaması 1024 karakterle sınırlı."""
+    import json
+    from pathlib import Path
+
+    chat_id = settings.get("TELEGRAM_CHAT_ID")
+    if not chat_id:
+        raise TelegramError("TELEGRAM_CHAT_ID boş")
+    media, files = [], {}
+    handles = []
+    try:
+        for i, p in enumerate(paths[:10]):
+            key = f"photo{i}"
+            fh = open(Path(p), "rb")
+            handles.append(fh)
+            files[key] = (Path(p).name, fh, "image/jpeg")
+            entry = {"type": "photo", "media": f"attach://{key}"}
+            if i == 0 and caption:
+                entry["caption"] = caption[:1024]
+            media.append(entry)
+        return _call("sendMediaGroup", {"chat_id": chat_id, "media": json.dumps(media)}, files)
+    finally:
+        for fh in handles:
+            fh.close()

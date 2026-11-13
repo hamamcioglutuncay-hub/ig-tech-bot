@@ -136,6 +136,79 @@ def print_post(post: dict) -> None:
                         title_align="left", width=100))
 
 
+def make_backgrounds(post: dict, day_dir: Path, design: dict) -> dict:
+    """Kapak + 5 haber için FLUX arka planlarını üretir (önbellekli: dosya varsa yeniden üretmez)."""
+    from PIL import Image
+
+    from .imagegen import ImageGenError, ImageQuotaError, generate_image
+
+    bg_dir = day_dir / "bg"
+    jobs = [("cover", design["cover"]["prompt"])] + [
+        (n, it["image_prompt"]) for n, it in enumerate(post["items"], 1)
+    ]
+    out: dict = {}
+    for key, prompt in jobs:
+        path = bg_dir / f"bg_{key}.jpg"
+        try:
+            with console.status(f"Arka plan üretiliyor: {key}…"):
+                generate_image(prompt, path)
+            out[key] = Image.open(path)
+        except ImageQuotaError:
+            raise
+        except ImageGenError as exc:
+            console.print(f"[yellow]⚠️  {key} arka planı üretilemedi, marka zemini kullanılacak: {exc}[/]")
+            out[key] = None
+    return out
+
+
+def cmd_render(args: argparse.Namespace) -> int:
+    import subprocess
+    from datetime import date as _date
+
+    from . import telegram
+    from .composer import load_design, render_carousel
+    from .imagegen import NEURONS_PER_IMAGE, ImageQuotaError, used_today
+
+    day_dir = config.OUTPUT_DIR / args.date if args.date else today_dir()
+    content = day_dir / "content.json"
+    if not content.exists():
+        console.print(f"[red]❌ {content.relative_to(config.ROOT)} yok. Önce: python -m bot write[/]")
+        return 1
+    post = json.loads(content.read_text(encoding="utf-8"))
+    day = _date.fromisoformat(day_dir.name)
+
+    variants = [Path(v) for v in args.design] if args.design else [None]
+    base = load_design()
+    try:
+        backgrounds = make_backgrounds(post, day_dir, base)
+    except ImageQuotaError as exc:
+        console.print(f"[yellow]⏭️  {exc} — bu tur atlandı.[/]")
+        telegram.notify(f"⏭️ ig-tech-bot: Cloudflare ücretsiz görsel kotası doldu, tur atlandı.\n{exc}")
+        return 2
+    console.print(f"[dim]Cloudflare kullanım tahmini bugün: {used_today():.0f}/10000 neuron "
+                  f"(görsel başına ≈{NEURONS_PER_IMAGE:.0f})[/]")
+
+    all_dirs = []
+    for v in variants:
+        design = load_design(v)
+        name = design.get("variant_name") or "design.yaml"
+        out = day_dir / "slides" if v is None else day_dir / "variants" / v.stem
+        paths = render_carousel(post, backgrounds, day, out, design)
+        all_dirs.append(out)
+        console.print(f"✅ {name}: {len(paths)} slayt → {out.relative_to(config.ROOT)}")
+        if not args.no_telegram:
+            try:
+                telegram.send_media_group(paths, caption=f"🎨 {name} — {day_dir.name}")
+            except telegram.TelegramError as exc:
+                console.print(f"[yellow]⚠️  Telegram önizleme gönderilemedi: {exc}[/]")
+    if not args.no_telegram and variants == [None]:
+        telegram.notify("📝 Caption önizleme:\n\n" + post["caption"])
+    if not args.no_open:
+        for d in all_dirs:
+            subprocess.run(["open", str(d)], check=False)
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(prog="python -m bot", description="ig-tech-bot komutları")
     sub = p.add_subparsers(dest="command", required=True)
@@ -155,6 +228,13 @@ def build_parser() -> argparse.ArgumentParser:
     w.add_argument("--hours", type=float, default=24, help="zaman penceresi (saat)")
     w.add_argument("--no-mark", action="store_true", help="seçilen haberleri seen.json'a yazma (deneme)")
     w.set_defaults(func=cmd_write)
+
+    r = sub.add_parser("render", help="Arka planları üret ve 7 slaytlık carousel'i oluştur")
+    r.add_argument("--date", help="output/ altındaki gün (YYYY-AA-GG), varsayılan bugün")
+    r.add_argument("--design", nargs="*", help="designs/*.yaml varyasyon(lar)ı; verilmezse design.yaml")
+    r.add_argument("--no-telegram", action="store_true", help="Telegram'a önizleme gönderme")
+    r.add_argument("--no-open", action="store_true", help="Klasörü Finder'da açma")
+    r.set_defaults(func=cmd_render)
     return p
 
 
