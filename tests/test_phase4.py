@@ -157,3 +157,35 @@ def test_hosting_raw_url():
     from bot.config import ROOT
     url = hosting.raw_url(ROOT / "output" / "2026-11-13" / "slides" / "01.jpg")
     assert url == "https://raw.githubusercontent.com/hamamcioglutuncay-hub/ig-tech-bot/main/output/2026-11-13/slides/01.jpg"
+
+
+def test_facebook_flavor_uses_graph_facebook(monkeypatch):
+    monkeypatch.setenv("IG_ACCESS_TOKEN", "EAA" + "z" * 60)
+    monkeypatch.setenv("IG_USER_ID", "17841400000000009")
+
+    class FakeFB(FakeIG):
+        def get(self, url, params, timeout):
+            if url.endswith("/17841400000000009"):
+                self.calls.append(("GET", url, dict(params)))
+                return Resp(200, {"id": "17841400000000009", "username": "singleplayer_tr"})
+            return super().get(url, params, timeout)
+
+    s = FakeFB()
+    assert IG.me(session=s)["username"] == "singleplayer_tr"
+    res = IG.publish_carousel(URLS[:3], [], "C", session=s, sleep=lambda _: None)
+    assert res.media_id == "M999"
+    assert all(c[1].startswith("https://graph.facebook.com/") for c in s.calls)
+
+
+def test_facebook_flavor_requires_numeric_id(monkeypatch):
+    monkeypatch.setenv("IG_ACCESS_TOKEN", "EAA" + "z" * 60)
+    monkeypatch.setenv("IG_USER_ID", "singleplayer_tr")
+    with pytest.raises(IG.InstagramError, match="sayısal"):
+        IG.me(session=FakeIG())
+
+
+def test_eaa_refresh_needs_app_credentials(monkeypatch):
+    monkeypatch.delenv("IG_APP_ID", raising=False)
+    monkeypatch.setenv("IG_APP_SECRET", "")
+    with pytest.raises(TR.TokenRefreshError, match="IG_APP_ID"):
+        TR.refresh_long_lived("EAA" + "z" * 60)

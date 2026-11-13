@@ -19,6 +19,7 @@ from . import settings
 from .config import STATE_DIR
 
 GRAPH = "https://graph.instagram.com"
+GRAPH_FB = "https://graph.facebook.com/v24.0"
 TIMEOUT = 30
 TOKEN_STATE = STATE_DIR / "token.json"
 
@@ -27,9 +28,9 @@ class TokenRefreshError(RuntimeError):
     pass
 
 
-def _get(path: str, params: dict) -> dict:
+def _get(path: str, params: dict, base: str = GRAPH) -> dict:
     try:
-        r = requests.get(f"{GRAPH}/{path}", params=params, timeout=TIMEOUT)
+        r = requests.get(f"{base}/{path}", params=params, timeout=TIMEOUT)
     except requests.RequestException as exc:
         raise TokenRefreshError(settings.scrub(f"bağlantı hatası: {type(exc).__name__}")) from None
     body = r.json() if r.headers.get("content-type", "").startswith(("application/json", "text/javascript")) else {}
@@ -45,7 +46,32 @@ def exchange_short_lived(short_token: str, app_secret: str) -> dict:
 
 
 def refresh_long_lived(token: str) -> dict:
+    if token.startswith("EAA"):
+        # Facebook/Unified login token: uygulama kimliği ve gizli anahtarıyla 60 günlük token alınır
+        app_id, secret = settings.get("IG_APP_ID"), settings.get("IG_APP_SECRET")
+        if not app_id or not secret:
+            raise TokenRefreshError("EAA token yenilemek için .env'de IG_APP_ID ve IG_APP_SECRET gerekli")
+        return _get("oauth/access_token", {"grant_type": "fb_exchange_token", "client_id": app_id,
+                                           "client_secret": secret, "fb_exchange_token": token}, GRAPH_FB)
     return _get("refresh_access_token", {"grant_type": "ig_refresh_token", "access_token": token})
+
+
+def token_expiry(token: str) -> datetime | None:
+    """EAA token'ın bitiş tarihini debug_token ile öğrenir (IG_APP_ID + IG_APP_SECRET gerekir).
+    0 = süresiz. Bilinemiyorsa None."""
+    app_id, secret = settings.get("IG_APP_ID"), settings.get("IG_APP_SECRET")
+    if not token.startswith("EAA") or not app_id or not secret:
+        return None
+    try:
+        r = requests.get(f"{GRAPH_FB}/debug_token", params={"input_token": token,
+                         "access_token": f"{app_id}|{secret}"}, timeout=TIMEOUT)
+        data = r.json().get("data") or {}
+    except (requests.RequestException, ValueError):
+        return None
+    exp = data.get("data_access_expires_at") if not data.get("expires_at") else data.get("expires_at")
+    if exp in (None, 0):
+        return None
+    return datetime.fromtimestamp(int(exp), tz=timezone.utc)
 
 
 def save_state(expires_in: int, now: datetime | None = None, path: Path | None = None) -> dict:

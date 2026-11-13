@@ -23,6 +23,7 @@ SECRET_KEYS = (
     "IG_USER_ID",
     "IG_APP_SECRET",
 )
+# IG_APP_ID gizli değildir; maskelenmez.
 DEFAULT_MODE = "dry-run"
 MODES = ("dry-run", "approve", "auto")
 

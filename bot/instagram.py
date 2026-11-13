@@ -1,4 +1,9 @@
-"""Resmi Instagram API with Instagram Login — carousel yayınlama.
+"""Resmi Meta Instagram API'si — carousel yayınlama.
+
+İki resmi giriş türü desteklenir (token önekinden otomatik seçilir):
+- IGAA… → Instagram API with Instagram Login (graph.instagram.com)
+- EAA…  → Meta "Unified login" / Facebook Login for Business ile alınan token (graph.facebook.com)
+Uç noktalar (media, media_publish, content_publishing_limit) ikisinde de aynıdır.
 
 Akış: her slayt için görsel kabı (is_carousel_item, alt_text) → hepsi FINISHED olana dek bekle →
 CAROUSEL kabı (children + caption) → media_publish → permalink.
@@ -13,7 +18,8 @@ import requests
 
 from . import settings
 
-GRAPH = "https://graph.instagram.com"
+GRAPH_IG = "https://graph.instagram.com"
+GRAPH_FB = "https://graph.facebook.com"
 DEFAULT_VERSION = "v24.0"
 TIMEOUT = 60
 POLL_S = 3
@@ -36,8 +42,14 @@ class RateLimitError(InstagramError):
     """API çağrı ya da günlük paylaşım sınırı."""
 
 
+def flavor() -> str:
+    """'facebook' (EAA… token) ya da 'instagram' (IGAA… token)."""
+    return "facebook" if settings.get("IG_ACCESS_TOKEN").startswith("EAA") else "instagram"
+
+
 def _base() -> str:
-    return f"{GRAPH}/{settings.get('IG_API_VERSION', DEFAULT_VERSION)}"
+    host = GRAPH_FB if flavor() == "facebook" else GRAPH_IG
+    return f"{host}/{settings.get('IG_API_VERSION', DEFAULT_VERSION)}"
 
 
 def _token() -> str:
@@ -77,11 +89,21 @@ def _req(method: str, path: str, params: dict | None = None, session=requests) -
 # --------------------------------------------------------------------------- hesap
 
 def me(session=requests) -> dict:
+    """Hesap bilgisi: {'user_id', 'username', 'account_type'?, 'media_count'}."""
+    if flavor() == "facebook":
+        uid = settings.get("IG_USER_ID")
+        if not uid.isdigit():
+            raise InstagramError("Bu token türünde IG_USER_ID sayısal Instagram hesap kimliği olmalı "
+                                 "(geliştirici panelinde hesap adının altındaki 1784… numarası)")
+        info = _req("GET", uid, {"fields": "id,username,media_count"}, session)
+        info["user_id"] = info.get("id")
+        info.setdefault("account_type", "BUSINESS")
+        return info
     return _req("GET", "me", {"fields": "user_id,username,account_type,media_count"}, session)
 
 
 def user_id(session=requests) -> str:
-    """IG_USER_ID sayısal ise onu, değilse (ör. kullanıcı adı yazılmışsa) /me'den gelen kimliği kullanır."""
+    """IG_USER_ID sayısal ise onu, değilse (yalnız Instagram Login'de) /me'den gelen kimliği kullanır."""
     raw = settings.get("IG_USER_ID")
     if raw.isdigit():
         return raw
