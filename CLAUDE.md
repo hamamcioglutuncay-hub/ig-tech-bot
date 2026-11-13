@@ -47,6 +47,10 @@ Instagram'da her gün "Günün 5 Teknoloji & Oyun Haberi" Türkçe carousel'ini 
 Modlar (`MODE`): `dry-run` → `approve` → `auto`.
 Workflow'lar: `generate.yml` (08:30 İstanbul = 05:30 UTC), `publish.yml` (auto: 12:30 İstanbul = 09:30 UTC; approve: yalnızca manuel), `refresh-token.yml` (haftalık), `cleanup.yml` (30 gün).
 
+## Komutlar
+- `.venv/bin/python -m bot collect [--hours 24] [--limit 60|0] [--category oyun|teknoloji] [--include-seen]`
+- `.venv/bin/python -m pytest -q`
+
 ## Yapı
 ```
 bot/ (config, collector, dedupe, llm_gemini, imagegen, composer, instagram, telegram, token_refresh, check, cli)

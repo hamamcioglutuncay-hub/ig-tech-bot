@@ -1,0 +1,100 @@
+# Haber kaynakları. Her kaynak 2026-11-13'te test edildi.
+# category: teknoloji | oyun     lang: tr | en
+# Kaynak eklemek/çıkarmak için bu listeyi düzenlemen yeterli.
+# enabled: false yaparak bir kaynağı silmeden kapatabilirsin.
+# tz: tarihleri saat dilimsiz veren kaynak için yerel saat dilimi.
+
+feeds:
+  # --- Teknoloji (İngilizce) ---
+  - name: The Verge
+    url: https://www.theverge.com/rss/index.xml
+    category: teknoloji
+    lang: en
+  - name: Ars Technica
+    url: https://feeds.arstechnica.com/arstechnica/index
+    category: teknoloji
+    lang: en
+  - name: TechCrunch
+    url: https://techcrunch.com/feed/
+    category: teknoloji
+    lang: en
+  - name: Engadget
+    url: https://www.engadget.com/rss.xml
+    category: teknoloji
+    lang: en
+  - name: Wired
+    url: https://www.wired.com/feed/rss
+    category: teknoloji
+    lang: en
+
+  # --- Teknoloji (Türkçe) ---
+  - name: Webtekno
+    url: https://www.webtekno.com/rss.xml
+    category: teknoloji
+    lang: tr
+  - name: ShiftDelete.Net
+    url: https://shiftdelete.net/feed
+    category: teknoloji
+    lang: tr
+  - name: DonanımHaber
+    url: https://www.donanimhaber.com/rss/tum/
+    category: teknoloji
+    lang: tr
+  - name: Teknoblog
+    url: https://www.teknoblog.com/feed/
+    category: teknoloji
+    lang: tr
+  - name: LOG
+    url: https://www.log.com.tr/feed/
+    category: teknoloji
+    lang: tr
+
+  # --- Oyun (İngilizce) ---
+  - name: IGN
+    url: https://feeds.feedburner.com/ign/all
+    category: oyun
+    lang: en
+  - name: PC Gamer
+    url: https://www.pcgamer.com/rss/
+    category: oyun
+    lang: en
+  - name: Eurogamer
+    url: https://www.eurogamer.net/feed
+    category: oyun
+    lang: en
+  - name: GamesIndustry.biz
+    url: https://www.gamesindustry.biz/feed
+    category: oyun
+    lang: en
+  - name: Rock Paper Shotgun
+    url: https://www.rockpapershotgun.com/feed
+    category: oyun
+    lang: en
+  - name: Kotaku
+    url: https://kotaku.com/rss
+    category: oyun
+    lang: en
+  - name: GameSpot
+    url: https://www.gamespot.com/feeds/news/
+    category: oyun
+    lang: en
+
+  # --- Oyun (Türkçe) ---
+  - name: Oyungezer
+    url: https://www.oyungezer.com.tr/rss
+    category: oyun
+    lang: tr
+    tz: Europe/Istanbul   # tarihleri saat dilimi belirtmeden veriyor
+  - name: Merlin'in Kazanı
+    url: https://www.merlininkazani.com/rss
+    category: oyun
+    lang: tr
+  - name: TurkMMO
+    url: https://www.turkmmo.com/feed/
+    category: oyun
+    lang: tr
+
+  # --- Denendi, çalışmıyor (2026-11-13) ---
+  # Multiplayer:    https://www.multiplayer.com.tr/feed/  → akışta yalnızca 2024 tarihli "deneme" yazısı var
+  # Disket Kutusu:  disketkutusu.com → alan adı yanıt vermiyor
+  # LEVEL:          level.com.tr → bmag.com.tr dergi mağazasına yönleniyor, RSS yok
