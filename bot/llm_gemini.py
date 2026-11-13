@@ -63,6 +63,29 @@ def model_name() -> str:
 
 last_model_used: str | None = None
 
+GEN_TIMEOUT_MS = 120_000   # uzun istem (150 aday) için
+CHECK_TIMEOUT_MS = 30_000
+
+
+def make_client(timeout_ms: int = GEN_TIMEOUT_MS):
+    """Zaman aşımlı, SDK içi yeniden denemesi kapalı istemci (yedek zincirini biz yönetiyoruz)."""
+    from google import genai
+    from google.genai import types
+
+    key = settings.get("GEMINI_API_KEY")
+    if not key:
+        raise LLMError("GEMINI_API_KEY boş")
+    return genai.Client(
+        api_key=key,
+        http_options=types.HttpOptions(
+            timeout=timeout_ms, retry_options=types.HttpRetryOptions(attempts=1)
+        ),
+    )
+
+
+def _is_timeout(exc: Exception) -> bool:
+    return "timeout" in type(exc).__name__.lower() or "timed out" in str(exc).lower()
+
 
 def _call_once(client, model: str, system: str, prompt: str, schema: dict):
     from google.genai import types
@@ -86,13 +109,9 @@ def gemini_generate(model: str, system: str, prompt: str, schema: dict) -> str:
     Tüm modellerin kotası doluysa QuotaError (tur atlanır).
     """
     global last_model_used
-    from google import genai
     from google.genai import errors
 
-    key = settings.get("GEMINI_API_KEY")
-    if not key:
-        raise LLMError("GEMINI_API_KEY boş")
-    client = genai.Client(api_key=key)
+    client = make_client()
     models = [m.strip() for m in model.split(",") if m.strip()]
     problems: dict[str, str] = {}
     resp = None
@@ -109,9 +128,14 @@ def gemini_generate(model: str, system: str, prompt: str, schema: dict) -> str:
                     continue  # sıradaki ücretsiz modeli dene
                 msg = settings.scrub(f"{code} {getattr(exc, 'message', '')}")
                 raise LLMError(f"Gemini hatası ({m}): {msg[:300]}") from None
+            except Exception as exc:  # noqa: BLE001
+                if _is_timeout(exc):
+                    problems[m] = "zaman aşımı"
+                    continue
+                raise LLMError(settings.scrub(f"Gemini bağlantı hatası ({m}): {type(exc).__name__}")) from None
         if resp is not None:
             break
-        if any(c in ("503", "500") for c in problems.values()) and round_ == 0:
+        if any(c in ("503", "500", "zaman aşımı") for c in problems.values()) and round_ == 0:
             time.sleep(RETRY_WAIT_S)
             continue
         break

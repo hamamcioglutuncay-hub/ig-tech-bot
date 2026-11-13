@@ -10,7 +10,7 @@ from dataclasses import dataclass
 import requests
 
 from . import settings, telegram
-from .llm_gemini import DEFAULT_MODEL, model_chain
+from .llm_gemini import CHECK_TIMEOUT_MS, _is_timeout, make_client, model_chain
 
 CF_API = "https://api.cloudflare.com/client/v4"
 TIMEOUT = 20
@@ -47,10 +47,9 @@ def check_gemini() -> Result:
     key = settings.get("GEMINI_API_KEY")
     if not key:
         return Result("Gemini", False, "GEMINI_API_KEY boş")
-    from google import genai
     from google.genai import errors
 
-    client = genai.Client(api_key=key)
+    client = make_client(CHECK_TIMEOUT_MS)
     try:
         names = []
         for m in client.models.list():
@@ -73,6 +72,10 @@ def check_gemini() -> Result:
             break
         except errors.APIError as exc:
             tried.append(f"{m}:{exc.code}")
+        except Exception as exc:  # noqa: BLE001
+            if not _is_timeout(exc):
+                raise
+            tried.append(f"{m}:zaman aşımı")
     if model is None:
         return Result("Gemini", False, f"anahtar geçerli ama hiçbir model yanıt vermedi ({', '.join(tried)})")
     note = f" (önce denenenler: {', '.join(tried)})" if tried else ""

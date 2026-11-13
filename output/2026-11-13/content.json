@@ -1,15 +1,15 @@
 {
-  "generated_at": "2026-11-13T12:20:27+00:00",
+  "generated_at": "2026-11-13T12:30:40+00:00",
   "model": "gemini-3.5-flash",
   "candidates": 150,
   "items": [
     {
-      "slide_title": "Nvidia CEO'su Jensen Huang İstifa Etti",
-      "slide_text": "Yapay zekâ devinin kurucusu ve CEO'su Jensen Huang görevinden ayrıldı. Şirket içi soruşturmalar ve çip ihracatı iddiaları sonrası Colette Kress geçici CEO oldu.",
-      "source_name": "The Decoder",
-      "source_url": "https://the-decoder.com/jensen-huang-resigns-as-nvidia-ceo-after-espionage-scandal-wipes-out-1-4-trillion-in-market-value/",
+      "slide_title": "Nvidia CEO'su Jensen Huang Görevinden İstifa Etti",
+      "slide_text": "Şirket içi ilişki iddiaları ve milyarlarca dolarlık çip kaçakçılığı skandalının ardından Nvidia kurucusu Jensen Huang CEO'luk görevinden ayrıldı.",
+      "source_name": "Kotaku",
+      "source_url": "https://kotaku.com/jensen-huang-resigns-from-nvidia-2000756256",
       "category": "teknoloji",
-      "image_prompt": "abstract glowing circuit board pattern on dark metallic background, deep green and silver light streaks, minimalist technology aesthetic, cinematic depth",
+      "image_prompt": "abstract futuristic glowing silicon wafer matrix, dark background, emerald green and metallic accents, minimal, cinematic light",
       "all_sources": [
         {
           "name": "Kotaku",
@@ -36,6 +36,10 @@
           "url": "https://the-decoder.com/jensen-huang-resigns-as-nvidia-ceo-after-espionage-scandal-wipes-out-1-4-trillion-in-market-value/"
         },
         {
+          "name": "TechCrunch",
+          "url": "https://techcrunch.com/2026/11/13/jensen-huang-didnt-show-confidence-in-his-successor-report-says/"
+        },
+        {
           "name": "DonanımHaber",
           "url": "https://www.donanimhaber.com/jensen-huang-abd-kongresi-nde-ifade-verecek--212865"
         },
@@ -58,24 +62,17 @@
         {
           "name": "Tom's Hardware",
           "url": "https://www.tomshardware.com/tech-industry/artificial-intelligence/mass-smuggling-of-nvidia-ai-gpus-could-be-the-underlying-cause-of-jensen-huangs-departure-analysts-claim-more-than-1-5-gigawatts-of-banned-chips-tracked-to-china-despite-export-controls"
-        },
-        {
-          "name": "The Next Web",
-          "url": "https://thenextweb.com/news/malaysia-speedmatrix-megaspeed-ai-chip-probe"
-        },
-        {
-          "name": "GamesIndustry.biz",
-          "url": "https://www.gamesindustry.biz/nvidias-jensen-huang-resigns-as-ceo-amid-reports-of-affairs-with-alleged-chinese-spy-and-two-employees"
         }
-      ]
+      ],
+      "headline": "Nvidia CEO'su Jensen Huang istifa etti, tartışmalar sürüyor"
     },
     {
-      "slide_title": "Microsoft Servislerinde Küresel Kesinti",
-      "slide_text": "Outlook, Teams ve Xbox Live gibi birçok Microsoft hizmetinde dünya genelinde erişim sorunları yaşanıyor. Şirket onarım çalışmalarının sürdüğünü duyurdu.",
+      "slide_title": "Microsoft Servislerinde Küresel Kesinti Yaşanıyor",
+      "slide_text": "Outlook, Teams ve Xbox Live gibi birçok Microsoft hizmeti küresel çapta erişim sorunu yaşıyor. Şirket sorunun tespiti ve çözümü için çalışmalarını sürdürüyor.",
       "source_name": "Teknoblog",
       "source_url": "https://www.teknoblog.com/outlook-microsoft-365-kesintisi-13-kasim-2026/",
       "category": "teknoloji",
-      "image_prompt": "abstract digital grid with glowing blue nodes breaking apart, dark blue backdrop, subtle red warning light reflections, minimal 3d graphic design",
+      "image_prompt": "abstract representation of broken digital networks, subtle blue light traces fading into shadow, minimalist geometric shapes",
       "all_sources": [
         {
           "name": "VGC",
@@ -109,49 +106,74 @@
           "name": "Insider Gaming",
           "url": "https://insider-gaming.com/microsoft-xbox-outage-global/"
         }
-      ]
+      ],
+      "headline": "Küresel Microsoft 365 ve Xbox kesintisi yaşanıyor"
     },
     {
-      "slide_title": "Wolfenstein 3 Resmi Yapım Aşamasına Geçti",
-      "slide_text": "MachineGames ve Xbox, efsanevi aksiyon serisinin yeni oyunu Wolfenstein 3 üzerindeki çalışmaların resmi olarak başladığını açıkladı.",
-      "source_name": "DonanımHaber",
-      "source_url": "https://www.donanimhaber.com/wolfenstein-3-resmen-duyuruldu--212852",
+      "slide_title": "Wolfenstein 3 Geliştirilme Aşamasına Girdi",
+      "slide_text": "Xbox yöneticileri, MachineGames stüdyosunun Wolfenstein 3 üzerinde çalışmaya başladığını ve id Software'in de yeni bir proje geliştirdiğini doğruladı.",
+      "source_name": "Eurogamer",
+      "source_url": "https://www.eurogamer.net/wolfenstein-3-new-id-software-game-announced-xbox",
       "category": "oyun",
-      "image_prompt": "abstract golden ember sparks hovering over dark grey smoky background, bold cinematic contrast, dramatic warm backlight, soft volumetric fog",
+      "image_prompt": "abstract dark crimson and charcoal embers glowing, industrial metallic textures, sharp contrast, atmospheric smoke",
       "all_sources": [
         {
           "name": "Nintendo Life",
           "url": "https://www.nintendolife.com/news/2026/11/wolfenstein-3-is-now-officially-in-production-at-machinegames"
         },
         {
-          "name": "Kotaku",
-          "url": "https://kotaku.com/wolfenstein-3-in-production-machine-games-microsoft-asha-sharma-2000756436"
+          "name": "Eurogamer",
+          "url": "https://www.eurogamer.net/wolfenstein-3-new-id-software-game-announced-xbox"
         },
         {
-          "name": "TurkMMO",
-          "url": "https://www.turkmmo.com/wolfenstein-3-10-yillik-bekleyisten-sonra-resmi-olarak-duyuruldu-h1000164221.html"
+          "name": "Polygon",
+          "url": "https://www.polygon.com/wolfenstein-doom-bethesda-new-game-announced/"
+        },
+        {
+          "name": "Kotaku",
+          "url": "https://kotaku.com/wolfenstein-3-in-production-machine-games-microsoft-asha-sharma-2000756436"
         },
         {
           "name": "Rock Paper Shotgun",
           "url": "https://www.rockpapershotgun.com/wolfenstein-3-and-new-id-software-game-confirmed-as-xbox-boss-somehow-unrelatedly-shouts-about-one-person-soon-wieldling-capabilities-that-once-required-entire-nations"
         },
         {
-          "name": "DonanımHaber",
-          "url": "https://www.donanimhaber.com/wolfenstein-3-resmen-duyuruldu--212852"
-        },
-        {
           "name": "VGC",
           "url": "https://www.videogameschronicle.com/news/machinegames-has-finally-officially-confirmed-that-wolfenstein-3-is-in-development/"
         }
-      ]
+      ],
+      "headline": "MachineGames, Wolfenstein 3 oyununu resmi olarak duyurdu"
     },
     {
-      "slide_title": "Google Yeni Yapay Zekâ Modeli Gemini 4 Hydrogen'i Tanıttı",
-      "slide_text": "Google, önceki sürümlere kıyasla daha hızlı ve gelişmiş yeteneklere sahip yeni yapay zekâ modeli Gemini 4 Hydrogen'i duyurdu.",
+      "slide_title": "Yeni Fable Oyunundan Oynanış Videosu Yayınlandı",
+      "slide_text": "Xbox'ın 25. yılına özel paylaşılan dört dakikalık video, Fable dünyasının karanlık atmosferini ve aksiyon dolu yeni oynanış detaylarını gözler önüne seriyor.",
+      "source_name": "Merlin'in Kazanı",
+      "source_url": "https://www.merlininkazani.com/fable-dan-dort-dakikalik-yeni-oynanis-videosu-yayinlandi-haber-264317",
+      "category": "oyun",
+      "image_prompt": "abstract enchanted forest mist, deep emerald and golden ambient glow, ethereal light rays through shadows",
+      "all_sources": [
+        {
+          "name": "Merlin'in Kazanı",
+          "url": "https://www.merlininkazani.com/fable-dan-dort-dakikalik-yeni-oynanis-videosu-yayinlandi-haber-264317"
+        },
+        {
+          "name": "Xbox Wire",
+          "url": "https://news.xbox.com/en-us/2026/11/12/fable-new-quest-gameplay-for-xboxs-25th-anniversary/"
+        },
+        {
+          "name": "GameSpot",
+          "url": "https://www.gamespot.com/articles/fable-is-looking-a-lot-darker-than-we-expected/"
+        }
+      ],
+      "headline": "Fable için yeni ve karanlık bir oynanış videosu paylaşıldı"
+    },
+    {
+      "slide_title": "Google Yeni Yapay Zekâ Modeli Gemini 4'ü Tanıttı",
+      "slide_text": "Google, Gemini 4 Hydrogen modelini duyurdu. Önceki sürümlere göre çok daha hızlı çalışan model, karmaşık görevler ve Arama motoru entegrasyonu için tasarlandı.",
       "source_name": "Google DeepMind",
       "source_url": "https://deepmind.google/blog/introducing-gemini-4-hydrogen/",
       "category": "teknoloji",
-      "image_prompt": "abstract flowing cyan and violet waves of light on dark blue space background, sleek futuristic energy trails, smooth gradient, high resolution rendering",
+      "image_prompt": "abstract translucent flowing energy waves, vibrant cyan and deep purple gradient, smooth light reflections, high tech background",
       "all_sources": [
         {
           "name": "MarkTechPost",
@@ -169,34 +191,9 @@
           "name": "Google AI Blog",
           "url": "https://blog.google/products-and-platforms/products/search/gemini-4-hydrogen-search-upgrade/"
         }
-      ]
-    },
-    {
-      "slide_title": "Oyun Şirketinden Çalışanlarına 5 Günlük GTA 6 İzni",
-      "slide_text": "Palworld yapımcısı Pocketpair, merakla beklenen GTA 6 çıkışı sebebiyle çalışanlarına oyunu oynayabilmeleri için 5 gün özel izin verdiğini açıkladı.",
-      "source_name": "TurkMMO",
-      "source_url": "https://www.turkmmo.com/unlu-oyun-firmasi-calisanlarina-gta-6-icin-5-gun-izin-verdi-h1000164224.html",
-      "category": "oyun",
-      "image_prompt": "abstract glowing vibrant neon pink and teal synthwave grid horizon, soft violet glow, minimalist retro futuristic mood",
-      "all_sources": [
-        {
-          "name": "TurkMMO",
-          "url": "https://www.turkmmo.com/unlu-oyun-firmasi-calisanlarina-gta-6-icin-5-gun-izin-verdi-h1000164224.html"
-        },
-        {
-          "name": "Oyungezer",
-          "url": "//oyungezer.com.tr/haber/pocketpairdan-calisanlarina-gta-6-izni/detay"
-        },
-        {
-          "name": "Webtekno",
-          "url": "https://www.webtekno.com/gta-6-bir-ulkede-neredeyse-yasaklaniyordu-h228925.html"
-        },
-        {
-          "name": "Eurogamer",
-          "url": "https://www.eurogamer.net/gta-6-internet-uk-broadband-ofcom-openreach"
-        }
-      ]
+      ],
+      "headline": "Google, yeni yapay zekâ modeli Gemini 4 Hydrogen'i tanıttı"
     }
   ],
-  "caption": "Günün öne çıkan teknoloji ve oyun haberleri ile karşınızdayız! İşte bugün bilmeniz gereken gelişmeler: 1. Nvidia CEO'su Jensen Huang istifa etti, şirket geçici yönetimle devam ediyor. 2. Microsoft 365 ve Outlook servislerinde dünya genelinde büyük kesinti yaşanıyor. 3. MachineGames ve Xbox, Wolfenstein 3'ün resmi yapım aşamasında olduğunu duyurdu. 4. Google, yeni nesil yapay zekâ modeli Gemini 4 Hydrogen'i çıkardı. 5. Pocketpair, GTA 6'nın çıkışı nedeniyle çalışanlarına 5 gün özel izin tanıdı.\n\nKaynaklar: The Decoder, Teknoblog, DonanımHaber, Google DeepMind, TurkMMO\n\n#teknoloji #oyun #nvidia #microsoft #wolfenstein3 #gemini4 #gta6 #yapayzeka\n\nGörseller yapay zekâ ile üretilmiştir."
+  "caption": "Teknoloji ve oyun dünyasında öne çıkan günün gelişmeleri:\n1. Nvidia CEO'su Jensen Huang, yaşanan skandalların ardından istifa etti.\n2. Microsoft servislerinde küresel çaptaki erişim sorunları devam ediyor.\n3. MachineGames stüdyosu Wolfenstein 3'ün geliştirilme sürecine başladığını duyurdu.\n4. Yeni Fable oyunundan dört dakikalık sürpriz bir oynanış videosu paylaşıldı.\n5. Google, çok daha hızlı çalışan yeni yapay zekâ modeli Gemini 4 Hydrogen'i çıkardı.\n\nKaynaklar: Kotaku, Teknoblog, Eurogamer, Merlin'in Kazanı, Google DeepMind\n\n#teknoloji #oyun #nvidia #microsoft #wolfenstein #fable #gemini #yapayzeka\n\nGörseller yapay zekâ ile üretilmiştir."
 }

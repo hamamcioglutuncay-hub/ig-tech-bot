@@ -232,7 +232,7 @@ def test_model_fallback_chain(monkeypatch):
 
     monkeypatch.setenv("GEMINI_API_KEY", "fake-key-for-test-0000")
     monkeypatch.setattr(L, "_call_once", fake_call)
-    monkeypatch.setattr("google.genai.Client", lambda api_key: object())
+    monkeypatch.setattr(L, "make_client", lambda *a, **k: object())
     assert L.gemini_generate("m1,m2,m3", "s", "p", {}) == '{"ok": true}'
     assert calls == ["m1", "m2", "m3"] and L.last_model_used == "m3"
 
@@ -245,6 +245,6 @@ def test_all_models_quota_raises_quota_error(monkeypatch):
 
     monkeypatch.setenv("GEMINI_API_KEY", "fake-key-for-test-0000")
     monkeypatch.setattr(L, "_call_once", quota)
-    monkeypatch.setattr("google.genai.Client", lambda api_key: object())
+    monkeypatch.setattr(L, "make_client", lambda *a, **k: object())
     with pytest.raises(L.QuotaError):
         L.gemini_generate("m1,m2", "s", "p", {})
