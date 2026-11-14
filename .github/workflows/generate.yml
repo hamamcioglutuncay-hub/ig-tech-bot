@@ -1,10 +1,12 @@
-# Her sabah 08:30 (İstanbul) günün içeriğini üretir ve Telegram'a önizleme gönderir.
+# Her sabah 05:07 (İstanbul) günün içeriğini üretir ve Telegram'a önizleme gönderir.
+# 06:37 yedek çalıştırma: ilki başarısız olduysa ya da gecikip henüz çalışmadıysa üretir; slaytlar zaten varsa hiçbir şey yapmaz.
 # MODE (repo değişkeni): dry-run | approve | auto — yayın burada YAPILMAZ (publish.yml).
 name: İçerik üret
 
 on:
   schedule:
-    - cron: "30 5 * * *"   # 05:30 UTC = 08:30 İstanbul
+    - cron: "7 2 * * *"    # 02:07 UTC = 05:07 İstanbul (Gemini/GitHub yoğunluğu düşük; tam saat yığılmasından kaçınır)
+    - cron: "37 3 * * *"   # 03:37 UTC = 06:37 İstanbul — yedek
   workflow_dispatch:
     inputs:
       force:
@@ -47,12 +49,29 @@ jobs:
         run: |
           git config user.name "ig-tech-bot"
           git config user.email "ig-tech-bot@users.noreply.github.com"
+      - name: Bugün zaten üretildi mi?
+        id: done
+        run: |
+          D=$(TZ=Europe/Istanbul date +%F)
+          if [ "${{ github.event_name }}" = "schedule" ] && ls output/$D/slides/*.jpg >/dev/null 2>&1; then
+            echo "$D slaytları zaten var; yedek çalıştırma atlanıyor."
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          fi
       - name: Günlük akış
-        run: python -m bot run ${{ inputs.force && '--force' || '' }}
+        if: steps.done.outputs.skip != 'true'
+        run: |
+          set -o pipefail
+          python -m bot run ${{ inputs.force && '--force' || '' }} 2>&1 | tee run.log
       - name: Hata bildirimi
         if: failure()
         run: |
-          python -c "from bot import telegram; telegram.notify('❌ ig-tech-bot – içerik üretimi başarısız. GitHub → Actions → İçerik üret logunu kontrol edin.')"
+          python - <<'EOF'
+          from pathlib import Path
+          from bot import settings, telegram
+          lines = [l for l in (Path("run.log").read_text(errors="ignore").splitlines() if Path("run.log").exists() else []) if l.strip()]
+          detail = settings.scrub("\n".join(lines[-3:]))[-600:]
+          telegram.notify("❌ ig-tech-bot – içerik üretimi başarısız.\n" + (detail or "Ayrıntı: GitHub → Actions → İçerik üret logu"))
+          EOF
       - name: Çıktıları ve durumu kaydet
         if: always()
         run: |

@@ -46,7 +46,7 @@ Instagram'da (@singleplayer_tr) her gün "Günün Teknoloji & Oyun Haberleri" T�
 | Yayın | Instagram container → carousel → `media_publish` |
 
 Modlar (`MODE`): `dry-run` → `approve` → `auto`.
-Workflow'lar: `generate.yml` (08:30 İstanbul = 05:30 UTC), `publish.yml` (auto: 12:30 İstanbul = 09:30 UTC; approve: yalnızca manuel), `refresh-token.yml` (haftalık), `cleanup.yml` (30 gün).
+Workflow'lar: `generate.yml` (05:07 İstanbul = 02:07 UTC + yedek 06:37 = 03:37 UTC), `publish.yml` (auto: 10:00 İstanbul = 07:00 UTC; approve: yalnızca manuel), `refresh-token.yml` (haftalık), `cleanup.yml` (30 gün).
 
 ## Komutlar
 - `.venv/bin/python -m bot collect [--hours 24] [--limit 60|0] [--category oyun|teknoloji] [--include-seen]`

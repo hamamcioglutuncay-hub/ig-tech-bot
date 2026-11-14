@@ -20,8 +20,9 @@ Her şey GitHub Actions'ta kendiliğinden çalışır; bilgisayarının açık o
 
 | Saat (İstanbul) | Ne olur |
 |---|---|
-| 08:30 | **İçerik üret** çalışır → slaytlar ve caption Telegram'a gelir |
-| 12:30 | Yalnızca `auto` modunda **Instagram'da yayınla** kendiliğinden çalışır |
+| 05:07 | **İçerik üret** çalışır → slaytlar ve caption Telegram'a gelir |
+| 06:37 | Yedek çalıştırma: ilki başarısızsa/gecikmişse üretir, içerik varsa atlar |
+| 10:00 | Yalnızca `auto` modunda **Instagram'da yayınla** kendiliğinden çalışır |
 | Pazartesi 09:00 | Instagram token'ı yenilenir |
 | Pazar 06:00 | 30 günden eski görseller silinir |
 
@@ -31,7 +32,7 @@ Her şey GitHub Actions'ta kendiliğinden çalışır; bilgisayarının açık o
 |---|---|
 | `dry-run` | Üretir, Telegram'a gönderir. **Asla yayınlamaz.** |
 | `approve` | Üretir, Telegram'a gönderir. Yayın **senin telefondan tetiklemenle** olur. |
-| `auto` | Üretir ve 12:30'da kendiliğinden yayınlar. |
+| `auto` | Üretir ve 10:00'da kendiliğinden yayınlar. |
 
 **`approve` modunda yayınlamak (telefondan):**
 1. GitHub mobil uygulaması → **ig-tech-bot** → **Actions**

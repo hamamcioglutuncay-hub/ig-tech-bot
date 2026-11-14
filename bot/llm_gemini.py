@@ -68,7 +68,9 @@ def model_name() -> str:
 
 last_model_used: str | None = None
 
-GEN_TIMEOUT_MS = 120_000   # uzun istem (150 aday) için
+GEN_TIMEOUT_MS = 120_000   # uzun istem için
+PREFILTER_LIMIT = 80       # Gemini'ye gönderilen aday sayısı (150 → 80: daha kısa istem, daha az zaman aşımı)
+SELECT_RETRY_WAIT_S = 60   # seçim başarısızsa yeniden denemeden önce bekleme (yoğunluk geçsin)
 CHECK_TIMEOUT_MS = 30_000
 
 
@@ -156,7 +158,7 @@ def gemini_generate(model: str, system: str, prompt: str, schema: dict) -> str:
 
 # --------------------------------------------------------------------------- 1) ön eleme
 
-def prefilter(articles: list[Article], limit: int = 150, per_source: int = 6) -> list[Article]:
+def prefilter(articles: list[Article], limit: int = PREFILTER_LIMIT, per_source: int = 6) -> list[Article]:
     """Çok kaynakta geçen ve yeni haberleri öne alır; kaynak ve kategori dengesini korur."""
     if not articles:
         return []
@@ -489,16 +491,20 @@ def generate_post(
         raise LLMError(f"Yeterli aday haber yok ({len(cands)})")
 
     chosen: list[Story] | None = None
-    for _ in range(2):  # seçim de bozuksa 1 kez tekrar
+    errors: list[str] = []
+    for attempt in range(2):  # seçim de bozuksa bekleyip 1 kez tekrar
         try:
             chosen = pick_stories(select_stories(cands, generate, model, system))
             break
         except QuotaError:
             raise
-        except LLMError:
+        except (LLMError, ValueError, KeyError, TypeError) as exc:
             chosen = None
+            errors.append(settings.scrub(f"{type(exc).__name__}: {exc}")[:200])
+            if attempt == 0 and SELECT_RETRY_WAIT_S:
+                time.sleep(SELECT_RETRY_WAIT_S)
     if not chosen:
-        raise LLMError("Gemini 2 denemede de geçerli bir haber seçimi yapamadı")
+        raise LLMError("Gemini 2 denemede de geçerli bir haber seçimi yapamadı — " + " | ".join(errors))
 
     data = write_slides(chosen, generate, model, system)
     url_source = {a.url: a.source for s in chosen for a in s.articles}

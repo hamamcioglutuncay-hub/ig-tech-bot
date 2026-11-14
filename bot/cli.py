@@ -350,7 +350,7 @@ MODE_NOTES = {
     "dry-run": "🧪 Mod: dry-run — bu içerik yayınlanmayacak (yalnızca önizleme).",
     "approve": "✅ Mod: approve — yayınlamak için GitHub uygulaması → ig-tech-bot → Actions → "
                "'Instagram'da yayınla' → Run workflow.",
-    "auto": "⏰ Mod: auto — bugün 12:30'da (İstanbul) otomatik yayınlanacak.",
+    "auto": "⏰ Mod: auto — bugün 10:00'da (İstanbul) otomatik yayınlanacak.",
 }
 
 

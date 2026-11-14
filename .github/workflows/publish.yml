@@ -1,11 +1,11 @@
 # Günün carousel'ini Instagram'da yayınlar.
 # approve: yalnızca elle (GitHub mobil → Actions → Instagram'da yayınla → Run workflow)
-# auto:    her gün 12:30 (İstanbul) otomatik.   dry-run: hiçbir zaman yayınlamaz.
+# auto:    her gün 10:00 (İstanbul) otomatik.   dry-run: hiçbir zaman yayınlamaz.
 name: Instagram'da yayınla
 
 on:
   schedule:
-    - cron: "30 9 * * *"   # 09:30 UTC = 12:30 İstanbul (yalnızca MODE=auto iken çalışır)
+    - cron: "0 7 * * *"    # 07:00 UTC = 10:00 İstanbul (yalnızca MODE=auto iken çalışır)
   workflow_dispatch:
 
 permissions:

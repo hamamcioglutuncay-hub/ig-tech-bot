@@ -85,6 +85,15 @@ Son güncelleme: 2026-11-13
 - Türkçe README: günlük kullanım, modlar, telefondan yayın, düzenleme, anahtarlar, sorun giderme.
 - 71 test geçti.
 
+## Düzeltme: haber seçimi hatası + zamanlama (2026-11-14)
+- Sorun: zamanlanmış "İçerik üret" (run 43594539397) 12:22 UTC'de başladı (cron 05:30 UTC, GitHub ~7 sa geciktirdi) ve
+  "Gemini 2 denemede de geçerli bir haber seçimi yapamadı" ile düştü. Asıl hata yutulduğu için logda görünmüyordu; muhtemel neden yoğun saatte zaman aşımı/503.
+- Düzeltmeler: seçim hatasının gerçek mesajı artık hataya ekleniyor; aday sayısı 150 → 80 (`PREFILTER_LIMIT`);
+  iki seçim denemesi arasında 60 sn bekleme (`SELECT_RETRY_WAIT_S`, testlerde 0); Telegram hata bildirimi logun son satırlarını (maskeli) içeriyor.
+- Zamanlama (kullanıcı onayı): üretim 05:07 İstanbul (02:07 UTC) + yedek 06:37 (03:37 UTC; slaytlar varsa atlar), yayın (auto) 10:00 (07:00 UTC).
+- video-studio Reels otomasyonu bu içeriği 07:30'da okur (o projede ayarlı).
+- 71 test geçti.
+
 ## Sıradaki adım
 1. Kullanıcı 3–5 gün elle hesap ısınması (≈2026-11-16/18); her sabah dry-run önizlemesi Telegram'a gelir.
 2. Isınma sonrası: hesap durumu kontrolü → test gönderisi (`python -m bot publish --ignore-mode`, yalnızca kullanıcı "yayınla" derse) → Faz 4 kapanışı.

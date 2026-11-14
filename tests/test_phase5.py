@@ -60,8 +60,9 @@ def test_workflows_valid_and_safe(name):
 
 
 def test_schedules_match_istanbul_times():
-    gen = yaml.safe_load((WF / "generate.yml").read_text())[True]["schedule"][0]["cron"]
+    gen = [s["cron"] for s in yaml.safe_load((WF / "generate.yml").read_text())[True]["schedule"]]
     pub = yaml.safe_load((WF / "publish.yml").read_text())[True]["schedule"][0]["cron"]
-    assert gen == "30 5 * * *" and pub == "30 9 * * *"   # 08:30 ve 12:30 İstanbul (UTC+3)
+    # 05:07 + yedek 06:37 üretim, 10:00 yayın (İstanbul, UTC+3)
+    assert gen == ["7 2 * * *", "37 3 * * *"] and pub == "0 7 * * *"
     pub_job = yaml.safe_load((WF / "publish.yml").read_text())["jobs"]["publish"]
     assert "vars.MODE == 'auto'" in pub_job["if"]
