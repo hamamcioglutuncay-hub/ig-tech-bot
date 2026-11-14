@@ -1,0 +1,180 @@
+{
+  "generated_at": "2026-11-14T13:06:32+00:00",
+  "model": "gemini-3.5-flash",
+  "candidates": 80,
+  "items": [
+    {
+      "slide_title": "Jensen Huang'ın Ayrılığının Arkasındaki İddialar",
+      "slide_text": "Nvidia'nın eski CEO'su Jensen Huang'ın şirketten ayrılışına dair yeni ayrıntılar ortaya çıktı. İddialara göre ayrılığın arkasında kişisel nedenlerden ziyade riskli iş uygulamaları ve Çin'e yönelik donanım kaçakçılığı iddiaları bulunuyor.",
+      "why_it_matters": "Yapay zekâ devinin yönetimindeki kriz, teknoloji sektöründeki dengeleri ve çip pazarını doğrudan etkileyebilir.",
+      "caption_paragraph": "Şirketteki finansal taahhütler ve Çin'e çip sevkiyatı iddiaları, yönetim kurulundaki gerilimi tırmandırdı.",
+      "source_name": "The Decoder",
+      "source_url": "https://the-decoder.com/jensen-huangs-ouster-likely-traces-back-to-nvidias-risky-business-practices-more-than-his-personal-life/",
+      "category": "teknoloji",
+      "image_prompt": "A dimly lit executive boardroom at night with an empty dark leather chair at the head of a glossy wooden table, a glowing microchip lies abandoned in the center, surrounding glass windows show distant neon city lights under a misty dark sky, cinematic realism",
+      "importance": 9,
+      "all_sources": [
+        {
+          "name": "The Decoder",
+          "url": "https://the-decoder.com/jensen-huangs-ouster-likely-traces-back-to-nvidias-risky-business-practices-more-than-his-personal-life/"
+        },
+        {
+          "name": "DonanımHaber",
+          "url": "https://www.donanimhaber.com/huang-in-ayriliginin-arkasinda-cin-e-kacak-cip-ticareti-mi-var--212881"
+        },
+        {
+          "name": "The Verge",
+          "url": "https://www.theverge.com/tech/1033781/nvidia-jensen-huang-last-visionary-showman-founder-ceo"
+        },
+        {
+          "name": "Tom's Hardware",
+          "url": "https://www.tomshardware.com/tech-industry/commemorative-plaque-at-dennys-booth-where-nvidia-was-born-has-been-removed-sign-removed-in-wake-of-jensens-scandals-marked-the-booth-that-launched-a-usd1-trillion-company"
+        }
+      ],
+      "headline": "Jensen Huang'ın Nvidia'dan ayrılışı ve Çin'e GPU kaçakçılığı iddiaları gündemi sarstı.",
+      "alt_text": "Teknoloji haberi: Jensen Huang'ın Ayrılığının Arkasındaki İddialar. Nvidia'nın eski CEO'su Jensen Huang'ın şirketten ayrılışına dair yeni ayrıntılar ortaya çıktı. İddialara göre ayrılığın arkasında kişisel nedenlerden ziyade riskli iş uygulamaları ve Çin'e yönelik donanım kaçakçılığı iddiaları bulunuyor. Neden önemli: Yapay zekâ devinin yönetimindeki kriz, teknoloji sektöründeki dengeleri ve çip pazarını doğrudan etkileyebilir. Kaynak: The Decoder."
+    },
+    {
+      "slide_title": "GTA 6 Oyunculara İlk Günden Tam Özgürlük Sunmayacak",
+      "slide_text": "Rockstar North eş başkanı Rob Nelson, merakla beklenen GTA 6'da oyuncuların ilk günden itibaren sınırsız özgürlüğe sahip olamayacağını açıkladı. Yapımda kaotik eylemler yerine daha yavaş ve doğal bir karakter gelişimi hedefleniyor.",
+      "why_it_matters": "Açık dünya yapısının kademeli açılması, serinin alışılmış oyun dinamiklerini ve oyuncu deneyimini değiştirebilir.",
+      "caption_paragraph": "Geliştirici ekip, doğrudan kaosa odaklanmak yerine hikayenin ve dünyanın daha doğal hissettirmesini hedefliyor.",
+      "source_name": "Merlin'in Kazanı",
+      "source_url": "https://www.merlininkazani.com/gta-6-oyunculara-ilk-gunden-buyuk-bir-ozgurluk-sunmayacak-haber-264343",
+      "category": "oyun",
+      "image_prompt": "A misty coastal city boulevard at dusk with glowing streetlights and palm trees lining an empty road, a retro unmarked car parked near a neon signboard reflecting in wet asphalt, vast open ocean in the background, cinematic dramatic atmosphere",
+      "importance": 8,
+      "all_sources": [
+        {
+          "name": "Merlin'in Kazanı",
+          "url": "https://www.merlininkazani.com/gta-6-oyunculara-ilk-gunden-buyuk-bir-ozgurluk-sunmayacak-haber-264343"
+        }
+      ],
+      "headline": "Rockstar, GTA 6'da oyunculara ilk günden tam özgürlük verilmeyeceğini açıkladı.",
+      "alt_text": "Oyun haberi: GTA 6 Oyunculara İlk Günden Tam Özgürlük Sunmayacak. Rockstar North eş başkanı Rob Nelson, merakla beklenen GTA 6'da oyuncuların ilk günden itibaren sınırsız özgürlüğe sahip olamayacağını açıkladı. Yapımda kaotik eylemler yerine daha yavaş ve doğal bir karakter gelişimi hedefleniyor. Neden önemli: Açık dünya yapısının kademeli açılması, serinin alışılmış oyun dinamiklerini ve oyuncu deneyimini değiştirebilir. Kaynak: Merlin'in Kazanı."
+    },
+    {
+      "slide_title": "OpenAI Robotik Ekibini Yeniden Yapılandırıyor",
+      "slide_text": "OpenAI, bağımsız robotik ekibini feshederek araştırmacıları diğer birimlere dağıttı. Şirket, GPT-6 Astra gibi genel amaçlı modellerin robotları doğrudan kontrol edebilmesi sayesinde özel bir robotik yapay zekâ ekibine ihtiyaç kalmadığını belirtiyor.",
+      "why_it_matters": "Genel amaçlı yapay zekâ modellerinin gelişimi, özelleşmiş robotik yazılımlara olan ihtiyacı ortadan kaldırabilir.",
+      "caption_paragraph": "Araştırmacıların diğer ekiplere dağıtılmasıyla robotik çalışmalarının genel modellerle hızlandırılması hedefleniyor.",
+      "source_name": "The Decoder",
+      "source_url": "https://the-decoder.com/openai-reassigns-robotics-researchers-to-other-teams-as-general-purpose-models-might-make-specialized-robotics-ai-unnecessary/",
+      "category": "teknoloji",
+      "image_prompt": "A futuristic robotics research laboratory with unbranded robotic arm joints stationary on clean white tables, glowing cyan data streams floating around server cabinets in a sleek modern facility, soft ambient indoor lighting, highly detailed hyperrealistic setup",
+      "importance": 8,
+      "all_sources": [
+        {
+          "name": "The Decoder",
+          "url": "https://the-decoder.com/openai-reassigns-robotics-researchers-to-other-teams-as-general-purpose-models-might-make-specialized-robotics-ai-unnecessary/"
+        }
+      ],
+      "headline": "OpenAI özel robotik ekibini kapatıp genel yapay zeka modellerine odaklanıyor.",
+      "alt_text": "Teknoloji haberi: OpenAI Robotik Ekibini Yeniden Yapılandırıyor. OpenAI, bağımsız robotik ekibini feshederek araştırmacıları diğer birimlere dağıttı. Şirket, GPT-6 Astra gibi genel amaçlı modellerin robotları doğrudan kontrol edebilmesi sayesinde özel bir robotik yapay zekâ ekibine ihtiyaç kalmadığını belirtiyor. Neden önemli: Genel amaçlı yapay zekâ modellerinin gelişimi, özelleşmiş robotik yazılımlara olan ihtiyacı ortadan kaldırabilir. Kaynak: The Decoder."
+    },
+    {
+      "slide_title": "SpaceX Starship Testinde İki Aşamalı Yakalama İptal Edildi",
+      "slide_text": "SpaceX, Starship roketinin 15. test uçuşunu gerçekleştirdi. Super Heavy iticisini kuleyle yakalama denemesi iptal edilerek itici Meksika Körfezi'ne indirildi. Ship 42 adlı üst aşama ise yörüngeye ulaşarak 26 Starlink uydusunu başarıyla bıraktı.",
+      "why_it_matters": "İtici yakalama hedefi ertelense de üst aşamanın yörüngeye ulaşması uzay görevleri açısından kritik bir adım.",
+      "caption_paragraph": "Yakalama denemesinin iptal edilmesine rağmen üst aşamanın uyduları yörüngeye taşıması testin başarısını koruyor.",
+      "source_name": "The Next Web",
+      "source_url": "https://thenextweb.com/news/spacex-starship-flight-15-booster-catch-aborted",
+      "category": "teknoloji",
+      "image_prompt": "A massive metallic space rocket ascending into the upper atmosphere above deep ocean waters, a giant trail of bright fiery exhaust smoke illuminating the cloudy sky, dark star-filled space visible in the high altitude, epic scale photorealistic atmospheric spaceflight scene",
+      "importance": 8,
+      "all_sources": [
+        {
+          "name": "The Next Web",
+          "url": "https://thenextweb.com/news/spacex-starship-flight-15-booster-catch-aborted"
+        }
+      ],
+      "headline": "SpaceX Starship 15. test uçuşunu gerçekleştirdi, roket yakalama denemesi iptal edildi.",
+      "alt_text": "Teknoloji haberi: SpaceX Starship Testinde İki Aşamalı Yakalama İptal Edildi. SpaceX, Starship roketinin 15. test uçuşunu gerçekleştirdi. Super Heavy iticisini kuleyle yakalama denemesi iptal edilerek itici Meksika Körfezi'ne indirildi. Ship 42 adlı üst aşama ise yörüngeye ulaşarak 26 Starlink uydusunu başarıyla bıraktı. Neden önemli: İtici yakalama hedefi ertelense de üst aşamanın yörüngeye ulaşması uzay görevleri açısından kritik bir adım. Kaynak: The Next Web."
+    },
+    {
+      "slide_title": "Yeni Rainbow Six Vegas Oyunu Yolda Olabilir",
+      "slide_text": "Ubisoft'un, serinin son halkasından 18 yıl sonra yeni bir Rainbow Six Vegas oyunu üzerinde çalıştığı iddia edildi. Fransız yayıncının projeyi geliştirdiğine dair söylentiler, taktiksel serinin hayranları arasında heyecan yarattı.",
+      "why_it_matters": "Unutulmaya yüz tutmuş taktiksel nişancı efsanesinin dönüşü, klasik FPS türüne olan ilgiyi yeniden canlandırabilir.",
+      "caption_paragraph": "Yıllardır sessizliğini koruyan taktiksel nişancı serisinin yeni bir projeyle geri dönmesi bekleniyor.",
+      "source_name": "Merlin'in Kazanı",
+      "source_url": "https://www.merlininkazani.com/rainbow-six-vegas-efsanesi-geri-donuyor-haber-264339",
+      "category": "oyun",
+      "image_prompt": "A night vision view of an empty tactical operations briefing room with glowing blueprint monitors, tactical helmets and gear resting on dark steel tables, blurred colorful neon casino lights visible through large tinted glass windows",
+      "importance": 8,
+      "all_sources": [
+        {
+          "name": "Eurogamer",
+          "url": "https://www.eurogamer.net/rainbow-six-vegas-new-game-ubisoft-spades-report"
+        },
+        {
+          "name": "Merlin'in Kazanı",
+          "url": "https://www.merlininkazani.com/rainbow-six-vegas-efsanesi-geri-donuyor-haber-264339"
+        }
+      ],
+      "headline": "Ubisoft'un yeni bir Rainbow Six Vegas oyunu üzerinde çalıştığı iddia edildi.",
+      "alt_text": "Oyun haberi: Yeni Rainbow Six Vegas Oyunu Yolda Olabilir. Ubisoft'un, serinin son halkasından 18 yıl sonra yeni bir Rainbow Six Vegas oyunu üzerinde çalıştığı iddia edildi. Fransız yayıncının projeyi geliştirdiğine dair söylentiler, taktiksel serinin hayranları arasında heyecan yarattı. Neden önemli: Unutulmaya yüz tutmuş taktiksel nişancı efsanesinin dönüşü, klasik FPS türüne olan ilgiyi yeniden canlandırabilir. Kaynak: Merlin'in Kazanı."
+    },
+    {
+      "slide_title": "Microsoft 365 Servislerindeki Kesinti Giderildi",
+      "slide_text": "Microsoft, küresel çapta yaşanan Microsoft 365 kesintisinin temel nedeninin çözüldüğünü açıklayarak toparlanma duyurdu. Şirket, sistem genelinde toparlanma sağlandığını ve kalan kullanıcılara erişimin kademeli olarak geri verildiğini bildirdi.",
+      "why_it_matters": "Kurumsal iletişimi durma noktasına getiren altyapı sorunlarının çözülmesi iş sürekliliği için hayati önem taşıyor.",
+      "caption_paragraph": "Sorunun ortadan kaldırılmasıyla birlikte etkilenen kurumsal kullanıcılara erişim kademeli olarak sağlanıyor.",
+      "source_name": "Teknoblog",
+      "source_url": "https://www.teknoblog.com/microsoft-365-kesintisi-temel-neden-toparlanma/",
+      "category": "teknoloji",
+      "image_prompt": "A vast subterranean server room with endless rows of dark server racks, green indicator lights flickering across dark networking equipment, glowing blue fiber optic cables neatly organized, clean cold tech ambiance with cinematic depth of field",
+      "importance": 7,
+      "all_sources": [
+        {
+          "name": "Teknoblog",
+          "url": "https://www.teknoblog.com/microsoft-365-kesintisi-temel-neden-toparlanma/"
+        }
+      ],
+      "headline": "Microsoft 365 küresel erişim krizine yol açan temel sorunun giderildiğini duyurdu.",
+      "alt_text": "Teknoloji haberi: Microsoft 365 Servislerindeki Kesinti Giderildi. Microsoft, küresel çapta yaşanan Microsoft 365 kesintisinin temel nedeninin çözüldüğünü açıklayarak toparlanma duyurdu. Şirket, sistem genelinde toparlanma sağlandığını ve kalan kullanıcılara erişimin kademeli olarak geri verildiğini bildirdi. Neden önemli: Kurumsal iletişimi durma noktasına getiren altyapı sorunlarının çözülmesi iş sürekliliği için hayati önem taşıyor. Kaynak: Teknoblog."
+    },
+    {
+      "slide_title": "Magic: The Gathering Dizisi Planeswalker Duyuruldu",
+      "slide_text": "Netflix, 33 yıllık kart oyunu efsanesi Magic: The Gathering uyarlaması Planeswalker animasyon dizisini tanıttı. Chandra Nalaar ve Ajani Goldmane'in maceralarını anlatacak yapımın 2027 yılında izleyicilerle buluşacağı açıklandı.",
+      "why_it_matters": "Köklü masaüstü kart oyunu evreninin dijital platforma taşınması, serinin geniş kitlelere ulaşmasını sağlayacak.",
+      "caption_paragraph": "Uzun süredir yapım aşamasında olan animasyon projesi, fantastik kart oyununun evrenini ekranlara taşıyacak.",
+      "source_name": "Eurogamer",
+      "source_url": "https://www.eurogamer.net/magic-the-gathering-planeswalker-netflix-animated-series-2027",
+      "category": "oyun",
+      "image_prompt": "A glowing mystical library with ancient floating leatherbound spellbooks radiating orange and blue magical sparks, stone arches opening to a misty fantasy landscape under a starry twilight sky, soft magical glow atmosphere, cinematic epic fantasy concept art",
+      "importance": 7,
+      "all_sources": [
+        {
+          "name": "Kayıp Rıhtım",
+          "url": "https://kayiprihtim.com/haber/magic-the-gathering-planeswalker-tanitim/"
+        },
+        {
+          "name": "Eurogamer",
+          "url": "https://www.eurogamer.net/magic-the-gathering-planeswalker-netflix-animated-series-2027"
+        }
+      ],
+      "headline": "Netflix, Magic: The Gathering animasyon dizisi Planeswalker'ı 2027 için duyurdu.",
+      "alt_text": "Oyun haberi: Magic: The Gathering Dizisi Planeswalker Duyuruldu. Netflix, 33 yıllık kart oyunu efsanesi Magic: The Gathering uyarlaması Planeswalker animasyon dizisini tanıttı. Chandra Nalaar ve Ajani Goldmane'in maceralarını anlatacak yapımın 2027 yılında izleyicilerle buluşacağı açıklandı. Neden önemli: Köklü masaüstü kart oyunu evreninin dijital platforma taşınması, serinin geniş kitlelere ulaşmasını sağlayacak. Kaynak: Eurogamer."
+    },
+    {
+      "slide_title": "Android XR Akıllı Gözlüklerde Yüz Gizleme Özelliği",
+      "slide_text": "Google'ın Android XR akıllı gözlüğü, Gemini modeline aktarılan görüntülerdeki insan yüzlerini otomatik olarak bulanıklaştıracak. Ayrıca şirket, üçüncü taraf uygulamalarda canlı yayın yapmayı ve yüz tanıma özelliklerini tamamen yasakladı.",
+      "why_it_matters": "Giyilebilir teknolojilerde kişisel verilerin korunması ve mahremiyet standartları adına kritik bir adım atıldı.",
+      "caption_paragraph": "Google, yapay zeka destekli giyilebilir cihazında mahremiyeti korumak adına sıkı güvenlik önlemleri alıyor.",
+      "source_name": "ShiftDelete.Net",
+      "source_url": "https://shiftdelete.net/android-xr-akilli-gozluk-yuz-bulaniklastirma",
+      "category": "teknoloji",
+      "image_prompt": "Sleek futuristic smart glasses resting on a dark reflective wooden surface, soft abstract blue light glowing from the inner lens, background features softly blurred indoor ambient lights, minimalist high tech privacy concept rendering in cinematic style",
+      "importance": 7,
+      "all_sources": [
+        {
+          "name": "ShiftDelete.Net",
+          "url": "https://shiftdelete.net/android-xr-akilli-gozluk-yuz-bulaniklastirma"
+        }
+      ],
+      "headline": "Android XR akıllı gözlükler Gemini'ye veri gönderirken yüzleri bulanıklaştıracak.",
+      "alt_text": "Teknoloji haberi: Android XR Akıllı Gözlüklerde Yüz Gizleme Özelliği. Google'ın Android XR akıllı gözlüğü, Gemini modeline aktarılan görüntülerdeki insan yüzlerini otomatik olarak bulanıklaştıracak. Ayrıca şirket, üçüncü taraf uygulamalarda canlı yayın yapmayı ve yüz tanıma özelliklerini tamamen yasakladı. Neden önemli: Giyilebilir teknolojilerde kişisel verilerin korunması ve mahremiyet standartları adına kritik bir adım atıldı. Kaynak: ShiftDelete.Net."
+    }
+  ],
+  "caption": "Teknoloji ve oyun dünyasında bugün dev şirketlerin kritik kararları, yeni yapım duyuruları ve yapay zeka alanındaki son gelişmeler öne çıkıyor.\n\n💻 Jensen Huang'ın Ayrılığının Arkasındaki İddialar\nŞirketteki finansal taahhütler ve Çin'e çip sevkiyatı iddiaları, yönetim kurulundaki gerilimi tırmandırdı.\nKaynak: The Decoder\n\n🎮 GTA 6 Oyunculara İlk Günden Tam Özgürlük Sunmayacak\nGeliştirici ekip, doğrudan kaosa odaklanmak yerine hikayenin ve dünyanın daha doğal hissettirmesini hedefliyor.\nKaynak: Merlin'in Kazanı\n\n💻 OpenAI Robotik Ekibini Yeniden Yapılandırıyor\nAraştırmacıların diğer ekiplere dağıtılmasıyla robotik çalışmalarının genel modellerle hızlandırılması hedefleniyor.\nKaynak: The Decoder\n\n💻 SpaceX Starship Testinde İki Aşamalı Yakalama İptal Edildi\nYakalama denemesinin iptal edilmesine rağmen üst aşamanın uyduları yörüngeye taşıması testin başarısını koruyor.\nKaynak: The Next Web\n\n🎮 Yeni Rainbow Six Vegas Oyunu Yolda Olabilir\nYıllardır sessizliğini koruyan taktiksel nişancı serisinin yeni bir projeyle geri dönmesi bekleniyor.\nKaynak: Merlin'in Kazanı\n\n💻 Microsoft 365 Servislerindeki Kesinti Giderildi\nSorunun ortadan kaldırılmasıyla birlikte etkilenen kurumsal kullanıcılara erişim kademeli olarak sağlanıyor.\nKaynak: Teknoblog\n\n🎮 Magic: The Gathering Dizisi Planeswalker Duyuruldu\nUzun süredir yapım aşamasında olan animasyon projesi, fantastik kart oyununun evrenini ekranlara taşıyacak.\nKaynak: Eurogamer\n\n💻 Android XR Akıllı Gözlüklerde Yüz Gizleme Özelliği\nGoogle, yapay zeka destekli giyilebilir cihazında mahremiyeti korumak adına sıkı güvenlik önlemleri alıyor.\nKaynak: ShiftDelete.Net\n\n#teknoloji #oyun #yapayzeka #gta6 #spacex #microsoft #ubisoft #netflix\n\nGörseller yapay zekâ ile üretilmiştir."
+}
